@@ -1,0 +1,24 @@
+﻿@using Dynamicweb.Content;
+@using Dynamicweb.Extensibility;
+@{
+    IEnumerable<Page> pages = Dynamicweb.Extensibility.ServiceLocator.Current.GetPageService().GetPagesByParentID(Pageview.Page.ID);
+}
+@if (pages.Any()){
+<div class="col-md-12 products-list">
+    @foreach (var page in pages.Where(x=>x.ItemType != "Product_Item")){
+    var pageTitle = page.MenuText;
+    var pageID = page.ID;
+    var pageLink = "/Default.aspx?ID=" + pageID;
+    string pageItemType = page.ItemType;
+   
+        <div class="product-item col-md-4 col-xs-12">                
+            <h3 class="name">
+                <a href="@pageLink">
+                @pageTitle
+                </a>
+            </h3>
+            <a class="btn btn-primary" href="@pageLink">@Translate("Read more")</a>      
+        </div> 
+    }
+</div>
+}

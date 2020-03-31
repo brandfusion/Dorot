@@ -1,0 +1,58 @@
+﻿@MasterPageFile("MasterOnePage.cshtml")
+@GetValue("Title(Homepage)")
+@GetValue("Description(Homepage)")
+@{
+//Show_NewsOnTheHomepage
+bool showNewsModule = true;
+  if (GetValue("Item.Show_NewsOnTheHomepage")!= null){
+  	showNewsModule = GetBoolean("Item.Area.Show_NewsOnTheHomepage");
+  }
+}
+
+@Include("Custom/HeaderImage.cshtml")
+
+@if(showNewsModule){
+<div class="col-xs-12 homepage-white-bg">
+	<div class="row">
+    <div class="container">         
+      <div class="withNews">      
+        @CentralContent()
+      
+        @RenderItemList(new
+        {
+            ItemType = "NewsItem",
+            ListSourceType = "Page",
+            ListSourcePage = 32,
+            ItemFieldsList = "*",
+            ListTemplate = "ItemPublisher/List/HomepageNewsItem.cshtml",
+            IncludeAllChildItems = "True",
+            ListPageSize = 1,
+            IncludeParagraphItems = "True",
+            ListOrderBy = "Date",
+            ListOrderByDirection = "Descending"
+        })      	           
+      </div> 
+    </div>
+	</div>
+</div>
+} else {
+  <div class="col-xs-12 homepage-white-bg">
+    <div class="row">   
+      <div class="withoutNews">
+        @CentralContent()
+      </div>
+    </div>
+  </div>
+}   
+
+
+@helper CentralContent(string rightClass = "col-xs-12 noPadding") {
+    if (!string.IsNullOrEmpty(GetString("DwContent(centralContent)")))
+    {
+        <div class="row dwcontent" id="centralContent" title="Homepage boxes" settings="unwrap:true"></div>
+		<div class="row dwcontent" id="maincontent" title="Content area"></div> 
+		<div class="row dwcontent" id="additionalContent" title="Additional content" settings="unwrap:true"></div>
+		<div class="dwcontent" id="widecontent" title="Wide Content area"></div>
+    }
+}
+

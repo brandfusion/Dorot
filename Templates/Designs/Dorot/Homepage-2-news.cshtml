@@ -1,0 +1,88 @@
+﻿@MasterPageFile("Master.cshtml")
+@GetValue("Title(Homepage)")
+@GetValue("Description(Homepage)")
+@{
+//Show_NewsOnTheHomepage
+bool showNewsModule = true;
+  if (GetValue("Item.Show_NewsOnThe_Homepage")!= null){
+  	showNewsModule = GetBoolean("Item.Show_NewsOnThe_Homepage");
+  }
+string newsParent = GetString("Item.Area.News_Page_ID");
+
+}
+
+@Include("Custom/HeaderImage.cshtml")
+
+@if(showNewsModule){
+<div class="col-xs-12 homepage-white-bg">
+	<div class="row">
+    <div class="container">         
+      <div class="withNews">      
+        @CentralContent()
+      
+        @RenderItemList(new
+        {
+            ItemType = "NewsItem",
+            ListSourceType = "Page",
+            ListSourcePage = newsParent,
+            ItemFieldsList = "*",
+            ListTemplate = "ItemPublisher/List/HomepageNewsItem.cshtml",
+            IncludeAllChildItems = "True",
+            ListPageSize = 2,
+            IncludeParagraphItems = "True",
+            ListOrderBy = "Date",
+            ListOrderByDirection = "Descending"
+        })      	           
+      </div> 
+    </div>
+	</div>
+</div>
+} else {
+  <div class="col-xs-12">
+    <div class="row">   
+      <div class="withoutNews">
+        @CentralContent()
+      </div>
+    </div>
+  </div>
+}  
+
+@if (!string.IsNullOrEmpty(GetString("DwContent(additionalContent)")))
+	{
+<div class="white-box">
+	<div class="container">
+      <div class="col-xs-12">
+        <div class="row dwcontent" id="additionalContent" title="Additional content Centered" settings="unwrap:true"></div>
+      </div>
+    </div>
+</div>
+	}
+	@if (!string.IsNullOrEmpty(GetString("DwContent(widecontent)")))
+	{
+	<div class="dwcontent" id="widecontent" title="Wide Content area"></div>
+	}
+
+	@if (!string.IsNullOrEmpty(GetString("DwContent(additionalContent2)")))
+	{
+<div class="white-box">
+	<div class="container">
+      <div class="col-xs-12">
+        <div class="row dwcontent" id="additionalContent2" title="Additional content2 Centered" settings="unwrap:true"></div>
+      </div>
+   </div>
+</div>
+	}
+	@if (!string.IsNullOrEmpty(GetString("DwContent(widecontent2)")))
+	{
+	<div class="dwcontent" id="widecontent2" title="Wide Content area 2"></div>
+	}
+
+@helper CentralContent() {
+    if (!string.IsNullOrEmpty(GetString("DwContent(centralContent)")))
+    {
+        <div class="row dwcontent" id="centralContent" title="Homepage boxes" settings="unwrap:true"></div>
+		
+    }
+	
+
+}

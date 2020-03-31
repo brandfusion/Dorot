@@ -1,0 +1,88 @@
+﻿@MasterPageFile("Master.cshtml")
+@GetValue("Title(Content page)")
+@GetValue("Description(Content page)")
+@using System;
+@Include("Custom/HeaderImage.cshtml")	
+@Include("includes/Razor/GetImage.cshtml")
+@Include("includes/Razor/VerifyImage.cshtml")
+@Include("includes/PageTemplates/GenericHelper.cshtml")
+
+
+@{	
+string titlePage = GetString("Item.Title.Value");
+string mainImage = GetString("Item.Image.Value");
+string city = GetString("Item.City.Value");
+string country = GetString("Item.Country.Value");
+string data = GetString("Item.Data.Value");
+string pdf = GetString("Item.PDF.Value");
+string description2 = GetString("Item.Description.Value");
+string linkText = GetString("Item.LinkText.Value");
+string linkURL = GetString("Item.LinkURL.Value");
+@* string formular= GetString("Item.Form.Value"); *@
+
+List<LoopItem> MediaServiceLoop = GetLoop("Item.MediaService");
+
+}
+
+ <div class="white-box white-box-content">
+	<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+				@if(!string.IsNullOrEmpty(@mainImage)){	
+					<img src="@mainImage" class="img-responsive" alt="" height="400" />
+				}
+
+					<h1>@titlePage</h1>
+					<p>@city</p>
+					<p>@country</p>
+					<p>@data</p>
+					<div>@description2</div> 
+					<p><a href="@linkURL">@linkText</a></p>
+					
+					@if(!string.IsNullOrEmpty(@pdf)){	
+					<p><a class="btn btn-primary" href="@pdf" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>@Translate("Seemore","See more")!!!</a></p><br>
+										
+			    @* @RenderDownloadLink(@pdf,@Translate("download","DOWNLOAD")) *@
+
+				}
+				
+									
+				</div>
+				@* <div class="col-md-3">
+				@if(!string.IsNullOrEmpty(@mainImage)){	
+					<img src="@mainImage" alt="" height="400" width="400" />
+				}
+
+				</div> *@
+			</div> 
+
+		<h2><a href="">@Translate("ContactDorotEvents","Contact Dorot Events")</a></h2>	
+
+			<div class="row dwcontent" id="maincontent" title="Content area"></div>
+
+			<div class="row">
+				@foreach(var element in MediaServiceLoop) {			
+					string titleMS = element.GetString("Item.MediaService.Title");
+					string imageMS = GetImage(element.GetString("Item.MediaService.Image"),260, 195);
+
+					@* string imageMS = element.GetImage(GetString("Item.MediaService.Image"),310, 310); *@
+
+					string shortDescriptionMS = element.GetString("Item.MediaService.Short_Description");
+					string linkLinkMS = element.GetString("Item.MediaService.Link_Link");
+					string linkTextMS = element.GetString("Item.MediaService.Link_Text");
+					string videoCodeMS = element.GetString("Item.MediaService.Video_Code");
+					string videoYoutubeCodeMS = element.GetString("Item.MediaService.Video_Youtube_Code");
+
+
+					<div class="studies-box col-md-3">
+						<h4>@titleMS</h4>			
+						<img src="@imageMS" alt="" class="img-responsive" />
+						<p>@imageMS</p>
+						
+					</div>
+				}          	  
+			</div>	
+			 
+	</div>	
+
+</div>

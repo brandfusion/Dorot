@@ -1,0 +1,64 @@
+﻿@MasterPageFile("Master.cshtml")
+@GetValue("Title(Content page)")
+@GetValue("Description(Content page)")
+@Include("includes/Razor/GetImage.cshtml")
+@Include("includes/Razor/VerifyImage.cshtml")
+@{
+  bool hideSecondaryNavigation = GetBoolean("Item.Page.Hide_Secondary_Navigation");
+  string contentcol = hideSecondaryNavigation ? "col-md-12" : "col-md-9";
+}
+
+
+@Include("Custom/HeaderImage.cshtml")
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+        	<ul class="dwnavigation breadcrumb" id="breadcrumbs" data-settings="template:Breadcrumb.xslt;startlevel:1;endlevel:3;expandmode:PathOnly"></ul>
+    	</div>
+    </div>
+</div>
+<div class="white-box white-box-content">
+	<div class="container">
+	  <div class="row">	
+        
+		    <div class="col-xs-12" id="topsearch">
+           <div class="search-box col-md-4 col-xs-12 pull-right">
+              <form action="/search" method="GET" role="search">
+                <div class="form-group">
+                  <input type="search" aria-label="search" name="q" id="q" autocomplete="off" spellcheck="false" placeholder='@Translate("findYourSolution", "Find your solution")' class="form-control">
+                  <button type="submit" value="search"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+              </form>
+           </div>
+           <h1> @GetGlobalValue("Global:Page.Name")</h1>
+        </div>
+        
+        @if(!hideSecondaryNavigation){
+          <div class="col-md-3" id="sidebarContainer">
+            <div class="nav nav-pills" id="secondNavigation">
+              <div class="sidebar__inner">
+         	      @if(GetString("DwPageID") == "488"){
+                
+                } else {
+               
+                } 
+                <ul class="dwnavigation" id="navpills" data-settings="template:Tabs.xslt;startlevel:2;endlevel:6;expandmode:All"></ul>
+              </div>
+            </div>
+          </div>
+    		}
+    		<div class="@contentcol">
+        	@if (!string.IsNullOrEmpty(GetString("DwContent(maincontent)"))) {
+
+				
+        		<div class="row dwcontent" id="maincontent" title="Content area"></div> 
+
+			} else {
+       
+        		<text>@Include("Custom/PageProductList.cshtml")</text>
+        
+        	}
+	      </div>
+		</div>
+	</div>
+</div>

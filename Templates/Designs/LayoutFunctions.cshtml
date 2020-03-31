@@ -1,0 +1,139 @@
+﻿@inherits RazorTemplateBase<RazorTemplateModel<Template>>
+@using Dynamicweb.Rendering;
+@* version 1.3 *@
+@{
+  init();
+}
+
+@functions {
+  private int currentColumns { get; set; }
+  private int columns { get; set; }
+  private bool paragraphWrapperStarted { get; set; }
+  private bool isMobile { get; set; }
+  private string itemOrder { get; set; }
+
+  public void init()
+  {
+	if (GetBoolean("ParagraphContainerIsFirst"))
+	{
+		System.Web.HttpContext.Current.Items["currentColumns"] = 0;
+	}
+
+  isMobile = (Dynamicweb.Frontend.PageView.Current().Device.ToString() == Dynamicweb.Frontend.Devices.DeviceType.Mobile.ToString()) ? true : false;
+	itemOrder = (GetString("Item.Order") == "" || isMobile) ? "image-top" : GetString("Item.Order");
+	columns = (GetInteger("Item.Width") == 12 || GetString("Item.Align") != "left") ? 12 : GetInteger("Item.Width");
+	currentColumns = Dynamicweb.Core.Converter.ToInt32(System.Web.HttpContext.Current.Items["currentColumns"]) + columns;
+	System.Web.HttpContext.Current.Items["currentColumns"] = currentColumns;
+	paragraphWrapperStarted = false;
+  }
+
+  public string GetColumnClass()
+  {
+    string widthStringMobile = GetString("Item.WidthMobile"),
+           widthString = GetString("Item.Width"),
+           align = (widthString == "12") ? "left" : GetString("Item.Align"),
+           alignMobile = (widthStringMobile == "12") ? "left" : GetString("Item.AlignMobile"),
+	         columnClass = "";
+    int div = (align == "center") ? 2 : 1,
+        divMobile = (alignMobile == "center") ? 2 : 1,
+        width = GetInteger("Item.Width"),
+        widthMobile = (widthStringMobile == "hide") ? 0 : GetInteger("Item.WidthMobile");
+
+    divMobile = ((12 - widthMobile)/divMobile);
+    div = ((12 - width)/div);
+
+    if (widthString == widthStringMobile)
+    {
+      columnClass = "col-xs-" + widthString;
+    }
+    else if (widthStringMobile == "hide")
+    {
+      columnClass = "hidden-xs col-md-" + widthString;
+    }
+    else
+    {
+      columnClass = "col-xs-" + widthStringMobile + " col-md-" + widthString;
+    }
+
+    if(alignMobile != "left" && widthMobile > 0 && widthMobile < 12)
+    {
+      columnClass += " col-xs-offset-" + divMobile.ToString();
+    }
+    if(align != "left" && width < 12 && div != divMobile)
+    {
+      columnClass += " col-md-offset-" + div.ToString();
+    }
+
+    return columnClass;
+  }
+
+  public string ParagraphClass()
+  {
+    string order = itemOrder;
+
+    if(GetInteger("Item.ImageWidth") == 12)
+    {
+      order = "image-top";
+    }
+
+    string paragraphClass = "col-xs-12 noPadding";
+
+    if(order == "image-left-column")
+    {
+      paragraphClass = "col-xs-" + ( 12 - GetInteger("Item.ImageWidth")) + " pull-right noPaddingRight";
+    }
+    else if(order == "image-right-column")
+    {
+      paragraphClass = "col-xs-" + ( 12 - GetInteger("Item.ImageWidth")) + " pull-left noPaddingLeft";
+    }
+
+    return paragraphClass;
+  }
+	
+  public string NewRow()
+  {
+    string finalReturn = string.Empty;
+
+    if (currentColumns > 12)
+    {
+      System.Web.HttpContext.Current.Items["currentColumns"] = columns;
+      finalReturn =  "</div><div class=\"row\">";
+    }
+
+    if (GetBoolean("ParagraphContainerIsLast"))
+    {
+      System.Web.HttpContext.Current.Items["currentColumns"] = 0;
+    }
+    return finalReturn;
+  }
+  
+  public string CheckForParagraphWrapper()
+  {
+    string returnString = string.Empty;
+
+    if (!paragraphWrapperStarted && itemOrder != "image-top")
+    {
+      paragraphWrapperStarted = true;
+      returnString = @StartParagraphWrapper();
+    }
+
+    return returnString;
+  }
+  
+  public string StartParagraphWrapper()
+  {
+    return "<div class='" + @ParagraphClass() + "'>";
+  }
+  
+  public string EndParagraphWrapper()
+  {
+    string returnString = string.Empty;
+
+    if (paragraphWrapperStarted)
+    {
+      returnString = "</div>";
+    }
+
+    return returnString;
+  }
+}

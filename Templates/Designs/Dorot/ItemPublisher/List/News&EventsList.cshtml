@@ -1,0 +1,107 @@
+﻿@using System.Web;
+@{
+string newsParent = Pageview.Area.Item["News_Page_ID"].ToString();
+string currentURL = GetGlobalValue("Global:Pageview.Url");
+string currentYear = HttpContext.Current.Request.Params["Year"];
+string cultureName = GetGlobalValue("Global:Area.Culture.Name");
+var yearsList = GetLoop("ItemPublisher:Items.List").Select(x => x.GetValue("ItemPublisher:Item.Year")).Distinct();
+
+}
+
+<div class="items">
+    @if(GetString("ItemPublisher:Items.Any")=="True") {  	
+  
+      <div class="news-list"> 
+        @if(GetLoop("ItemPublisher:Items.List").Count() > 0){
+         foreach (LoopItem i in GetLoop("ItemPublisher:Items.List")) { 
+        	  string friendlyURL = Dynamicweb.Frontend.SearchEngineFriendlyURLs.GetFriendlyUrl(i.GetString("ItemPublisher:Item.Field.PageId"));
+            DateTime date = @i.GetDate("ItemPublisher:Item.Date.Value"); 
+            string dateItem = date.ToString("dddd, MMMM dd, yyyy h:mm tt", System.Globalization.CultureInfo.GetCultureInfo(cultureName));
+			string dateLongCulture = date.ToString("f", System.Globalization.CultureInfo.GetCultureInfo(cultureName));
+            string dateTimeCulture = date.ToString("tt", System.Globalization.CultureInfo.GetCultureInfo(cultureName));
+            string description = @i.GetString("ItemPublisher:Item.Description");
+            string linkEvent = @i.GetString("ItemPublisher:Item.Url");
+            <div class="item-news">                
+                @* <span class="date">@dateLongCulture</span> *@
+                <h2 class="name"><a href='@linkEvent'>@i.GetValue("ItemPublisher:Item.PageName")</a></h2>
+                <div>@description</div> 
+
+                <a class="btn btn-primary" href='@linkEvent'>@Translate("readMore", "Read More")</a>
+            </div>  
+         	} 
+
+		 }
+      </div>
+		
+	  
+      <ul class="pagination">              		 
+             <li><a href='/Default.aspx?ID=@GetString("ItemPublisher:Global.PageId")&amp;PageNum=1' class="first">@Translate("First", "First")</a></li>
+             @if (!string.IsNullOrWhiteSpace(GetString("ItemPublisher:Items.Paging.PrevPage"))) {
+                  <li><a href='@GetString("ItemPublisher:Items.Paging.PrevPage")' class="prev">@Translate("Previous", "Previous")</a></li>
+             }
+             @{
+                  int nrPagina = 1;
+                  int nrAfisari = 2;
+                  int nrPagini = GetInteger("ItemPublisher:Items.TotalCount");
+                  int currentPage = GetInteger("ItemPublisher:Items.Paging.CurrentPage");
+
+
+                  if (currentPage > nrAfisari + 1)
+                  {
+                      <li> <span class="dots">...</span> </li>
+                  }
+                  foreach (LoopItem page in GetLoop("ItemPublisher:Items.Paging.Pages"))
+                  {	
+                      if (nrPagina >=  currentPage - nrAfisari && nrPagina <=  currentPage + nrAfisari)
+                      {
+                        <li>
+							<a href='@page.GetString("ItemPublisher:Items.Paging.Pages.Page.Url")'>
+                                @if (page.GetBoolean("ItemPublisher:Items.Paging.Pages.Page.IsCurrent"))
+                                {
+                                	<span class="active">@page.GetValue("ItemPublisher:Items.Paging.Pages.Page.Number")</span>
+                                } else {
+                                	@page.GetValue("ItemPublisher:Items.Paging.Pages.Page.Number");
+                                }
+                            </a>
+                        </li>
+                      }
+                      nrPagina++;
+                  }
+                  if (currentPage < nrPagini - nrAfisari)
+                  {
+                      <li> <span class="dots"> ... </span> </li>
+                  }
+              }
+              @if (!string.IsNullOrWhiteSpace(GetString("ItemPublisher:Items.Paging.NextPage"))) {
+                  <li><a href='@GetString("ItemPublisher:Items.Paging.NextPage")' class="next">@Translate("Next", "Next")</a></li>
+              }
+              <li><a href='/Default.aspx?ID=@GetString("ItemPublisher:Global.PageId")&amp;PageNum=@GetString("ItemPublisher:Items.Paging.TotalPages")' class="last">@Translate("Last", "Last")</a></li>
+      </ul>
+
+     
+  }else {
+
+			<div class="news-list">
+              <p>@Translate("noNews","There are no news associated with this category")</p>
+				<div class="pull-left noPrint">
+                <a href='/Default.aspx?ID=@GetValue("Item.Area.News_Page_ID")' class="back">@Translate("back", "Back")</a>
+            </div>
+			</div>
+		}
+</div>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
+<script type="text/javascript">
+$(document).ready(function() {
+  $('select').select2({
+     minimumResultsForSearch: -1
+  });
+  $('select').on('change',function(){
+  	var redirectURL = $(this).val();
+  	window.location.href= redirectURL;
+  });
+  
+});
+</script>

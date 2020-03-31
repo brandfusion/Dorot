@@ -1,0 +1,569 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <!-- Master Code version 1.0.3 -->
+<head>	
+	<title>@GetValue("Title")</title>
+@GetValue("MetaTags")
+@GetValue("CopyRightNotice")
+
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width">
+	<meta name="google-site-verification" content="rVYYYi7ZvW2jWU2HSTS2iUAaRoBG55rYEbB5HEKcDto">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
+
+
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+      
+    @{
+		    
+	string areaLayoutPath = "/Files/Templates/Designs/Dorot/";		
+	areaLayoutPath = areaLayoutPath.Substring(0, areaLayoutPath.LastIndexOf("/"));
+
+}
+    <link rel="apple-touch-icon" sizes="57x57" href="@areaLayoutPath/assets/img/icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="@areaLayoutPath/assets/img/icons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="@areaLayoutPath/assets/img/icons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="@areaLayoutPath/assets/img/icons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="@areaLayoutPath/assets/img/icons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="@areaLayoutPath/assets/img/icons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="@areaLayoutPath/assets/img/icons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="@areaLayoutPath/assets/img/icons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="@areaLayoutPath/assets/img/icons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="@areaLayoutPath/assets/img/icons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="@areaLayoutPath/assets/img/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="@areaLayoutPath/assets/img/icons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="@areaLayoutPath/assets/img/icons/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="“#72246C”">
+<meta name="msapplication-TileImage" content="@areaLayoutPath/assets/img/icons/ms-icon-144x144.png">
+<meta name="msapplication-square70x70logo" content="@areaLayoutPath/assets/img/icons/Square70x70Logo.png">
+<meta name="msapplication-square144x144logo" content="@areaLayoutPath/assets/img/icons/ms-icon-144x144.png">
+<meta name="msapplication-square150x150logo" content="@areaLayoutPath/assets/img/icons/ms-icon-150x150.png">
+<meta name="msapplication-square310x310logo" content="@areaLayoutPath/assets/img/icons/Square310x310Logo.png">
+<meta name="msapplication-wide310x150logo" content="@areaLayoutPath/assets/img/icons/Wide310x150Logo.png">
+<meta name="theme-color" content="#72246C">
+
+	<link rel="stylesheet" type="text/css" href="@areaLayoutPath/assets/css/dorot-style.css">
+    @* <link rel="stylesheet" type="text/css" href="@areaLayoutPath/assets/css/layout.css"> *@
+	<link rel="stylesheet" type="text/css" href="@areaLayoutPath/assets/css/fix.css">
+    <link rel="stylesheet" type="text/css" href="@areaLayoutPath/assets/css/20_navigation.css">
+	@if(!string.IsNullOrEmpty(GetString("Item.Area.CustomCssURL"))){
+     <link rel="stylesheet" type="text/css" href='@areaLayoutPath/assets/css/@GetString("Item.Area.CustomCssURL")'> 
+    }
+    @if(!string.IsNullOrEmpty(GetString("Item.Area.CustomCodeHead"))){
+     @GetString("Item.Area.CustomCodeHead") 
+    }
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>	
+    <script type="text/javascript" src="@areaLayoutPath/assets/js/highlight.js"></script>
+    <script type="text/javascript" src="@areaLayoutPath/assets/js/sticky.js"></script>
+
+	<!-- <script type="text/javascript">var switchTo5x=true;</script>
+	<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+	<script type="text/javascript" src="http://s.sharethis.com/loader.js"></script> -->
+	
+
+    
+    
+	@{
+		string home = "";
+		string drawer = "";
+		@* if(GetInteger("DwPageID") == GetInteger("DwAreaFirstPageID")) {
+			home = "homepage";			
+		}
+		if(GetInteger("DwPageID") != GetInteger("DwAreaFirstPageID")) {
+			drawer = "drawer";
+		} 
+      
+        if(GetInteger("DwPageID") == 3) {
+			home = "homepage";			
+		}
+		if(GetInteger("DwPageID") != 3) {
+			drawer = "drawer";
+		}*@
+      
+      	
+      
+      	if(!GetBoolean("Item.Page.Hide_Child_PagesInNavigation")){
+      		drawer = "drawer";
+      	}
+      
+       if(GetString("Item.SystemName") == "NewsItem"){
+      		drawer = "";
+      	}
+      
+      if(GetString("Item.SystemName") == "Homepage"){
+      		home = "homepage";
+      		drawer = "";
+      	}
+
+                       
+    string linkButton = GetString("Item.Area.LinkButton"),
+           linkTextButton = GetString("Item.Area.LinkTextButton");
+      
+	}
+  <!--GoogleTracking-->
+  @{
+      string googleTrackingCode = GetString("Item.Area.Google_Tracking_Code");
+      if(!string.IsNullOrEmpty(googleTrackingCode)){
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        
+          ga('create', '@googleTrackingCode', 'auto');
+          ga('send', 'pageview');
+      </script>
+     }
+      
+   }
+   <!--GoogleTracking-->
+	@GetValue("Stylesheets")
+@GetValue("Javascripts")
+</head>
+    <style type="text/css">
+     	.max-wrapper { 
+            max-width: 1920px;   
+            margin: 0 auto;
+            display: block;
+            height: -webkit-calc(100% - 285px); 
+            height:    -moz-calc(100% - 285px); 
+            height:      -o-calc(100% - 285px);
+            z-index: 1;
+            background: #fff;
+        }   
+    </style>   
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/assets/owl.theme.default.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css"> 
+      
+<body class="@home" id="top">    
+      @* <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5808de87d226407a"></script>  *@
+      
+      <div style="display:none">
+        HideChilds = @GetBoolean("Item.Page.Hide_Child_PagesInNavigation") <br>
+        SystemName = @GetString("Item.SystemName")
+      </div>
+      @using Dynamicweb.Content.Items;
+@using System
+@{
+//Define the pageURL to avoid parsing of #
+	string pageURL = GetGlobalValue("Global:Pageview.Url");
+	//Define ItemArea object
+	Dynamicweb.Content.Items.Item itemArea = Pageview.Area.Item;
+	//read settingsPageID from Area
+  	//string settingsPageId = itemArea["SettingsPageId"].ToString();
+	//Define an empty item object for Settings
+	Dynamicweb.Content.Items.Item generalSettings;
+	string menu = "";
+	IEnumerable<ItemEntry> menuItems = Enumerable.Empty<ItemEntry>();
+	
+    @*if(!string.IsNullOrEmpty(settingsPageId)){
+        int generalSettingsPage = Int32.Parse(settingsPageId.ToString());
+        generalSettings = Dynamicweb.Content.Items.Item.GetItemById("Settings", Dynamicweb.Extensibility.ServiceLocator.Current.GetPageService().GetPage(generalSettingsPage).ItemId);
+        //Get the relations list
+        menu = generalSettings["Menu"] != null ? generalSettings["Menu"].ToString() : "";
+        int itemListID;
+        if (int.TryParse(menu, out itemListID)) {
+            //Get the relations list objsect based on the ID of the relations list
+            var itemList = ItemList.GetItemListById(itemListID);
+            //get a list of Items objects from the Relation
+            menuItems = itemList.Relations;
+        }
+    }*@
+
+
+//string HtmlMenu = GetString("Item.Page.HTML_Menu");
+//string HtmlMobileMenu = GetString("Item.Page.HTML_Mobile_Menu");
+string TopMenuParentPage = GetString("Item.Area.TopMenuPageId");
+string topnavigation = RenderNavigation(new
+{
+    template = "LIClean.xslt",
+    id = "topnavigation2",
+    expandmode = "all",
+    parentid = TopMenuParentPage,
+    startlevel = 1,
+    endlevel = 3
+});
+
+
+string homePageLink =  "/Default.aspx?ID="+ GetString("DwAreaFirstActivePageID");
+}
+
+@* <div class="opacity-box-header">&nbsp;</div> *@
+<header class="header @drawer">
+	<div class="top-header hidden-xs">			
+	    <div class="container">
+	      <div class="row">
+	         
+
+	        <div class="col-xs-12">
+	          <nav role="navigation" aria-labelledby="nav1">
+	 			
+				<div id="nav1">
+	           
+			            <ul>  
+	  <li>
+        <a href="#" class="global-sites">@Translate("globalSites","Global sites") @* <i class="fa fa-caret-down" aria-hidden="true"></i> *@</a>
+        @* <ul class="dropdown-menu">
+	       <li><a href="#" target="_blank">@Translate("corporate", "Corporate")<span></span></a></li>
+	       <li><a href="#" target="_blank">@Translate("canada", "Canada")<span></span></a></li>
+	    </ul> *@
+      </li>	
+</ul> 
+			            @if(!string.IsNullOrEmpty(GetString("DW_extranet_AccessUserEmail")) ) {
+			 				<ul>
+				 				<li>
+				 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;@GetString("DW_extranet_AccessUserEmail")<a href="/Admin/Public/ExtranetLogoff.aspx"> Logout</a></span>
+
+
+				 				</li>		 				
+			 				</ul>
+			 				}else{
+							<ul>
+								<li>
+									<a href="/Default.aspx?ID=532">Login</a>
+								</li>
+							</ul>
+			 			}
+			            @topnavigation
+				</div>
+	            	                 
+			  </nav> 
+	          
+	        </div>
+	        
+	    </div>
+	  </div>
+	</div>
+	<button type="button" class="hidden-lg hidden-md hidden-sm mobile-menu-trigger noPrint"><i class="fa fa-bars"></i></button>
+	
+	<div class="main-menu">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="row">
+						<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 logo">
+							<a href='@homePageLink' alt="Dorot" style="display: block;">
+							    <h1><img src='@Pageview.Area.Item["Logo"]' alt="Dorot" class="img-responsive"></h1>
+							</a>
+						</div>
+	          			<div role="navigation" aria-labelledby="nav2">
+
+			          			
+				          			<div class="col-xs-6 col-sm-9 col-md-9 col-lg-10">															
+										
+										<nav id="nav2">
+										  @GetValue("DwNavigation(megaMenu)")							
+										</nav>
+
+									</div>
+									<div class="col-xs-12 hidden-lg hidden-md mobile-nav">			
+										@GetValue("DwNavigation(drawernavigationMobile)")
+				                        <ul class="country-mobile">  
+    <li class="dw-navbar-button hasChildren">
+      <a class="dropdown-toggle hasChildren" data-hover="dropdown" data-close-others="true" href="javascript:void(0);">@Translate("globalSites", "Global sites") <span></span></a>
+      @* <ul class="M1">
+        <li><a href="#" target="_blank">@Translate("corporate", "Corporate")<span></span></a></li>
+        <li><a href="#" target="_blank">@Translate("canada", "Canada")<span></span></a></li>
+      </ul> *@
+    </li>	
+</ul> 
+									</div>
+								
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+      <div class="max-wrapper">
+          <div class="mobile-big-wrapper left-side">
+              <div class="mobile-wrapper">
+                  
+                  	
+          
+                  
+@GetValue("Title(Content page)")
+@GetValue("Description(Content page)")
+
+
+@{
+		string pageImage = GetString("Item.Page.Image");
+		string genericImage = GetString("Item.Area.Default_Header_Image");
+		string image = !string.IsNullOrEmpty(pageImage) ? pageImage : genericImage;
+		string title = GetString("Item.Page.Title");
+		string description = GetString("Item.Page.Description").ToString();
+		string link =  GetString("Item.Page.Link").ToString();
+		string textLink = GetString("Item.Page.Link_Text").ToString();
+		string vimeoCode = GetString("Item.Page.Vimeo_Code").ToString();
+		string youtubeCode = GetString("Item.Page.You_Tube_Code").ToString();
+		string videoTextLink = GetString("Item.Page.Video_Link_Text").ToString();
+		string videoCode = !string.IsNullOrEmpty(vimeoCode) ? vimeoCode : youtubeCode;
+		string h1Tag = GetString("Item.Page.H1_Tag");
+		bool tallHeader = GetBoolean("Item.Page.TallHeader");
+		string tallHeaderCSS = tallHeader ? "tall" : "";
+
+}
+
+@GetValue("DwNavigation(headimage)")
+
+@*<div class="head-image" style='background-image: url(@image)'>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">				
+				<h2>@title</h2>
+				@if (!string.IsNullOrEmpty(description)) { 
+					<p>@description</p>
+				}
+				@if (!string.IsNullOrEmpty(link)) { 
+					<a href='@link'>@textLink</a>	
+				}
+				@if (!string.IsNullOrEmpty(videoCode)) { 
+					<a href='#' data-toggle="modal" data-target="#popup_home">@videoTextLink</a>
+				}
+			</div>
+		</div>
+	</div>
+</div>*@
+
+@SnippetStart("modals")
+@if (!string.IsNullOrEmpty(videoCode)) {
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="popup_home" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg" role="document" style="max-width: 670px;">
+		<div class="modal-content">
+	    	<div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal" aria-label='@Translate("Close","Close")'><span aria-hidden="true">&times;</span></button>
+	        </div>
+	        <div class="modal-body">
+	        @if (!string.IsNullOrEmpty(@vimeoCode)) {  
+	        	<iframe src="https://player.vimeo.com/video/@(vimeoCode)" width="640px" height="360px" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+				<script type="text/javascript">
+					$(function() {
+						$('#popup_home').on('hidden.bs.modal', function (e) {
+						
+							var source = $('#popup_home iframe').attr('src');
+							$('#popup_home iframe').attr('src','');
+							$('#popup_home iframe').attr('src',source);																			  
+						});
+					});
+				</script>
+			} 
+
+			@if (!string.IsNullOrEmpty(@youtubeCode)) {  
+	        	<iframe class="youtube-content" width="640px" height="360px" src='https://www.youtube.com/embed/@(youtubeCode)?version=3&enablejsapi=1' frameborder="0" allowfullscreen=""></iframe>
+				<script type="text/javascript">
+					$(function() {
+						$('#popup_home').on('hidden.bs.modal', function (e) {
+							$('#popup_home iframe.youtube-content').each(function(){
+								this.contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*')
+							});
+						});
+					});
+				</script>
+	         } 
+	       </div>      
+	   </div>
+	</div>
+</div>
+}
+@SnippetEnd("modals") 	
+<div class="white-box white-box-content">
+	<div class="container">
+		<div class="col-xs-12">
+			<div class="row">
+									
+				<h1>@GetGlobalValue("Global:Page.Name")</h1>
+				
+              	@*<div class="row" id="contentTop">@GetValue("DwContent(contentTop)")</div>  *@
+
+                <div class="col-md-3">
+                <div class="nav nav-pills" id="secondNavigation">
+             @if(GetString("DwPageID") == "488"){
+                	@GetValue("DwNavigation(navpills1)")} else {@GetValue("DwNavigation(navpills)")} 
+                </div>
+                </div>
+                <div class="col-md-8">
+				<div class="row" id="maincontent">@GetValue("DwContent(maincontent)")</div> 
+				</div>
+              	
+			</div>	
+		</div>
+	</div>
+</div>
+
+
+          
+              </div>
+          </div>
+          @{
+    string FooterMenuParentPage =  GetString("Item.Area.Footer_Page_ID");
+    string footernavigation = RenderNavigation(new {
+        template = "LIClean.xslt",
+        id = "bottomnavigation",
+        expandmode = "all",
+        parentid = FooterMenuParentPage,
+        startlevel = 1,
+        endlevel = 2
+    });
+    //string TopMenuParentPage = GetString("Item.Area.TopMenuPageId");
+    string footerNavigationMobile = RenderNavigation(new
+    {
+        template = "FooterLinksMobile.xslt",
+        id = "drawernavigationFooter",
+        expandmode = "all",
+        parentid = TopMenuParentPage,
+        startlevel = 1,
+        endlevel = 1
+    });
+    string navigationSetting = "parentid:" + TopMenuParentPage + ";startlevel:1;endlevel:2;template:FooterLinks.xslt;expandmode:all;";
+}
+
+<footer class="footer noPrint">  
+    <div class="footer-top">
+       @GetValue("Item.Area.Motto")     
+    </div>  
+    <div class="container">
+        <div class="row">   
+	        <div class="col-md-5">
+	            @* <a href="#top" class="hidden-lg hidden-md hidden-sm back-to-top"><span></span>@Translate("Back to top", "Back to top")</a> *@	                   
+	            <a href="#top" ref="#top" class="hidden-lg hidden-md hidden-sm back-to-top"><span></span>@Translate("Back to top", "Back to top")</a>
+	            <nav class="col-xs-12 col-md-12">
+	                @GetValue("DwNavigation(drawernavigationFooter)")
+	                @footerNavigationMobile
+	            </nav>
+	        </div>
+
+	        <div class="col-md-7 text-justify">
+	            @RenderParagraphContent(560)
+
+                <div class="col-md-12">
+                    <ul class="footer-menu">
+                        <li>
+                            <p class="copyright hidden-xs hidden-sm">&copy;@DateTime.Now.Year @GetValue("DwAreaName")</p>
+                            @* @footernavigation *@
+                            @*@GetValue("DwNavigation(bottomnavigation)")*@
+                            
+                        </li> 
+                    </ul> 
+                </div>
+	        </div>
+        </div>
+    </div>  
+
+
+
+
+    <div class="footer-logo">  
+      <div class="container">
+        <div class="row">
+            <div class="col-xs-5 col-md-10">  @* @GetValue("DwAreaFirstPageID") *@
+                <a href='@Pageview.Area.Item["LinkLogoFooter"]'><img src='@Pageview.Area.Item["LogoFooter"]' alt='@Pageview.Area.Item["AltLogoFooter"]'></a>			
+            </div>
+            <div class="col-xs-7 col-md-2 copyright hidden-lg hidden-md">&copy; @DateTime.Now.Year @GetValue("DwAreaName")</div>
+        </div>
+      </div>
+    </div>
+    
+</footer>		
+
+
+          @if(!string.IsNullOrEmpty(linkButton) && !string.IsNullOrEmpty(linkTextButton)) {
+            <div class="popup animated fadeInRight transition400">
+              <a href='/@linkButton'>@linkTextButton<span style="display: none;">!</span></a>
+            </div>
+          }
+      </div>
+
+      <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.5.0/lodash.min.js"></script> -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js"></script>
+      <script type="text/javascript" src="@areaLayoutPath/assets/js/main.min.js"></script>
+      <script type="text/javascript" src="@areaLayoutPath/assets/js/mobile-menu.js"></script>	
+      <script type="text/javascript" src="@areaLayoutPath/assets/js/main.js"></script>
+      <script src="https://use.fontawesome.com/3d0dad0af9.js"></script>
+      @* <script async="" defer="" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDUJVpKvhlFqq-qq27cgda-RO5uOhYvu7s&callback=initMap"></script> *@
+       
+      @if(!string.IsNullOrEmpty(GetString("Item.Area.CustomCodeFooter"))){
+        @GetString("Item.Area.CustomCodeFooter") 
+      }
+
+      @RenderSnippet("modals")  
+
+
+     @*  <script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        dots: false,
+        nav: true,      
+        autoplay: true,
+        autoplayHoverPause: true,
+        slideBy: 3,
+        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        responsive: {
+          0: {
+            items: 1
+          },
+          600: {
+            items: 2
+          },
+          1000: {
+            items: 4
+          }
+        }
+    })
+
+
+  //$('#myModal').modal('show')
+
+
+  $(document).ready(function() {
+
+  /* This is basic - uses default settings */
+  
+  //$("a.single_image").fancybox();
+  
+  /* Using custom settings */
+  
+  // $("a#inline").fancybox({
+  //   'hideOnContentClick': true
+  // });
+
+  /* Apply fancybox to multiple items */
+  
+  $("a.single_image").fancybox({
+    'transitionIn'  : 'elastic',
+    'transitionOut' : 'elastic',
+    'speedIn'   : 600, 
+    'speedOut'    : 200, 
+    'overlayShow' : false
+  });
+  
+});
+
+
+
+  $(".videoGallery").fancybox({
+      type: "iframe"
+    });
+
+
+
+
+  </script> *@
+
+</body>
+</html>

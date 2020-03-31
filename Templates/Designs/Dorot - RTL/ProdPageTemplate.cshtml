@@ -1,0 +1,237 @@
+﻿@MasterPageFile("Master.cshtml")
+@GetValue("Title(Content page)")
+@GetValue("Description(Content page)")
+@using System;
+@Include("includes/Razor/GetImage.cshtml")
+@Include("includes/Razor/VerifyImage.cshtml")
+@Include("includes/PageTemplates/GenericHelper.cshtml")
+@Include("Custom/HeaderImage.cshtml")	
+@{	
+
+
+string titlePage = GetString("Item.Title.Value");
+string imagePage = GetImage(GetString("Item.Image.Value"),400, 400);
+string productCatalog = GetString("Item.ProductCatalog.Value");
+string technicalS = GetString("Item.Technical_Specifications.Value");
+string installationG = GetString("Item.Installation_Guide.Value");
+string iom = GetString("Item.IOM.Value");
+string multimedia = GetString("Item.Multimedia.Value");
+string purchaseS = "http://" + GetGlobalValue("Global:Request.Host") + "/engineering-hub/engineers-library/purchase-specifications?Folder=%2F"+titlePage;
+string troubleshootGuide = "http://" + GetGlobalValue("Global:Request.Host") + "/engineering-hub/engineers-library/troubleshoot-guides?Folder=%2F"+titlePage;
+string dataSheets ="http://" + GetGlobalValue("Global:Request.Host") + "/engineering-hub/engineers-library/data-sheets?Folder=%2F"+titlePage;
+string cadFiles ="http://" + GetGlobalValue("Global:Request.Host") + "/engineering-hub/engineers-library/cad-library?Folder=%2F"+titlePage;
+string designTS = GetString("Item.DesignAndTestStandards.Value");
+
+List<LoopItem> caseStudiesLoop = GetLoop("Item.Case_Studies");
+List<LoopItem> certificationsLoop = GetLoop("Item.Certifications2");
+List<LoopItem> galerieImaginiLoop = GetLoop("Item.GalerieImagini");
+}
+
+
+<div class="container">
+	<div class="row">
+				<div class="col-md-12">
+              		<ul class="dwnavigation breadcrumb" id="breadcrumbs" data-settings="template:Breadcrumb.xslt;startlevel:1;endlevel:3;expandmode:PathOnly"></ul>
+         		</div>
+    </div>
+</div>
+<div class="white-box white-box-content">
+	<div class="container">
+    <div class="row">
+
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+           <div class="search-box col-md-4 pull-right">
+              <form action="/search" method="GET" role="search">
+                <div class="form-group">
+                  <input type="text" name="q" id="q" aria-label="search" autocomplete="off" spellcheck="false" placeholder='@Translate("findYourSolution", "Find your solution")' class="form-control">
+                  <button type="submit"><i class="fa fa-search" aria-hidden="true"></i><span style="display:none">text</span></button>
+                  @* <div class="instant_search"></div> *@
+                </div>
+              </form>
+           </div>
+           <h1>@titlePage</h1>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12" id="productimage">
+          <img src="@imagePage" alt="@titlePage" class="img-responsive"/>
+        </div>
+        <div class="col-md-5 col-sm-4 col-xs-12" id="overview">
+          
+            
+            <div class="row"><div class="dwcontent" id="overviewcontent" title="Content overview"></div></div>
+         
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-12 group-btn" id="download">
+          <h2 class="title">@Translate("Downloads","Downloads")</h2>
+
+
+          @if(!string.IsNullOrEmpty(productCatalog)) { 
+            <div class="catalog-btn" title="pdf">@RenderDownloadLink(@productCatalog,@Translate("ProductCatalog"," Product Catalog"))</div>    
+          }
+          @if(!string.IsNullOrEmpty(technicalS)) {    
+            <div class="technicalS-btn">@RenderDownloadLink(@technicalS,@Translate("TechnicalSpecification","Technical Specifications"))</div>
+          }
+          @if(!string.IsNullOrEmpty(installationG)) { 
+            <div class="installationG-btn">@RenderDownloadLink(@installationG,@Translate("InstallationGuide","Installation Guide"))</div>
+          }
+          @if(!string.IsNullOrEmpty(iom)) { 
+            <div class="iom-btn">@RenderDownloadLink(@iom,@Translate("IOM","IOM"))</div> 
+          }
+          @if(!string.IsNullOrEmpty(multimedia)) { 
+            <div class="multimedia-btn">@RenderDownloadLink(@multimedia,@Translate("multimedia","Multimedia"))</div>
+          }
+
+
+          @if(!string.IsNullOrEmpty(purchaseS)) { 
+            <div class="purchaseS-btn">@RenderDownloadLink(@purchaseS,@Translate("PurchaseSpecification","Purchase Specification"))</div>
+          }
+          @if(!string.IsNullOrEmpty(troubleshootGuide)) { 
+            <div class="troubleshootGuide-btn">@RenderDownloadLink(@troubleshootGuide,@Translate("TroubleshootGuide","Troubleshoot Guide"))</div>
+          }
+          @if(!string.IsNullOrEmpty(dataSheets)) {  
+            <div class="dataSheets-btn">@RenderDownloadLink(@dataSheets,@Translate("dataSheets","Data Sheets"))</div> 
+          }
+          @if(!string.IsNullOrEmpty(cadFiles)) {     
+            <div class="cadFiles-btn">@RenderDownloadLink(@cadFiles,@Translate("cadFiles","Cad Files"))</div> 
+          }
+          @if(!string.IsNullOrEmpty(designTS)) {
+            <div class="designTS-btn">@RenderDownloadLink(@designTS,@Translate("DesignAndTestStandards","Design And Test Standards"))</div> 
+          }
+
+               
+        </div>
+
+        <div class="dwcontent" id="maincontent" title="Content full width"></div>
+        @if(caseStudiesLoop.Count() > 0){
+              int caseStudiesLoopHalf = (caseStudiesLoop.Count() / 2) + 1;
+              <div class="col-md-12 col-sm-12 col-xs-12" id="casestudies">
+                <h3 class="dw-section-title">@Translate("CaseStudies","Case studies")</h3>
+              </div>
+            <ul class="studies-box col-md-6">
+              @foreach(var element in caseStudiesLoop) {      
+                string titleCS = element.GetString("Item.Case_Studies.Title");
+                string imageCS = element.GetString("Item.Case_Studies.Image");
+                int counterCer = element.GetInteger("Item.Certifications2.LoopCounter");
+                <li>
+                  <p>@titleCS</p>     
+                </li>
+                @ResetElement("ul",counterCer,caseStudiesLoopHalf,"studies-box col-md-6")
+              } 
+            </ul>
+      
+        }
+        @if(certificationsLoop.Count() > 0) {
+          int certificationsLoopHalf = (certificationsLoop.Count() / 2) + 1;
+          <div class="col-md-12 col-sm-12 col-xs-12" id="certifications">
+            <h3 class="dw-section-title">@Translate("Certifications","Certifications")</h3>
+          </div>
+          <ul class="studies-box col-md-6">
+            @foreach(var element in certificationsLoop) {     
+              string titleCer = element.GetString("Item.Certifications2.Title");
+              string imageCer = element.GetString("Item.Certifications2.Image");
+              string imageCerResized = GetImage(imageCer,50, 50);
+              string linkCer = element.GetString("Item.Certifications2.File.Value");
+              int counterCer = element.GetInteger("Item.Certifications2.LoopCounter");
+			  string titleWithOutSpaces = titleCer.Replace(" ","");
+    
+              <li>
+                <div class="media">
+                  <div class="media-left"><img src="@imageCerResized" alt='@titleCer' class="img-responsive media-object" /></div>
+                  <div class="media-right"><a href="@linkCer" target="_blank"><p>@titleCer</p></a></div>
+                  </div>
+              </li>
+              @ResetElement("ul",counterCer,certificationsLoopHalf,"studies-box col-md-6")    
+            }
+          </ul>
+        }
+
+    </div>
+
+	<div class="row">
+	    <div class="col-md-12">
+	        <div class="owl-carousel owl-theme" id="gallery"> 
+
+				@if(certificationsLoop.Count() > 0) {
+			        
+			       foreach(LoopItem element in galerieImaginiLoop) {    
+				        string titleImg = element.GetString("Item.GalerieImagini.Title.Value");
+				        string imageGalerie = element.GetString("Item.GalerieImagini.Image.Value");  
+			        
+			            <div class="item">
+			              <a class="single_image" href="" rel="">
+			                @titleImg<br />
+			                <img src='@imageGalerie' alt="@titleImg" class="img-responsive" />
+			              </a>
+			            </div>                
+			        } 
+			            
+			    }
+
+			</div> <!-- end of owl -->    
+		</div>    
+	</div>
+
+	</div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js"></script>
+
+<script>
+$('.owl-carousel').owlCarousel({
+    loop: true,
+    margin: 10,
+    dots: false,
+    nav: true,      
+    autoplay: true,
+    autoplayHoverPause: true,
+    slideBy: 3,
+    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      600: {
+        items: 2
+      },
+      1000: {
+        items: 4
+      }
+    }
+})
+
+
+//$('#myModal').modal('show')
+
+
+$(document).ready(function() {
+
+/* This is basic - uses default settings */
+
+//$("a.single_image").fancybox();
+
+/* Using custom settings */
+
+// $("a#inline").fancybox({
+//   'hideOnContentClick': true
+// });
+
+/* Apply fancybox to multiple items */
+
+$("a.single_image").fancybox({
+'transitionIn'  : 'elastic',
+'transitionOut' : 'elastic',
+'speedIn'   : 600, 
+'speedOut'    : 200, 
+'overlayShow' : false
+});
+
+});
+
+
+
+$(".videoGallery").fancybox({
+  type: "iframe"
+});
+
+</script>

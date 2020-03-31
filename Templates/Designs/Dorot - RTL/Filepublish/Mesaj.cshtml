@@ -1,0 +1,11 @@
+﻿		@{
+			string altInfo = "<img alt='"+GetValue("FilepublishFileName")+"' ";
+		}
+
+
+		<tr>
+			<td class="target-images">@GetString("FilepublishFileIcon").Replace("<img",@altInfo)</td>
+			<td class="target-hrefs"><a href='@GetString("FilepublishFileLink")'>@GetValue("FilepublishFileName") </td>
+			<td align="right">@GetValue("FilepublishFileSizeKB")</td>
+			<td align="right">@GetValue("FilepublishFileDatemodified")</td>
+		</tr>

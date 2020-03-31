@@ -1,0 +1,34 @@
+@* @Include("Custom/GlobalVariables.cshtml") *@
+@Include("../includes/Razor/GetImage.cshtml")
+@Include("../includes/Razor/VerifyImage.cshtml")
+@Include("../includes/PageTemplates/GenericHelper.cshtml")
+
+
+
+
+<div class="col-md-12 products-list">
+
+@{
+	
+      	 string titleProduct = GetString("Item.Title.Value"),
+	       shortDescriptionProduct = GetString("Item.Products.Short_Description"),
+	       imageLink= GetString("Item.Products.Image"),
+		     image = GetImage(imageLink,300, 300), 
+         link = element.GetString("Item.Products.Link"),
+         
+         textLinkPDF = GetString("Item.Products.TextLinkPDF"),
+         PDF = GetString("Item.Products.PDF"),
+         textLinkPDF2 = GetString("Item.Products.TextLinkPDF2"),
+         PDF2 = GetString("Item.Products.PDF2"),
+         textLinkPDF3 = GetString("Item.Products.TextLinkPDF3"),
+         PDF3 = GetString("Item.Products.PDF3"),
+         textLinkPDF4 = GetString("Item.Products.TextLinkPDF4"),
+         PDF4 = GetString("Item.Products.PDF4"),
+         noImage = "/Files/Images/Dorot/no_image.png";
+  
+}
+
+        <p> @titleProduct</p>
+      
+          
+</div>

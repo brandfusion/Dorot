@@ -1,0 +1,108 @@
+﻿@MasterPageFile("Master.cshtml")
+@GetValue("Title(Content page)")
+@GetValue("Description(Content page)")
+
+@Include("Custom/HeaderImage.cshtml")	
+@Include("includes/Razor/GetImage.cshtml")
+@Include("includes/Razor/VerifyImage.cshtml")
+
+
+@{	
+string titlePage = GetString("Item.Title.Value");
+string mainImage = GetString("Item.Image.Value");
+string city = GetString("Item.City.Value");
+string country = GetString("Item.Country.Value");
+string data = GetString("Item.Data.Value");
+string pdf = GetString("Item.PDF.Value");
+
+List<LoopItem> MediaServiceLoop = GetLoop("Item.MediaService");
+
+}
+
+ <div class="white-box white-box-content">
+	<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<h1>@titlePage</h1>
+					<p>@city, @country @data</p>
+					<p><a class="btn btn-primary" href="@pdf" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></p>					
+				</div><br>
+				<div class="col-md-3">
+				@if(!string.IsNullOrEmpty(@mainImage)){	
+					 <img src="@mainImage" class="img-responsive" alt="" /> 
+				}
+
+				</div>
+			</div> 
+
+
+
+			<div class="row dwcontent" id="maincontent" title="Content area"></div>
+
+			<div class="row">
+				@foreach(var element in MediaServiceLoop) {			
+					string titleMS = element.GetString("Item.MediaService.Title");
+					@* string imageMS = GetImage(element.GetString("Item.MediaService.Image"), 200, 150); *@
+					string imageMS = element.GetString("Item.MediaService.Image");
+
+					
+					string videoImage = "http://" + GetGlobalValue("Global:Request.Host")+ "/Files/Images/Dorot/playDorot.png";
+			
+
+					string shortDescriptionMS = element.GetString("Item.MediaService.Short_Description");
+					string descriptionMS = element.GetString("Item.MediaService.Description");
+					string linkLinkMS = element.GetString("Item.MediaService.Link_Link");
+					string linkTextMS = element.GetString("Item.MediaService.Link_Text");
+					string videoCodeMS = element.GetString("Item.MediaService.Video_Code");
+					string videoYoutubeCodeMS = element.GetString("Item.MediaService.Video_Youtube_Code");
+
+
+						
+						if(!string.IsNullOrEmpty(videoCodeMS)){
+
+								<div class="col-md-6">
+									<h3>@titleMS</h3>
+									<p>@shortDescriptionMS</p>
+									<p>@descriptionMS</p>
+								</div>
+
+								<div class="col-md-6">
+				             	 	<a href="https://player.vimeo.com/video/@videoCodeMS" ><img src='@videoImage' class="img-responsive" alt="" /></a>
+				             	 </div>
+				             }		            								  
+						  	else if (!string.IsNullOrEmpty(videoYoutubeCodeMS)){
+
+								<div class="row">
+									<div class="col-md-6">
+										<h3>@titleMS</h3>
+										<p>@shortDescriptionMS</p>
+										<p>@descriptionMS</p>
+									</div>
+
+									<div class="col-md-6">
+										<a href="https://www.youtube.com/embed/@videoYoutubeCodeMS" ><img src='@videoImage' class="img-responsive" alt="" /></a>
+									</div>
+								</div>  
+				             }
+				            else {
+							
+								<div class="studies-box col-md-2">
+									@* <h4>@titleMS</h4> *@			
+									<img src="@imageMS" alt="@titleMS" class="img-responsive" />
+									
+								</div>
+						
+				            
+				             }
+
+
+
+
+
+				
+				}          	  
+			</div>	
+			 
+	</div>	
+
+</div>

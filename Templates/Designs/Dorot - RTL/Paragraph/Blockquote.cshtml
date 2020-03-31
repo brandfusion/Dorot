@@ -1,0 +1,99 @@
+﻿@Include("Layout.cshtml")
+
+@NewRow()
+
+<div class="@ColumnClass()">
+	<quote>
+		@if (GetString("Item.Order") == "title-first" || GetString("Item.Order") == "")
+		{
+				@RenderHeading()			
+				@RenderText()
+				@RenderSubHeading()
+				@RenderModule()
+				@RenderButton()
+		}
+
+		@if (GetString("Item.Order") == "title-sub-first")
+		{
+				@RenderHeading()
+				@RenderText()
+				@RenderSubHeading()			
+				@RenderModule()
+				@RenderButton()
+		}
+
+	</quote>	
+</div>
+
+
+@helper RenderHeading()
+{
+	if (GetBoolean("Item.ShowTitle") != false){
+		if (!string.IsNullOrEmpty(GetString("Item.Title")))
+		{
+			<h3 class="dw-section-title"> 
+				<span>
+					@GetString("Item.Title") 
+				</span>
+			</h3>
+		}
+	}
+}
+
+@helper RenderButton()
+{	
+	var Url = GetString("Item.Link");
+
+	if (!string.IsNullOrEmpty(Url) && !string.IsNullOrEmpty(GetString("Item.LinkText")))
+	{	
+		if (Url.Contains("http"))
+		{
+			<text>
+				<p class="pull-right" style="margin-bottom: 30px !important">
+					<a href="@GetString("Item.Link")" target="_blank" class="btn btn-dw-primary pull-right">@GetString("Item.LinkText")</a>
+				</p>
+			</text>
+		}
+		else if (Url.Contains("/"))
+		{
+			<text>
+				<p class="pull-right" style="margin-bottom: 30px !important">
+					<a href="@GetString("Item.Link")" class="btn btn-dw-primary pull-right" download>@GetString("Item.LinkText")</a>
+				</p>
+			</text>
+		}
+		else
+		{
+			<text>
+				<p class="pull-right" style="margin-bottom: 30px !important">
+					<a href="@GetString("Item.Link")" class="btn btn-dw-primary pull-right">@GetString("Item.LinkText")</a>
+				</p>
+			</text>
+		}
+	}
+}
+
+@helper RenderSubHeading()
+{
+	if (!string.IsNullOrEmpty(GetString("Item.Subtitle")))
+	{
+		<a href="#"><span>
+			@GetString("Item.Subtitle")
+		</span></a>
+	}
+}
+
+@helper RenderText()
+{
+	if (!string.IsNullOrWhiteSpace(GetString("Item.Text"))){
+		<p>
+			@System.Text.RegularExpressions.Regex.Replace(GetString("Item.Text"), "<.*?>", String.Empty)
+			<span class="close-quote">&nbsp;</span>
+		</p>
+	}
+}
+
+@helper RenderModule()
+{
+	@GetString("ParagraphModule")
+}

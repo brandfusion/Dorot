@@ -1,0 +1,64 @@
+﻿@{
+int count = 1;
+
+<div class="row items accordion-list" id="accordion">	
+      @foreach(LoopItem accordionItem in GetLoop("Item.Accordion_List")) {   	  
+            
+      string title = !string.IsNullOrEmpty(accordionItem.GetString("Item.Accordion_List.Title.Value")) ? accordionItem.GetString("Item.Accordion_List.Title.Value") : "";    	
+      string longDescription = !string.IsNullOrEmpty(accordionItem.GetString("Item.Accordion_List.Long_Description.Value")) ? accordionItem.GetString("Item.Accordion_List.Long_Description.Value") : "";    	    
+                                      
+      <div class="item col-xs-12"> 
+		 <div class="view-more-btn"><div class="box">          
+		 
+            @if(!string.IsNullOrEmpty(@title)) { 
+                <div class="link box-name">
+                    <h3>@title</h3> 
+                </div>
+            }                      
+            @if(!string.IsNullOrEmpty(@longDescription)) { 
+                <div class="text box-details">
+                    <p>@longDescription</p> 
+                </div>
+            } 
+
+		 </div></div>
+      </div>                    
+      count++;
+  
+      } 
+</div>
+}
+    
+<script type="text/javascript">
+    $(function(){
+      //$(".accordion li").first().addClass('open');
+
+      var Accordion = function(el, multiple) {
+          this.el = el || {};
+          this.multiple = multiple || false;
+
+          // Variabile
+          var link = this.el.find('.link');
+          // Evenimente
+          link.on('click', {el: this.el, multiple: this.multiple},this.dropdown)
+      }
+
+      Accordion.prototype.dropdown = function(e) {
+          var $el = e.data.el;
+              $this = $(this),
+              $next = $this.next();
+
+          // mutarea elementului open la deschiderea evenimentului pe link-ul următor 
+          $next.slideToggle();
+          // Adăuga elementul părinte de clasă open a elementului cu class = link-li
+          $this.parent().toggleClass('open');
+          
+          //Parametru initial care permite ca primul element sa fie activ
+          if(!e.data.multiple){
+              $el.find('.text').not($next).slideUp().parent().removeClass('open');
+          }
+      }
+      // Alege submeniurile multiple (true) 
+      var accordion = new Accordion($('#accordion'), false);
+    }); 
+</script>

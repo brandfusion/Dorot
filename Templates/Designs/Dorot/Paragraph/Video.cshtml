@@ -1,0 +1,18 @@
+﻿@{
+string videoIdYoutube = GetString("Item.Video_Youtube_Code");
+string videoIdVimeo = GetString("Item.Video_Code");
+string videoType = !string.IsNullOrEmpty(videoIdYoutube) ? "youtube" : "";
+
+}
+<div class='embed-container'>
+      @if(videoType == "youtube"){
+      <iframe src='http://www.youtube.com/embed/@videoIdYoutube' frameborder='0' allowfullscreen></iframe>
+      }else{
+      <iframe src="https://player.vimeo.com/video/@videoIdVimeo" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      }
+   </div>
+   <div class="col-md-12 plum-bg-color">
+     <div class="video-banner">@GetValue("Item.Short_Description")</div>
+</div>
+
+

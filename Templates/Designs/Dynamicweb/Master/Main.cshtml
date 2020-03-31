@@ -1,0 +1,1184 @@
+﻿@inherits Dynamicweb.Rendering.RazorTemplateBase<Dynamicweb.Rendering.RazorTemplateModel<Dynamicweb.Rendering.Template>>
+@using Dynamicweb.Content
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamicweb</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+    @if (string.IsNullOrWhiteSpace(GetString("Item.Area.CustomCssURL")))
+    {
+        <link rel="stylesheet" href="assets/Stylesheets/Styles.css" />
+    }
+    else
+    {
+        @("<" + "link")@: rel="stylesheet" href='@GetString("Item.Area.CustomCssURL")' @("/>")
+    }
+  <link rel="stylesheet" href="assets/stylesheets/20_navigation.css" />
+    @RenderSnippet("StyleSheet")
+    @RenderSnippet("JavaScript")
+</head>
+<body>
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          	<div id="mainNavContainer" class="col-xs-12 noPaddingLeft">
+           
+              <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    @Translate("Our Products","Our Products")<i class="fa fa-angle-down"></i>
+                  </button>
+                </div>
+                @* <div id="navbar" class="navbar-collapse collapse">
+                  <ul id="megaMenu" class="dwnavigation" settings="startlevel:1;endlevel:4;template:liCleanMegaMenu.xslt;expandmode:All;id:megaMenu;"></ul>
+                 
+                </div> *@
+
+                <div id="navbar" class="navbar-collapse collapse">
+                <ul class="pageLevel1 nav navbar-nav" id="megaMenu">
+                  <li class=" firstItem inpath activeItem vertical">
+                    <a  href="/standard/products-solutions">Products &amp; Solutions</a>
+                    <ul class="pageLevel2 ">
+                      <li class=" firstItem ">
+                        <a  href="/standard/products-solutions/hydraulic-control-valves">Hydraulic Control Valves</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem ">
+                            <a   href="/standard/products-solutions/hydraulic-control-valves/metal-pilot-operated-valves">Metal Pilot-operated Valves</a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/products-solutions/hydraulic-control-valves/metal-pilot-operated-valves/300-series">300 Series </a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/hydraulic-control-valves/metal-pilot-operated-valves/100-series-gal-valve">100 Series (Gal Valve)</a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/hydraulic-control-valves/metal-pilot-operated-valves/500-series">500 Series</a>
+                              </li>
+                            </ul>
+                          </li><li class=" ">
+                            <a   href="/standard/products-solutions/hydraulic-control-valves/plastic-pilot-operated-valves">Plastic Pilot-Operated Valves</a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/products-solutions/hydraulic-control-valves/plastic-pilot-operated-valves/75-series-super-gal">75 Series (Super Gal)</a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/hydraulic-control-valves/plastic-pilot-operated-valves/80-series">80 Series </a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/hydraulic-control-valves/plastic-pilot-operated-valves/pvc-valves">PVC Valves </a>
+                              </li>
+                            </ul>
+                          </li><li class=" ">
+                            <a   href="/standard/products-solutions/hydraulic-control-valves/back-flushing-valves">Back-Flushing Valves</a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/products-solutions/hydraulic-control-valves/back-flushing-valves/general">General</a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/hydraulic-control-valves/back-flushing-valves/metallic">Metallic</a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/hydraulic-control-valves/back-flushing-valves/plastic">Plastic</a>
+                              </li>
+                            </ul>
+                          </li>
+                          
+                          
+                          <li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/products-solutions/hydraulic-control-valves/pilots-all-range">Pilots - ALL Range</a>
+                          </li><li class=" ">
+                            <a   href="/standard/products-solutions/hydraulic-control-valves/solenoid-valves-all-range">Solenoid-valves - ALL Range</a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/products-solutions/hydraulic-control-valves/solenoid-valves-all-range/irrigation-line">Irrigation line</a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/hydraulic-control-valves/solenoid-valves-all-range/gem-a">GEM-A</a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/hydraulic-control-valves/solenoid-valves-all-range/330t">330T</a>
+                              </li>
+                            </ul>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/products-solutions/hydraulic-control-valves/hydrometers">Hydrometers</a>
+                          </li>
+                          
+                          
+                          <li class="">
+                            <a  href="/standard/products-solutions/hydraulic-control-valves/spare-parts">Spare Parts</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/products-solutions/air-valves">Air Valves</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem ">
+                            <a   href="/standard/products-solutions/air-valves/plastic">Plastic</a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/products-solutions/air-valves/plastic/dav-p-k-kinetic-air-valve">DAV P K (kinetic Air Valve)</a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/air-valves/plastic/dav-lp-k-kinetic-low-pressure-air-valve">DAV LP K (kinetic Low Pressure Air Valve)</a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/air-valves/plastic/dav-p-a-automatic-air-valve">DAV P A (Automatic Air Valve)</a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/air-valves/plastic/dav-p-ka-combination-air-valve-kinetic-automatic">DAV P KA (Combination Air Valve: Kinetic-Automatic)</a>
+                              </li>
+                            </ul>
+                          </li><li class=" ">
+                            <a   href="/standard/products-solutions/air-valves/metal">Metal</a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/products-solutions/air-valves/metal/dav-ms">DAV-MS</a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/air-valves/metal/dav-mh">DAV-MH</a>
+                              </li>
+                              <li>
+                                <a href="/standard/products-solutions/air-valves/metal/dav-mp">DAV-MP</a>
+                              </li>
+                            </ul>
+                          </li><li class=" ">
+                            <a   href="/standard/products-solutions/air-valves/waste-water">Waste Water</a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/products-solutions/air-valves/waste-water/dav-wp">DAV-WP</a>
+                              </li>
+                            </ul>
+                          </li>
+                          
+                          
+                          <li class="">
+                            <a  href="/standard/products-solutions/air-valves/av-pro">AV-Pro</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/products-solutions/mechanical-valves-gaer-line">Mechanical valves (GAER line)</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem">
+                            <a  href="/standard/products-solutions/mechanical-valves-gaer-line/butterfly-valves">Butterfly Valves</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/products-solutions/mechanical-valves-gaer-line/check-valves">Check Valves</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/products-solutions/mechanical-valves-gaer-line/gate-valves">Gate Valves</a>
+                          </li>
+                          
+                          
+                          <li class="">
+                            <a  href="/standard/products-solutions/mechanical-valves-gaer-line/accesories">Accesories</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/products-solutions/electronic">Electronic</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem">
+                            <a  href="/standard/products-solutions/electronic/valve-controller-condor">Valve Controller/ CONDOR</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/products-solutions/electronic/lasu">LASU</a>
+                          </li><li class="">
+                            <a  href="/standard/products-solutions/electronic/tele-controllers">Tele Controllers</a>
+                          </li>
+                          
+                          
+                        </ul>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/products-solutions/water-meters">Water Meters</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem">
+                            <a  href="/standard/products-solutions/water-meters/mechanic">Mechanic</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/products-solutions/water-meters/ultrasonic">Ultrasonic</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/products-solutions/water-meters/electro-magnetic">Electro-Magnetic</a>
+                          </li>
+                          
+                          
+                          <li class="">
+                            <a  href="/standard/products-solutions/water-meters/amr-options">AMR Options</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="">
+                        <a href="/standard/products-solutions/spare-parts-accesories">Spare Parts &amp; Accesories</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="vertical ">
+                    <a  href="/standard/water-works">Water Works</a>
+                    <ul class="pageLevel2 ">
+                      <li class=" firstItem ">
+                        <a  href="/standard/water-works/browse-by-control-solutions">Browse by Control-Solutions</a>
+                        <ul class="pageLevel3 ">
+                         <li class=" firstItem ">
+                            <a   href="/standard/water-works/browse-by-control-solutions/reservoir-tanks">Reservoir &amp; Tanks</a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/water-works/browse-by-control-solutions/reservoir-tanks/basic-level-control-solutions">Basic level control solutions</a>
+                              </li>
+                              <li>
+                                <a href="/standard/water-works/browse-by-control-solutions/reservoir-tanks/level-and-flow-control">Level and Flow control</a>
+                              </li>
+                              <li>
+                                <a href="/standard/water-works/browse-by-control-solutions/reservoir-tanks/water-hammer-prevention">Water hammer prevention</a>
+                              </li>
+                              <li>
+                                <a href="/standard/water-works/browse-by-control-solutions/reservoir-tanks/back-pressure-control">Back pressure control</a>
+                              </li>
+                              <li>
+                                <a href="/standard/water-works/browse-by-control-solutions/reservoir-tanks/extreme-low-pressure-conditions">Extreme low pressure conditions</a>
+                              </li>
+                            </ul>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/water-works/browse-by-control-solutions/pumping-systems">Pumping systems</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/water-works/browse-by-control-solutions/water-hammer-prevention-attenuation">Water Hammer prevention &amp; attenuation</a>
+                          </li>
+                          
+                          
+                          <li class="">
+                            <a  href="/standard/water-works/browse-by-control-solutions/air-in-water-systems">Air in water-systems</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/water-works/browse-by-market-segment">Browse by Market segment</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem ">
+                            <a   href="/standard/water-works/browse-by-market-segment/municipal-national-water-systems">Municipal &amp; National  Water-systems </a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/water-works/browse-by-market-segment/municipal-national-water-systems/nrw-pressure-management">NRW &amp; Pressure Management</a>
+                              </li>
+                              <li>
+                                <a href="/standard/water-works/browse-by-market-segment/municipal-national-water-systems/scada-control">SCADA control</a>
+                              </li>
+                            </ul>
+                          </li><li class=" ">
+                            <a   href="/standard/water-works/browse-by-market-segment/high-rise-buildings">High-Rise Buildings</a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/water-works/browse-by-market-segment/high-rise-buildings/water-level-control">Water level control</a>
+                              </li>
+                              <li>
+                                <a href="/standard/water-works/browse-by-market-segment/high-rise-buildings/pressure-reducing">Pressure reducing</a>
+                              </li>
+                              <li>
+                                <a href="/standard/water-works/browse-by-market-segment/high-rise-buildings/water-hammer-prevention">Water hammer prevention</a>
+                              </li>
+                              <li>
+                                <a href="/standard/water-works/browse-by-market-segment/high-rise-buildings/pressure-relief">Pressure-Relief</a>
+                              </li>
+                              <li>
+                                <a href="/standard/water-works/browse-by-market-segment/high-rise-buildings/pump-control">Pump control</a>
+                              </li>
+                            </ul>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/water-works/browse-by-market-segment/hvac">HVAC</a>
+                          </li>
+                          
+                          
+                          <li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/water-works/browse-by-market-segment/marine">Marine</a>
+                          </li><li class="">
+                            <a  href="/standard/water-works/browse-by-market-segment/industrial">Industrial</a>
+                          </li>
+                          
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="vertical ">
+                    <a  href="/standard/agriculture">Agriculture</a>
+                    <ul class="pageLevel2 ">
+                      <li class=" firstItem ">
+                        <a  href="/standard/agriculture/browse-by-control-solution">Browse by Control-Solution</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem ">
+                            <a   href="/standard/agriculture/browse-by-control-solution/on-off-control">On/OFF Control</a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/agriculture/browse-by-control-solution/on-off-control/manual-control">Manual Control </a>
+                              </li>
+                              <li>
+                                <a href="/standard/agriculture/browse-by-control-solution/on-off-control/2w-electric-valve">2W Electric Valve</a>
+                              </li>
+                              <li>
+                                <a href="/standard/agriculture/browse-by-control-solution/on-off-control/3w-valve">3W Valve</a>
+                              </li>
+                              <li>
+                                <a href="/standard/agriculture/browse-by-control-solution/on-off-control/two-stages-open">Two stages open</a>
+                              </li>
+                              <li>
+                                <a href="/standard/agriculture/browse-by-control-solution/on-off-control/surge-preventing-stepped-closure-addition">Surge preventing - stepped closure addition</a>
+                              </li>
+                            </ul>
+                          </li><li class=" ">
+                            <a   href="/standard/agriculture/browse-by-control-solution/pressure-regulation">Pressure Regulation</a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/agriculture/browse-by-control-solution/pressure-regulation/pressure-reducing">Pressure Reducing</a>
+                              </li>
+                              <li>
+                                <a href="/standard/agriculture/browse-by-control-solution/pressure-regulation/pressure-sustaining">Pressure Sustaining</a>
+                              </li>
+                              <li>
+                                <a href="/standard/agriculture/browse-by-control-solution/pressure-regulation/pressure-reducing-pressure-sustaining">Pressure Reducing/Pressure Sustaining </a>
+                              </li>
+                            </ul>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/agriculture/browse-by-control-solution/flow-rate-control">Flow Rate Control </a>
+                          </li>
+                          
+                          
+                          <li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/agriculture/browse-by-control-solution/water-hammer-protection">Water-hammer protection</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/agriculture/browse-by-control-solution/float-controlled-valve">Float Controlled Valve</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/agriculture/browse-by-control-solution/ouick-pressure-relief">Ouick Pressure Relief</a>
+                          </li>
+                          
+                          
+                          <li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/agriculture/browse-by-control-solution/air-valve">AIR Valve *</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/agriculture/browse-by-control-solution/pump-valve">Pump Valve*</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/agriculture/browse-by-control-solution/excessive-flow-shut-off-valve">Excessive flow shut off valve</a>
+                          </li>
+                          
+                          
+                          <li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/agriculture/browse-by-control-solution/pressure-differential-valve">Pressure differential  valve</a>
+                          </li><li class="">
+                            <a  href="/standard/agriculture/browse-by-control-solution/surge-preventing-stepped-closure-addition">Surge preventing - stepped closure addition</a>
+                          </li>
+                          
+                        </ul>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/agriculture/browse-by-use-case">Browse by Use-Case</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem">
+                            <a  href="/standard/agriculture/browse-by-use-case/tanks-and-reservoirs">Tanks and Reservoirs</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/agriculture/browse-by-use-case/pumping-systems">Pumping-Systems</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/agriculture/browse-by-use-case/main-supply-infrastructure">Main Supply-infrastructure</a>
+                          </li>
+                          
+                          
+                         <li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/agriculture/browse-by-use-case/open-field-sprinklers-drip-irrigation">Open Field - sprinklers &amp; drip irrigation</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/agriculture/browse-by-use-case/open-field-center-pivot-applications">Open Field - Center-Pivot applications</a>
+                          </li><li class=" ">
+                            <a   href="/standard/agriculture/browse-by-use-case/greenhouses">Greenhouses</a>
+                            <ul class="pageLevel4 ">
+                              <li>
+                                <a href="/standard/agriculture/browse-by-use-case/greenhouses/main-greenhouse">Main Greenhouse</a>
+                              </li>
+                              <li>
+                                <a href="/standard/agriculture/browse-by-use-case/greenhouses/internal-greenhouse">Internal Greenhouse </a>
+                              </li>
+                            </ul>
+                          </li>
+                          
+                          
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="vertical ">
+                    <a  href="/standard/fire-protection">Fire Protection</a>
+                    <ul class="pageLevel2 ">
+                      <li class=" firstItem">
+                        <a href="/standard/fire-protection/series-300-basic-hydraulic-valves">Series 300 Basic Hydraulic Valves </a>
+                      </li>
+                      <li>
+                        <a href="/standard/fire-protection/series-100-basic-hydraulic-valves">Series 100 Basic Hydraulic Valves </a>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/fire-protection/deluge-valve-range">Deluge Valve Range</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem">
+                            <a  href="/standard/fire-protection/deluge-valve-range/hydraulically-actuated-deluge-valve-de-hm">Hydraulically Actuated Deluge Valve (DE/HM)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-valve-range/hydraulically-actuated-anti-columning-deluge-valve-de-hrv">Hydraulically Actuated, Anti-Columning Deluge Valve (DE/HRV)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-valve-range/electrically-actuated-remote-reset-deluge-valve-2-2-solenoid-de-el">Electrically Actuated Remote Reset Deluge Valve 2/2 solenoid (DE/EL)</a>
+                          </li>
+                          
+                          
+                          <li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-valve-range/electrically-actuated-manual-reset-deluge-valve-2-2-solenoid-de-el-mr">Electrically Actuated Manual Reset Deluge Valve 2/2 solenoid (DE/EL-MR)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-valve-range/electrically-actuated-deluge-valve-3-2-solenoid-de-rc">Electrically Actuated Deluge Valve 3/2 Solenoid (DE/RC)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-valve-range/electrically-actuated-manual-reset-deluge-valve-de-rcl">Electrically Actuated Manual Reset Deluge Valve (DE/RCL)</a>
+                          </li>
+                          
+                          
+                          <li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-valve-range/electrically-actuated-manual-reset-electric-remote-reset-deluge-valve-de-rce">Electrically Actuated Manual Reset &amp; Electric Remote Reset Deluge Valve (DE/RCE)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-valve-range/electrically-actuated-deluge-valve-chinese-standard-de-elcn">Electrically Actuated Deluge Valve (Chinese standard) (DE/EL[CN])</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-valve-range/electro-hydraulically-actuated-anti-columning-deluge-valve-de-el-hrv">Electro-Hydraulically Actuated, Anti-Columning Deluge Valve (DE/EL/HRV)</a>
+                          </li>
+                          
+                          
+                          <li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-valve-range/pneumatically-actuated-deluge-valve-de-porv">Pneumatically Actuated Deluge Valve (DE/PORV)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-valve-range/electro-pneumatically-actuated-deluge-valve-de-el-porv">Electro-Pneumatically Actuated Deluge Valve (DE/EL/PORV)</a>
+                          </li><li class="">
+                            <a  href="/standard/fire-protection/deluge-valve-range/double-interlock-pre-action-electric-pneumatic-release-system-de-el-porv-dn">Double-Interlock Pre-action, Electric-Pneumatic Release System (DE/EL/PORV/DN)</a>
+                          </li>
+                          
+                          
+                        </ul>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/fire-protection/pressure-reducing-and-pressure-relief-valves">Pressure Reducing and Pressure Relief Valves</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem">
+                            <a  href="/standard/fire-protection/pressure-reducing-and-pressure-relief-valves/pressure-reducing-valves-pr-ul">Pressure Reducing Valves (PR/UL)</a>
+                          </li><li class="">
+                            <a  href="/standard/fire-protection/pressure-reducing-and-pressure-relief-valves/pressure-relief-valves-ps-ul">Pressure Relief Valves (PS/UL)</a>
+                          </li>
+                          
+                        </ul>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/fire-protection/local-and-remote-actuated-monitor-valves">Local and Remote Actuated Monitor Valves</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem">
+                            <a  href="/standard/fire-protection/local-and-remote-actuated-monitor-valves/manually-actuated-monitor-valve-mo-m">Manually Actuated Monitor Valve (MO/M)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/local-and-remote-actuated-monitor-valves/remote-hydraulic-pneumatic-actuated-monitor-valve-mo-rc">Remote Hydraulic/Pneumatic Actuated Monitor Valve (MO/RC)</a>
+                          </li><li class="">
+                            <a  href="/standard/fire-protection/local-and-remote-actuated-monitor-valves/electrically-actuated-monitor-valve-mo-el">Electrically Actuated Monitor Valve (MO/EL)</a>
+                          </li>
+                          
+                          
+                        </ul>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/fire-protection/water-level-control-valves">Water Level Control Valves</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem">
+                            <a  href="/standard/fire-protection/water-level-control-valves/modulating-float-control-valve-fl">Modulating Float Control Valve (FL)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/water-level-control-valves/electric-float-control-valve-flel">Electric Float Control Valve (FLEL)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/water-level-control-valves/differential-float-pilot-control-valve-fldi">Differential Float Pilot Control Valve (FLDI)</a>
+                          </li>
+                          
+                          
+                          <li class="">
+                            <a  href="/standard/fire-protection/water-level-control-valves/altitude-pilot-control-valve-al">Altitude Pilot Control Valve (AL)</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/fire-protection/deluge-pressure-reducing-valve-range">Deluge Pressure Reducing Valve Range</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem">
+                            <a  href="/standard/fire-protection/deluge-pressure-reducing-valve-range/hydraulically-actuated-anti-columning-deluge-pressure-reducing-valve-de-hrv-pr">Hydraulically actuated anti-columning Deluge Pressure Reducing Valve (DE/HRV/PR)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-pressure-reducing-valve-range/electrically-or-hydraulically-actuated-deluge-pressure-reducing-valve-de-el-hrv-pr">Electrically or Hydraulically actuated Deluge Pressure Reducing Valve (DE/EL/HRV/PR)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-pressure-reducing-valve-range/electrically-actuated-deluge-pressure-reducing-valve-2-2-solenoid-de-el-pr">Electrically actuated Deluge Pressure Reducing Valve 2/2 solenoid (DE/EL/PR)</a>
+                          </li>
+                          
+                          
+                         <li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-pressure-reducing-valve-range/electrically-actuated-deluge-pressure-reducing-valve-3-2-solenoid-de-rc-pr">Electrically actuated Deluge Pressure Reducing Valve 3/2 solenoid (DE/RC/PR)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-pressure-reducing-valve-range/electrically-actuated-deluge-pressure-reducing-valve-3-2-solenoid-de-rcl-pr">Electrically actuated Deluge Pressure Reducing Valve 3/2 solenoid (DE/RCL/PR)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/deluge-pressure-reducing-valve-range/pneumatically-actuated-deluge-pressure-reducing-valve-de-porv-pr">Pneumatically actuated Deluge Pressure Reducing Valve (DE/PORV/PR)</a>
+                          </li>
+                          
+                          
+                          <li class="">
+                            <a  href="/standard/fire-protection/deluge-pressure-reducing-valve-range/electrically-or-pneumatically-actuated-deluge-pressure-reducing-valve-de-el-porv-pr">Electrically or Pneumatically actuated Deluge Pressure Reducing Valve (DE/EL/PORV/PR)</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/fire-protection/hydrants">Hydrants</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem">
+                            <a  href="/standard/fire-protection/hydrants/hydraulic-hydrant-valve-hy">Hydraulic Hydrant Valve (HY)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/hydrants/hydraulic-pressure-reducing-hydrant-valve-hy-pr1">Hydraulic Pressure-Reducing Hydrant Valve (HY/PR1)</a>
+                          </li><li class="">
+                            <a  href="/standard/fire-protection/hydrants/hydraulic-pressure-reducing-hydrant-valve-hy-pr2">Hydraulic Pressure-Reducing Hydrant Valve (HY/PR2)</a>
+                          </li>
+                          
+                          
+                        </ul>
+                      </li>
+                      <li class=" ">
+                        <a  href="/standard/fire-protection/zero-pressure-foam-valve-range">Zero Pressure Foam Valve Range</a>
+                        <ul class="pageLevel3 ">
+                          <li class=" firstItem">
+                            <a  href="/standard/fire-protection/zero-pressure-foam-valve-range/foam-concentrate-electrically-actuated-double-chamber-control-valve-zp-el">Foam Concentrate Electrically actuated Double chamber Control Valve (ZP/EL)</a>
+                          </li><li class="" style="margin-bottom:10px;">
+                            <a  href="/standard/fire-protection/zero-pressure-foam-valve-range/slaved-hydraulic-pilot-actuated-foam-concentrate-double-chamber-control-valve-zp-hm">Slaved Hydraulic Pilot actuated Foam Concentrate Double chamber Control Valve (ZP/HM)</a>
+                          </li><li class="">
+                            <a  href="/standard/fire-protection/zero-pressure-foam-valve-range/slaved-hydraulic-actuated-over-the-seat-foam-concentrate-double-chamber-control-valve-zp-h">Slaved Hydraulic actuated over the seat Foam Concentrate Double chamber Control Valve (ZP/H)</a>
+                          </li>
+                          
+                          
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="drop ">
+                    <a  href="/standard/mining">Mining</a>
+                    <ul class="pageLevel2 ">
+                      <li class=" firstItem">
+                        <a href="/standard/mining/open-mine-systems">Open mine systems</a>
+                      </li>
+                      <li class="">
+                        <a href="/standard/mining/deep-mine-systems">Deep mine-systems</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="">
+                    <a href="/standard/water-treatment-filtration">Water-treatment &amp; Filtration</a>
+                  </li>
+                </ul>
+                                 
+                                </div>
+
+
+              </nav>
+                  <nav class="navbar navbar-default">
+                      <div class="navbar-header">
+                          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                              @Translate("Our Products", "Our Products")<i class="fa fa-angle-down"></i>
+                          </button>
+                      </div>
+                      
+
+                      <div id="navbar" class="navbar-collapse collapse">
+                          <ul class="pageLevel1 nav navbar-nav" id="megaMenu">
+                              <li class=" firstItem inpath activeItem vertical">
+                                  <a href="/standard/products-solutions">Products &amp; Solutions</a>
+                                  <ul class="pageLevel2 ">
+                                      <li class=" firstItem ">
+                                          <a href="/standard/products-solutions/hydraulic-control-valves">Hydraulic Control Valves</a>
+                                          <ul class="pageLevel3 ">
+                                              <li class=" firstItem ">
+                                                  <a href="/standard/products-solutions/hydraulic-control-valves/metal-pilot-operated-valves">Metal Pilot-operated Valves</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li>
+                                                          <a href="/standard/products-solutions/hydraulic-control-valves/metal-pilot-operated-valves/300-series">300 Series </a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/hydraulic-control-valves/metal-pilot-operated-valves/100-series-gal-valve">100 Series (Gal Valve)</a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/hydraulic-control-valves/metal-pilot-operated-valves/500-series">500 Series</a>
+                                                      </li>
+                                                  </ul>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/products-solutions/hydraulic-control-valves/plastic-pilot-operated-valves">Plastic Pilot-Operated Valves</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li>
+                                                          <a href="/standard/products-solutions/hydraulic-control-valves/plastic-pilot-operated-valves/75-series-super-gal">75 Series (Super Gal)</a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/hydraulic-control-valves/plastic-pilot-operated-valves/80-series">80 Series </a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/hydraulic-control-valves/plastic-pilot-operated-valves/pvc-valves">PVC Valves </a>
+                                                      </li>
+                                                  </ul>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/products-solutions/hydraulic-control-valves/back-flushing-valves">Back-Flushing Valves</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li>
+                                                          <a href="/standard/products-solutions/hydraulic-control-valves/back-flushing-valves/general">General</a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/hydraulic-control-valves/back-flushing-valves/metallic">Metallic</a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/hydraulic-control-valves/back-flushing-valves/plastic">Plastic</a>
+                                                      </li>
+                                                  </ul>
+                                              </li>
+
+
+                                              <li class="" style="margin-bottom:10px;">
+                                                  <a href="/standard/products-solutions/hydraulic-control-valves/pilots-all-range">Pilots - ALL Range</a>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/products-solutions/hydraulic-control-valves/solenoid-valves-all-range">Solenoid-valves - ALL Range</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li>
+                                                          <a href="/standard/products-solutions/hydraulic-control-valves/solenoid-valves-all-range/irrigation-line">Irrigation line</a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/hydraulic-control-valves/solenoid-valves-all-range/gem-a">GEM-A</a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/hydraulic-control-valves/solenoid-valves-all-range/330t">330T</a>
+                                                      </li>
+                                                  </ul>
+                                              </li>
+                                              <li class="" style="margin-bottom:10px;">
+                                                  <a href="/standard/products-solutions/hydraulic-control-valves/hydrometers">Hydrometers</a>
+                                              </li>
+
+
+                                              <li class="">
+                                                  <a href="/standard/products-solutions/hydraulic-control-valves/spare-parts">Spare Parts</a>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                      <li class=" ">
+                                          <a href="/standard/products-solutions/air-valves">Air Valves</a>
+                                          <ul class="pageLevel3 ">
+                                              <li class=" firstItem ">
+                                                  <a href="/standard/products-solutions/air-valves/plastic">Plastic</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li>
+                                                          <a href="/standard/products-solutions/air-valves/plastic/dav-p-k-kinetic-air-valve">DAV P K (kinetic Air Valve)</a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/air-valves/plastic/dav-lp-k-kinetic-low-pressure-air-valve">DAV LP K (kinetic Low Pressure Air Valve)</a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/air-valves/plastic/dav-p-a-automatic-air-valve">DAV P A (Automatic Air Valve)</a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/air-valves/plastic/dav-p-ka-combination-air-valve-kinetic-automatic">DAV P KA (Combination Air Valve: Kinetic-Automatic)</a>
+                                                      </li>
+                                                  </ul>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/products-solutions/air-valves/metal">Metal</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li>
+                                                          <a href="/standard/products-solutions/air-valves/metal/dav-ms">DAV-MS</a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/air-valves/metal/dav-mh">DAV-MH</a>
+                                                      </li>
+                                                      <li>
+                                                          <a href="/standard/products-solutions/air-valves/metal/dav-mp">DAV-MP</a>
+                                                      </li>
+                                                  </ul>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/products-solutions/air-valves/waste-water">Waste Water</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li>
+                                                          <a href="/standard/products-solutions/air-valves/waste-water/dav-wp">DAV-WP</a>
+                                                      </li>
+                                                  </ul>
+                                              </li>
+
+
+                                              <li class="">
+                                                  <a href="/standard/products-solutions/air-valves/av-pro">AV-Pro</a>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                      <li class=" ">
+                                          <a href="/standard/products-solutions/mechanical-valves-gaer-line">Mechanical valves (GAER line)</a>
+                                          <ul class="pageLevel3 ">
+                                              <li class=" firstItem">
+                                                  <a href="/standard/products-solutions/mechanical-valves-gaer-line/butterfly-valves">Butterfly Valves</a>
+                                              </li>
+                                              <li class="" style="margin-bottom:10px;">
+                                                  <a href="/standard/products-solutions/mechanical-valves-gaer-line/check-valves">Check Valves</a>
+                                              </li>
+                                              <li class="" style="margin-bottom:10px;">
+                                                  <a href="/standard/products-solutions/mechanical-valves-gaer-line/gate-valves">Gate Valves</a>
+                                              </li>
+
+
+                                              <li class="">
+                                                  <a href="/standard/products-solutions/mechanical-valves-gaer-line/accesories">Accesories</a>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                      <li class=" ">
+                                          <a href="/standard/products-solutions/electronic">Electronic</a>
+                                          <ul class="pageLevel3 ">
+                                              <li class=" firstItem">
+                                                  <a href="/standard/products-solutions/electronic/valve-controller-condor">Valve Controller/ CONDOR</a>
+                                              </li>
+                                              <li class="" style="margin-bottom:10px;">
+                                                  <a href="/standard/products-solutions/electronic/lasu">LASU</a>
+                                              </li>
+                                              <li class="">
+                                                  <a href="/standard/products-solutions/electronic/tele-controllers">Tele Controllers</a>
+                                              </li>
+
+
+                                          </ul>
+                                      </li>
+                                      <li class=" ">
+                                          <a href="/standard/products-solutions/water-meters">Water Meters</a>
+                                          <ul class="pageLevel3 ">
+                                              <li class=" firstItem">
+                                                  <a href="/standard/products-solutions/water-meters/mechanic">Mechanic</a>
+                                              </li>
+                                              <li class="" style="margin-bottom:10px;">
+                                                  <a href="/standard/products-solutions/water-meters/ultrasonic">Ultrasonic</a>
+                                              </li>
+                                              <li class="" style="margin-bottom:10px;">
+                                                  <a href="/standard/products-solutions/water-meters/electro-magnetic">Electro-Magnetic</a>
+                                              </li>
+
+
+                                              <li class="">
+                                                  <a href="/standard/products-solutions/water-meters/amr-options">AMR Options</a>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                      <li class="">
+                                          <a href="/standard/products-solutions/spare-parts-accesories">Spare Parts &amp; Accesories</a>
+                                      </li>
+                                  </ul>
+                              </li>
+                              <li class=" firstItem inpath activeItem vertical">
+                                  <a href="/standard/products-solutions">Fields of Expertise</a>
+                                  <ul class="pageLevel2">
+                                      <li>
+                                          <a href="/standard/water-works">Water Works</a>
+                                          <ul class="pageLevel3 ">
+                                              <li class=" firstItem ">
+                                                  <a href="/standard/water-works/browse-by-control-solutions">Browse by Control-Solutions</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li class=" firstItem ">
+                                                          <a href="/standard/water-works/browse-by-control-solutions/reservoir-tanks">Reservoir &amp; Tanks</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/water-works/browse-by-control-solutions/pumping-systems">Pumping systems</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/water-works/browse-by-control-solutions/water-hammer-prevention-attenuation">Water Hammer prevention &amp; attenuation</a>
+                                                      </li>
+
+
+                                                      <li class="">
+                                                          <a href="/standard/water-works/browse-by-control-solutions/air-in-water-systems">Air in water-systems</a>
+                                                      </li>
+                                                  </ul>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/water-works/browse-by-market-segment">Browse by Market segment</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li class=" firstItem ">
+                                                          <a href="/standard/water-works/browse-by-market-segment/municipal-national-water-systems">Municipal &amp; National  Water-systems </a>
+                                                      </li>
+                                                      <li class=" ">
+                                                          <a href="/standard/water-works/browse-by-market-segment/high-rise-buildings">High-Rise Buildings</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/water-works/browse-by-market-segment/hvac">HVAC</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/water-works/browse-by-market-segment/marine">Marine</a>
+                                                      </li>
+                                                      <li class="">
+                                                          <a href="/standard/water-works/browse-by-market-segment/industrial">Industrial</a>
+                                                      </li>
+
+                                                  </ul>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                      <li>
+                                          <a href="/standard/agriculture">Agriculture</a>
+                                          <ul class="pageLevel3 ">
+                                              <li class=" firstItem ">
+                                                  <a href="/standard/agriculture/browse-by-control-solution">Browse by Control-Solution</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li class=" firstItem ">
+                                                          <a href="/standard/agriculture/browse-by-control-solution/on-off-control">On/OFF Control</a>
+
+                                                      </li>
+                                                      <li class=" ">
+                                                          <a href="/standard/agriculture/browse-by-control-solution/pressure-regulation">Pressure Regulation</a>
+
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/agriculture/browse-by-control-solution/flow-rate-control">Flow Rate Control </a>
+                                                      </li>
+
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/agriculture/browse-by-control-solution/water-hammer-protection">Water-hammer protection</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/agriculture/browse-by-control-solution/float-controlled-valve">Float Controlled Valve</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/agriculture/browse-by-control-solution/ouick-pressure-relief">Ouick Pressure Relief</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/agriculture/browse-by-control-solution/air-valve">AIR Valve *</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/agriculture/browse-by-control-solution/pump-valve">Pump Valve*</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/agriculture/browse-by-control-solution/excessive-flow-shut-off-valve">Excessive flow shut off valve</a>
+                                                      </li>
+
+
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/agriculture/browse-by-control-solution/pressure-differential-valve">Pressure differential  valve</a>
+                                                      </li>
+                                                      <li class="">
+                                                          <a href="/standard/agriculture/browse-by-control-solution/surge-preventing-stepped-closure-addition">Surge preventing - stepped closure addition</a>
+                                                      </li>
+
+                                                  </ul>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/agriculture/browse-by-use-case">Browse by Use-Case</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li class=" firstItem">
+                                                          <a href="/standard/agriculture/browse-by-use-case/tanks-and-reservoirs">Tanks and Reservoirs</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/agriculture/browse-by-use-case/pumping-systems">Pumping-Systems</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/agriculture/browse-by-use-case/main-supply-infrastructure">Main Supply-infrastructure</a>
+                                                      </li>
+
+
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/agriculture/browse-by-use-case/open-field-sprinklers-drip-irrigation">Open Field - sprinklers &amp; drip irrigation</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/agriculture/browse-by-use-case/open-field-center-pivot-applications">Open Field - Center-Pivot applications</a>
+                                                      </li>
+                                                      <li class=" ">
+                                                          <a href="/standard/agriculture/browse-by-use-case/greenhouses">Greenhouses</a>
+                                                      </li>
+
+
+                                                  </ul>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                      <li>
+                                          <a href="/standard/fire-protection">Fire Protection</a>
+                                          <ul class="pageLevel3 ">
+                                              <li class=" firstItem">
+                                                  <a href="/standard/fire-protection/series-300-basic-hydraulic-valves">Series 300 Basic Hydraulic Valves </a>
+                                              </li>
+                                              <li>
+                                                  <a href="/standard/fire-protection/series-100-basic-hydraulic-valves">Series 100 Basic Hydraulic Valves </a>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/fire-protection/deluge-valve-range">Deluge Valve Range</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li class=" firstItem">
+                                                          <a href="/standard/fire-protection/deluge-valve-range/hydraulically-actuated-deluge-valve-de-hm">Hydraulically Actuated Deluge Valve (DE/HM)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-valve-range/hydraulically-actuated-anti-columning-deluge-valve-de-hrv">Hydraulically Actuated, Anti-Columning Deluge Valve (DE/HRV)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-valve-range/electrically-actuated-remote-reset-deluge-valve-2-2-solenoid-de-el">Electrically Actuated Remote Reset Deluge Valve 2/2 solenoid (DE/EL)</a>
+                                                      </li>
+
+
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-valve-range/electrically-actuated-manual-reset-deluge-valve-2-2-solenoid-de-el-mr">Electrically Actuated Manual Reset Deluge Valve 2/2 solenoid (DE/EL-MR)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-valve-range/electrically-actuated-deluge-valve-3-2-solenoid-de-rc">Electrically Actuated Deluge Valve 3/2 Solenoid (DE/RC)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-valve-range/electrically-actuated-manual-reset-deluge-valve-de-rcl">Electrically Actuated Manual Reset Deluge Valve (DE/RCL)</a>
+                                                      </li>
+
+
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-valve-range/electrically-actuated-manual-reset-electric-remote-reset-deluge-valve-de-rce">Electrically Actuated Manual Reset &amp; Electric Remote Reset Deluge Valve (DE/RCE)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-valve-range/electrically-actuated-deluge-valve-chinese-standard-de-elcn">Electrically Actuated Deluge Valve (Chinese standard) (DE/EL[CN])</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-valve-range/electro-hydraulically-actuated-anti-columning-deluge-valve-de-el-hrv">Electro-Hydraulically Actuated, Anti-Columning Deluge Valve (DE/EL/HRV)</a>
+                                                      </li>
+
+
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-valve-range/pneumatically-actuated-deluge-valve-de-porv">Pneumatically Actuated Deluge Valve (DE/PORV)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-valve-range/electro-pneumatically-actuated-deluge-valve-de-el-porv">Electro-Pneumatically Actuated Deluge Valve (DE/EL/PORV)</a>
+                                                      </li>
+                                                      <li class="">
+                                                          <a href="/standard/fire-protection/deluge-valve-range/double-interlock-pre-action-electric-pneumatic-release-system-de-el-porv-dn">Double-Interlock Pre-action, Electric-Pneumatic Release System (DE/EL/PORV/DN)</a>
+                                                      </li>
+
+
+                                                  </ul>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/fire-protection/pressure-reducing-and-pressure-relief-valves">Pressure Reducing and Pressure Relief Valves</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li class=" firstItem">
+                                                          <a href="/standard/fire-protection/pressure-reducing-and-pressure-relief-valves/pressure-reducing-valves-pr-ul">Pressure Reducing Valves (PR/UL)</a>
+                                                      </li>
+                                                      <li class="">
+                                                          <a href="/standard/fire-protection/pressure-reducing-and-pressure-relief-valves/pressure-relief-valves-ps-ul">Pressure Relief Valves (PS/UL)</a>
+                                                      </li>
+
+                                                  </ul>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/fire-protection/local-and-remote-actuated-monitor-valves">Local and Remote Actuated Monitor Valves</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li class=" firstItem">
+                                                          <a href="/standard/fire-protection/local-and-remote-actuated-monitor-valves/manually-actuated-monitor-valve-mo-m">Manually Actuated Monitor Valve (MO/M)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/local-and-remote-actuated-monitor-valves/remote-hydraulic-pneumatic-actuated-monitor-valve-mo-rc">Remote Hydraulic/Pneumatic Actuated Monitor Valve (MO/RC)</a>
+                                                      </li>
+                                                      <li class="">
+                                                          <a href="/standard/fire-protection/local-and-remote-actuated-monitor-valves/electrically-actuated-monitor-valve-mo-el">Electrically Actuated Monitor Valve (MO/EL)</a>
+                                                      </li>
+
+
+                                                  </ul>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/fire-protection/water-level-control-valves">Water Level Control Valves</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li class=" firstItem">
+                                                          <a href="/standard/fire-protection/water-level-control-valves/modulating-float-control-valve-fl">Modulating Float Control Valve (FL)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/water-level-control-valves/electric-float-control-valve-flel">Electric Float Control Valve (FLEL)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/water-level-control-valves/differential-float-pilot-control-valve-fldi">Differential Float Pilot Control Valve (FLDI)</a>
+                                                      </li>
+
+
+                                                      <li class="">
+                                                          <a href="/standard/fire-protection/water-level-control-valves/altitude-pilot-control-valve-al">Altitude Pilot Control Valve (AL)</a>
+                                                      </li>
+                                                  </ul>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/fire-protection/deluge-pressure-reducing-valve-range">Deluge Pressure Reducing Valve Range</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li class=" firstItem">
+                                                          <a href="/standard/fire-protection/deluge-pressure-reducing-valve-range/hydraulically-actuated-anti-columning-deluge-pressure-reducing-valve-de-hrv-pr">Hydraulically actuated anti-columning Deluge Pressure Reducing Valve (DE/HRV/PR)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-pressure-reducing-valve-range/electrically-or-hydraulically-actuated-deluge-pressure-reducing-valve-de-el-hrv-pr">Electrically or Hydraulically actuated Deluge Pressure Reducing Valve (DE/EL/HRV/PR)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-pressure-reducing-valve-range/electrically-actuated-deluge-pressure-reducing-valve-2-2-solenoid-de-el-pr">Electrically actuated Deluge Pressure Reducing Valve 2/2 solenoid (DE/EL/PR)</a>
+                                                      </li>
+
+
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-pressure-reducing-valve-range/electrically-actuated-deluge-pressure-reducing-valve-3-2-solenoid-de-rc-pr">Electrically actuated Deluge Pressure Reducing Valve 3/2 solenoid (DE/RC/PR)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-pressure-reducing-valve-range/electrically-actuated-deluge-pressure-reducing-valve-3-2-solenoid-de-rcl-pr">Electrically actuated Deluge Pressure Reducing Valve 3/2 solenoid (DE/RCL/PR)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/deluge-pressure-reducing-valve-range/pneumatically-actuated-deluge-pressure-reducing-valve-de-porv-pr">Pneumatically actuated Deluge Pressure Reducing Valve (DE/PORV/PR)</a>
+                                                      </li>
+
+
+                                                      <li class="">
+                                                          <a href="/standard/fire-protection/deluge-pressure-reducing-valve-range/electrically-or-pneumatically-actuated-deluge-pressure-reducing-valve-de-el-porv-pr">Electrically or Pneumatically actuated Deluge Pressure Reducing Valve (DE/EL/PORV/PR)</a>
+                                                      </li>
+                                                  </ul>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/fire-protection/hydrants">Hydrants</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li class=" firstItem">
+                                                          <a href="/standard/fire-protection/hydrants/hydraulic-hydrant-valve-hy">Hydraulic Hydrant Valve (HY)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/hydrants/hydraulic-pressure-reducing-hydrant-valve-hy-pr1">Hydraulic Pressure-Reducing Hydrant Valve (HY/PR1)</a>
+                                                      </li>
+                                                      <li class="">
+                                                          <a href="/standard/fire-protection/hydrants/hydraulic-pressure-reducing-hydrant-valve-hy-pr2">Hydraulic Pressure-Reducing Hydrant Valve (HY/PR2)</a>
+                                                      </li>
+
+
+                                                  </ul>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/standard/fire-protection/zero-pressure-foam-valve-range">Zero Pressure Foam Valve Range</a>
+                                                  <ul class="pageLevel4 ">
+                                                      <li class=" firstItem">
+                                                          <a href="/standard/fire-protection/zero-pressure-foam-valve-range/foam-concentrate-electrically-actuated-double-chamber-control-valve-zp-el">Foam Concentrate Electrically actuated Double chamber Control Valve (ZP/EL)</a>
+                                                      </li>
+                                                      <li class="" style="margin-bottom:10px;">
+                                                          <a href="/standard/fire-protection/zero-pressure-foam-valve-range/slaved-hydraulic-pilot-actuated-foam-concentrate-double-chamber-control-valve-zp-hm">Slaved Hydraulic Pilot actuated Foam Concentrate Double chamber Control Valve (ZP/HM)</a>
+                                                      </li>
+                                                      <li class="">
+                                                          <a href="/standard/fire-protection/zero-pressure-foam-valve-range/slaved-hydraulic-actuated-over-the-seat-foam-concentrate-double-chamber-control-valve-zp-h">Slaved Hydraulic actuated over the seat Foam Concentrate Double chamber Control Valve (ZP/H)</a>
+                                                      </li>
+
+
+                                                  </ul>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                      <li>
+                                          <a href="/standard/mining">Mining</a>
+                                          <ul class="pageLevel3 ">
+                                              <li class=" firstItem">
+                                                  <a href="/standard/mining/open-mine-systems">Open mine systems</a>
+                                              </li>
+                                              <li class="">
+                                                  <a href="/standard/mining/deep-mine-systems">Deep mine-systems</a>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                      <li class="">
+                                          <a href="/standard/water-treatment-filtration">Water-treatment &amp; Filtration</a>
+                                      </li>
+                                  </ul>
+                              </li>
+                          </ul>
+
+                      </div>
+
+
+                  </nav>
+              
+          
+          </div>
+          
+          
+          @*   <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">@Translate("Toggle_navigation", "Toggle navigation")</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href='Default.aspx?ID=@Dynamicweb.Extensibility.ServiceLocator.Current.GetPageService().GetFirstActivePageForArea(Pageview.Area.ID)'>@Pageview.Area.Name</a>
+            </div>
+       *@
+      		
+      
+           @*  <div class="collapse navbar-collapse">
+                <ul class="dwnavigation nav navbar-nav" id="navbar" data-settings="template:liCleanMegaMenu.xslt;startlevel:1;endlevel:3;expandmode:all;id:megaMenu;"></ul>
+                <div class="pull-right">
+
+
+                    @if (Pageview.User != null)
+                    {
+                        <p class="navbar-text">
+                            @Translate("Signed_in_as", "Signed in as")
+                            @if (Pageview.Area.Item != null && Pageview.Area.Item.ContainsKey("UserManagementPageId"))
+                            {
+                                <a href='Default.aspx?Id=@Pageview.Area.Item["UserManagementPageId"]' class="navbar-link username">@Pageview.User.UserName</a>
+                            }
+                            else
+                            {
+                                <span class="username">@Pageview.User.UserName</span>
+                            }
+                        </p>
+                        <a href='/Admin/Public/ExtranetLogoff.aspx?redirect=@System.Web.HttpUtility.UrlEncode("/Default.aspx?Id="+Pageview.Page.ID)' class="btn btn-default navbar-btn">@Translate("Sign_out", "Sign out")</a>
+                    }
+                    else
+                    {
+                        if (Pageview.Area.Item != null && Pageview.Area.Item.ContainsKey("SignInPageId"))
+                        {
+                            <a href='Default.aspx?Id=@Pageview.Area.Item["SignInPageId"]&amp;redirect=@System.Web.HttpUtility.UrlEncode("/Default.aspx?Id="+Pageview.Page.ID)' class="btn btn-default navbar-btn">@Translate("Sign_in", "Sign in")</a>
+                        }
+                    }
+
+                    @{
+                        var languages = GetLoop("WebsiteLanguages");
+
+                        if (languages.Count > 1)
+                        {
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    @Translate("Language", "Language") <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    @foreach (var language in GetLoop("WebsiteLanguages"))
+                                    {
+                                        <li>
+                                            <a href='Default.aspx?ID=@language.GetValue("FirstPageID")'>@language.GetValue("Name")</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    }
+                </div>
+            </div> *@
+        </div>
+    </div>
+    @ContentPlaceholder()
+
+    @{
+        var footerItems = GetLoop("Item.Area.FooterContent");
+        if (footerItems.Count > 0)
+        {
+            var numberOfColumns = 4;
+            switch (footerItems.Count)
+            {
+                case 1: numberOfColumns = 12; break;
+                case 2: numberOfColumns = 6; break;
+                case 3: numberOfColumns = 4; break;
+                case 4: numberOfColumns = 3; break;
+                case 5: numberOfColumns = 2; break;
+                case 6: numberOfColumns = 2; break;
+                case 7: numberOfColumns = 2; break;
+
+            }
+            <footer class="container">
+                <div class="row">
+                    @foreach (var item in GetLoop("Item.Area.FooterContent"))
+                    {
+                        <div class="col-md-@numberOfColumns">
+                            <div class="footerName">@item.GetValue("Item.Area.FooterContent.Name")</div>
+                            <div class="footerContent">@item.GetValue("Item.Area.FooterContent.Content")</div>
+                        </div>
+                    }
+                </div>
+            </footer>
+        }
+    }
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="assets/js/navigation.js"></script>
+    @RenderSnippet("JavaScriptBottom")
+</body>
+</html>

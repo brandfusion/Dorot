@@ -1,0 +1,34 @@
+﻿footer {
+    margin-top: 2em;
+}
+
+    footer > .row > div {
+        text-align: center;
+    }
+
+
+        footer > .row > div:last-child {
+            text-align: right;
+        }
+
+        footer > .row > div:first-child {
+            text-align: left;
+        }
+
+.readonly .form-control {
+	border-color: transparent;
+	box-shadow: none;
+}
+
+
+
+
+ul#megaMenu > li.hasChildren.dropdown:nth-child(2) > ul.pageLevel2.dropdown-menu {
+  
+}
+
+ul#megaMenu > li.hasChildren.dropdown:nth-child(2) > ul.pageLevel2.dropdown-menu > ul.pageLevel3.dropdown-menu:nth-child(2) {
+  width: 556px !important;
+}
+
+

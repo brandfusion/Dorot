@@ -1,0 +1,23 @@
+﻿@{
+string cultureName = GetGlobalValue("Global:Area.Culture.Name");
+
+}
+
+<div class="col-xs-12 col-sm-6 brown-box">
+    <div class="opacity-box">&nbsp;</div>
+    <div>
+        <h3>@Translate("InTheNews","Bioverativ in the news")</h3>
+        @foreach(LoopItem newsItem in GetLoop("ItemPublisher:Items.List")){
+			
+            DateTime date = @newsItem.GetDate("ItemPublisher:Item.Date");
+            string dateItem = date.ToString("dddd, MMMM dd, yyyy h:mm tt", System.Globalization.CultureInfo.GetCultureInfo(cultureName));
+			string dateLongCulture = date.ToString("f", System.Globalization.CultureInfo.GetCultureInfo(cultureName));
+            string dateTimeCulture = date.ToString("tt", System.Globalization.CultureInfo.GetCultureInfo(cultureName));
+            <div class="news-box">
+                <span>@dateLongCulture</span>
+                <p>@newsItem.GetString("ItemPublisher:Item.Title")</p>
+                <a href='@newsItem.GetString("ItemPublisher:Item.Url")'>@Translate("readMore","Read more")</a>
+            </div>
+      }
+    </div>
+</div>

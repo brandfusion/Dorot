@@ -1,0 +1,56 @@
+﻿@{
+   int count = 0;
+   string title = !string.IsNullOrEmpty(GetString("Item.Title.Value")) ? GetString("Item.Title.Value") : "";
+   string image = !string.IsNullOrEmpty(GetString("Item.Icon.Value")) ? GetString("Item.Icon.Value") : "";
+   string text = !string.IsNullOrEmpty(GetString("Item.Text.Value")) ? GetString("Item.Text.Value") : "";
+  
+   string customClass = !string.IsNullOrEmpty(GetString("Item.CustomStyle.Value")) ? GetString("Item.CustomStyle.Value") : "";
+
+
+   <div class="@customClass" @RenderAnchor()>	  
+
+	 @if (!string.IsNullOrEmpty(@customClass)) {
+	 	<span class="blue-circle">&nbsp;</span>
+	 } 
+     @if (!string.IsNullOrEmpty(@image)) {
+        <img src="@image" alt="" />
+     }
+     @* @if (!string.IsNullOrEmpty(@title)) {
+		<h4><p><strong>@title</strong></p></h4>
+     } *@  
+     @if (!string.IsNullOrEmpty(@text)) {
+        @text
+     } 
+  	 
+     @{
+        string[] awesome = {"cataloguesAccount", "cad-libraryAccount", "purchaseAccount", "fieldsAccount", "designToolsAccount", "caseStudiesAccount"};
+
+       foreach(LoopItem linkParams in GetLoop("Item.Item_List")){   		
+
+          string link = !string.IsNullOrEmpty(linkParams.GetString("Item.Item_List.Link_Link.Value")) ? linkParams.GetString("Item.Item_List.Link_Link.Value") : "";
+          string linkExternal = !string.IsNullOrEmpty(linkParams.GetString("Item.Item_List.Link_Extern.Value")) ? linkParams.GetString("Item.Item_List.Link_Extern.Value") : "";
+          string linkFinal = !string.IsNullOrEmpty(linkExternal) ? linkExternal : link ;
+      
+          string linkTarget = linkParams.GetBoolean("Item.Item_List.OpenInNewWindow.Value") ? "target='_blank'" : "";
+          string linkText = linkParams.GetString("Item.Item_List.Link_Text.Value");        		
+
+              if (!string.IsNullOrEmpty(@linkText)) {
+                	<div class="userAccount"><a href='@linkFinal' class="button-secondary btn btn-primary @(awesome[count % awesome.Length])" @linkTarget >@linkText</a></div>
+        		  }
+        
+
+          count++;
+       }  	
+     }      
+  </div>
+}
+    
+
+@helper RenderAnchor() {
+	if (!string.IsNullOrEmpty(GetString("Item.Title")))
+    {
+    	<text>id='@GetString("Item.Title").Replace(" ","-")'</text>
+    }
+}
+  
+

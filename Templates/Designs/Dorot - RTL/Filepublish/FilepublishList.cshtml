@@ -1,0 +1,17 @@
+﻿<div id="downloads_tab">
+	@GetString("Title")
+
+    <ul> 
+       @if(!string.IsNullOrEmpty(GetValue("FilepublishList").ToString())){
+      
+      @GetValue("FilepublishList")
+     
+      }else{
+      
+      <p>There are no files uploaded.  Please <a href='Default.aspx?ID=497'> contact</a> Dorot specialists.</p>
+      }
+          		
+	</ul>
+
+	@GetValue("FilepublishUpload")
+</div>

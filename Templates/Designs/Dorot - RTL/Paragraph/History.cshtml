@@ -1,0 +1,54 @@
+﻿@{
+    int count = 1;
+
+    <div class="" @RenderAnchor()>
+        <div class="col-xs-12 text-center">
+			<h2>@GetValue("Item.Title")</h2> 
+			 		
+            @foreach(LoopItem articleParams in GetLoop("Item.History_List")) {   	  
+
+     			
+                // Item.History_List.Year_Position
+				string active = (count==1) ? "active" :  "" ;
+
+                string position = !string.IsNullOrEmpty(articleParams.GetString("Item.History_List.Year_Position.Value")) ? articleParams.GetString("Item.History_List.Year_Position.Value") : "";   
+                string clasa = (position=="left") ? "leftBox" : "rightBox" ;
+
+
+                string year = !string.IsNullOrEmpty(articleParams.GetString("Item.History_List.Year.Value")) ? articleParams.GetString("Item.History_List.Year.Value") : "";    	
+				string title = !string.IsNullOrEmpty(articleParams.GetString("Item.History_List.Title.Value")) ? articleParams.GetString("Item.History_List.Title.Value") : ""; 
+                string image = !string.IsNullOrEmpty(articleParams.GetString("Item.History_List.Image.Value")) ? articleParams.GetString("Item.History_List.Image.Value") : "";  
+                string shortDescription = !string.IsNullOrEmpty(articleParams.GetString("Item.History_List.Short_Description.Value")) ? articleParams.GetString("Item.History_List.Short_Description.Value") : "";    			
+        
+
+
+				<div class="row history-box leftBox @active">
+                    <div class="col-xs-12 col-sm-4 history-year">
+						<h2>@year</h2>
+						@if(!string.IsNullOrEmpty(image)){
+							<figure><img src="@image" title="@title" class="img-responsive" /></figure>
+						}
+                    </div>
+                    <div class="col-xs-12 col-sm-8 history-details">
+                        @if (!string.IsNullOrEmpty(@title)) {
+                            @* <h3>@title</h3> *@
+                        }
+                        @if (!string.IsNullOrEmpty(@shortDescription)) {
+                            <p>@shortDescription</p>
+                        }
+                    </div>
+                </div>
+                count++;
+        
+            }  
+        </div>
+    </div>
+}
+
+@helper RenderAnchor() {
+	if (!string.IsNullOrEmpty(GetString("Item.Title")))
+		{
+		<text>id='@GetString("Item.Title").Replace(" ","-")'</text>
+
+		}
+}

@@ -1,0 +1,106 @@
+﻿@Include("Layout.cshtml")
+@*<script type="text/javascript">
+  @Include("../assets/js/googleMaps.js")
+</script>*@
+@NewRow()
+@{
+string googleMapsURL = "http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=44.4363653,26.1391885&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed&amp;markers=icon:http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/map-marker-icon.png";
+string latitude = GetString("Item.Latitude");
+string longitude = GetString("Item.Longitude");
+string zoom = GetString("Item.Zoom_Level");
+string marker = !string.IsNullOrEmpty(GetString("Item.Marker_Image")) ? GetString("Item.Marker_Image") : "/Files/Images/Corporate/common/marker.png";
+}
+<style>
+#map {
+  height: 430px;
+  position: relative;
+  width: 100%;
+}
+
+.maps-frame {
+  height: 430px;
+  width: 100%;
+}
+
+</style>
+
+<div class="@ColumnClass()" @RenderAnchor()>
+  <div class="map-frame">
+	<div id="map"></div>
+    <div class="container">
+        <div class="col-md-4 pull-right contacts-on-map-container">
+            <div class="contacts-on-map">
+                <h3>@GetString("Item.Title")</h3>
+                <p>@GetString("Item.Text")
+                @RenderButton()
+            </div>
+        </div>
+      </div>        
+  </div>
+</div>
+
+<script>
+       function initMap() {
+        var uluru = {lat: @latitude, lng: @longitude};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: @zoom,
+          center: uluru
+        });
+  //var image = '@marker';
+  		  var marker = new google.maps.Marker({
+          position: uluru,
+  		  //icon:image,
+          map: map
+  		
+        });
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5A_s6HkpwGB9vkmkv33h1utEDYSfPHd8&callback=initMap"
+    async defer></script>
+
+
+
+@helper RenderAnchor() {
+	if (!string.IsNullOrEmpty(GetString("Item.Title")))
+		{
+		<text>id='@GetString("Item.Title").Replace(" ","-")'</text>
+
+		}
+}
+
+
+@helper RenderButton()
+{	
+	var Url = GetString("Item.Link");
+	var buttonAlignment = GetString("Item.Link_Alignment");
+	var button = GetBoolean("Item.ShowAsButton") ? "button" : "";
+
+	if (!string.IsNullOrEmpty(Url) && !string.IsNullOrEmpty(GetString("Item.LinkText")))
+	{	
+		if (Url.Contains("http"))
+		{
+			<text>
+				<p class="@buttonAlignment" style="margin-bottom: 30px !important">
+					<a href="@GetString("Item.Link")" target="_blank" class="btn btn-dw-primary @buttonAlignment @button">@GetString("Item.LinkText")</a>
+				</p>
+			</text>
+		}
+		else if (Url.Contains("/"))
+		{
+			<text>
+				<p class="@buttonAlignment" style="margin-bottom: 30px !important">
+					<a href="@GetString("Item.Link")" class="btn btn-dw-primary @buttonAlignment @button" download>@GetString("Item.LinkText")</a>
+				</p>
+			</text>
+		}
+		else
+		{
+			<text>
+				<p class="@buttonAlignment" style="margin-bottom: 30px !important">
+					<a href="@GetString("Item.Link")" class="btn btn-dw-primary @buttonAlignment @button">@GetString("Item.LinkText")</a>
+				</p>
+			</text>
+		}
+	}
+}

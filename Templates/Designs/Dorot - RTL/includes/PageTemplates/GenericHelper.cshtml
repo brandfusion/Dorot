@@ -1,0 +1,36 @@
+﻿@inherits RazorTemplateBase<RazorTemplateModel<Template>>
+@using Dynamicweb.Rendering;
+@using System.Net.Http;
+@functions{
+
+    private string RenderDownloadLink(string File, string FileTitle)
+    {
+	   var response = new HttpResponseMessage();
+       if(!string.IsNullOrEmpty(File))
+
+//response.Content = new StringContent("<p class='paragraphButton'><a href='" + File +"' target='_blank'>" + FileTitle + "</a></p>");
+           return "<p><a href='" + File +"' class='btn btn-primary' target='_blank'>" + FileTitle + "</a></p>";
+       
+      else 
+    	return null;
+	
+	}
+
+	private string ResetElement(string elementType, int verificationLeft, int verificationRight, string elementClass)
+   {
+    //elementType = ul, div
+    //verificationLeft = left side of the verification
+    //verificationRight = right side of the verification
+    //elementClass= the class that is set on the new element
+	
+	if(verificationLeft == verificationRight){
+		string output = "<"+ "/" + elementType + "><" + elementType +" class=\""+ elementClass +"\""+">";
+		return output;
+	} else {
+
+	return null;
+	}
+
+	}
+
+}

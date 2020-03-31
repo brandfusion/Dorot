@@ -1,0 +1,214 @@
+﻿@font-face {
+  font-family: 'fs_elliotbold';
+  src: url('../fonts/fs_elliot-bold-webfont.woff2') format('woff2'), url('../fonts/fs_elliot-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}  
+@font-face {
+  font-family: 'fs_elliot_probold';
+  src: url('../fonts/fselliotpro-bold-webfont.woff2') format('woff2'), url('../fonts/fselliotpro-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'fs_elliot_proregular';
+  src: url('../fonts/fselliotpro-regular-webfont.woff2') format('woff2'), url('../fonts/fselliotpro-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}  
+@font-face {
+  font-family: 'SwiftNeueLTPro-Bold';
+  src: url('../fonts/SwiftNeueLTPro-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal; 
+}  
+@font-face {
+  font-family: 'SwiftNeueLTPro-Regular';
+  src: url('../fonts/SwiftNeueLTPro-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal; 
+}
+@font-face {
+  font-family: 'NotoSans';
+  src: url('../fonts/NotoSans.eot');
+  src: url('../fonts/NotoSans.eot?#iefix') format('embedded-opentype'), url('../fonts/NotoSans.woff') format('woff'), url('../fonts/NotoSans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}  
+@font-face {
+  font-family: 'NotoSans-Bold';
+  src: url('../fonts/NotoSans-Bold.eot');
+  src: url('../fonts/NotoSans-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/NotoSans-Bold.woff') format('woff'), url('../fonts/NotoSans-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+html, body {
+	width: 100%;
+	height: 100%;
+  	color: #000;
+}
+
+.underconstruction {
+	background: #72246c;
+	text-align: center;	
+	padding: 15% 0 0 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.underconstruction h2 {
+	font-size: 55px;
+	font-family: 'SwiftNeueLTPro-Bold';
+	line-height: 1;
+	margin: 0 auto 0.3em auto;
+	text-align: center;
+	color: rgba(255, 255, 255, 0.9);
+	max-width: 60%;
+}
+.underconstruction p {
+	font-size: 18px;
+	line-height: 1.5;
+	text-align: center;
+	max-width: 60%;
+	margin: 0 auto;
+	color: rgba(255, 255, 255, 0.9);
+	font-family: 'NotoSans';
+}
+
+/** .underconstruction a {
+	display: inline-block;
+	border: 2px solid #ffffff;
+	padding: 7px 50px;
+	margin: 1.5em auto 0 auto;
+	line-height: 1.5;
+	color: #ffffff;
+	font-size: 18px;
+	text-decoration: none;
+	font-family: 'NotoSans-Bold';
+}
+.underconstruction a:hover { 
+	border: 2px solid #ffffff;
+	background: #ffffff;
+	color: #711a61;
+}
+**/
+button {
+	display: inline-block;
+	border: 2px solid #ffffff;
+	padding: 7px 50px;
+	margin: 1.5em auto 0 auto;
+	line-height: 1.5;
+	color: #ffffff;
+	font-size: 18px;
+	text-decoration: none;
+	font-family: 'NotoSans-Bold';
+}
+button:hover { 
+	border: 2px solid #ffffff;
+	background: #ffffff;
+	color: #711a61;
+}
+
+.loginfield {
+    color: #fff;
+}
+
+.info-pane.error {
+    font-weight: bolder;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.22);
+    border: 1px solid #fff;
+}
+
+.copyright {
+   color:#fff;
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+   background-color: #72246c;
+}
+
+.login-pane {
+	width: 300px;
+    margin: 0 auto;
+    text-align: left;
+}
+.login-pane input[type="text"], .login-pane input[type="password"] {
+	width: 100%;
+    padding: 5px 10px;
+    margin: 0 0 10px 0;
+    color: #333;
+}
+.login-pane button {
+	background: #fff;
+    width: 100%;
+    margin: 10px auto 0 auto !important;
+    color: #72246c;
+}
+.login-pane label {
+	padding: 0 0 5px 0;
+    margin: 0;
+    font-weight: 400;
+    text-align: left !important;
+}
+.pr-field.commands {
+	text-align: left;
+    width: 100% !important;
+}
+.login-pane .pr-field {
+	margin: 0 !important;
+}
+.login-pane .info-pane.error {
+    background: none !important;
+    border: 1px solid #fff !important;
+    color: #fff !important;
+    font-weight: 400 !important;
+}
+
+.plum-bg-color {
+  background: #72246c;
+  color: #ffffff;
+  padding: 3em 0; 
+}
+.plum-bg-color a.btn {
+    display: inline-block;
+    border: 2px solid #ffffff;
+    padding: 7px 30px;
+    margin: 1.5em 0 0 0;
+    line-height: 1.5;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 0;
+    font-family: 'NotoSans-Bold'; 
+}
+.plum-bg-color a.btn:hover {
+    display: inline-block;
+	background: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 7px 30px;
+    margin: 1.5em 0 0 0;
+    line-height: 1.5;
+    color: #72246c;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 0;
+    font-family: 'NotoSans-Bold'; 
+}
+
+a   {
+  	color: #ffffff;
+  	text-decoration: none;
+	font-weight: bold;}
+
+a:hover   {
+  	color: #ffffff;
+  	text-decoration: underline;
+  	font-weight: bold;}
+a:active   {
+  	color: #ffffff;
+  	text-decoration: none;
+  	font-weight:bold;}

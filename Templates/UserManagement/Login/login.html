@@ -1,0 +1,31 @@
+﻿<div class="login-pane">
+    <!--<h3 class="head">Login</h3>-->
+    <!--@If(DW_extranet_error_uk<defined>)-->
+    <div class="info-pane error"><!--@DW_extranet_error_uk--></div>
+    <!--@EndIf-->
+
+
+
+    <form method="post" action="/Default.aspx?id=<!--@Global:Page.ID-->">
+        <input type="hidden" name="ID" value="<!--@Global:Page.ID-->" />
+        <!--@If Defined(UserManagement:User.Login.SuccessRedirectToPage)-->
+        <input type="hidden" name="Redirect" value="<!--@UserManagement:User.Login.SuccessRedirectToPage-->" />
+        <!--@EndIf-->
+      
+      
+        <div class="form-group">
+          <label for="login-username"><!--@Translate(username, "User name")-->:</label>
+          <input type="text" class="form-control" name="username" id="login-username" placeholder="" value="<!--@If(Server:Request.username<defined>)--><!--@Server:Request.username--><!--@EndIf-->" />
+        </div>
+        <div class="form-group">
+          <label for="login-password"><!--@Translate(password, "Password")-->:</label>
+          <input type="password" class="form-control" name="password" id="login-password" placeholder="" value="<!--@If(Server:Request.password<defined>)--><!--@Server:Request.password--><!--@EndIf-->" />
+        </div>
+        <div class="form-group">
+          <a href="/Default.aspx?id=<!--@Global:Page.ID-->&amp;LoginAction=Recovery"><!--@Translate(forgotPass, "Forgot your password?")--></a>
+          <button type="submit" name="LoginAction" value="Login" class="btn btn-primary"><!--@Translate(sumbit, "Submit")--></button>
+        </div>
+
+
+    </form>
+</div>

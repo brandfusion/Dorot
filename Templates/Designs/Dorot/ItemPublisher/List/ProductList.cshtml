@@ -1,0 +1,82 @@
+﻿@using System.Web;
+@Include("../../includes/Razor/GetImage.cshtml")
+@Include("../../includes/Razor/VerifyImage.cshtml")
+
+
+<link rel="stylesheet" href="/Files/Templates/ItemPublisher/ItemPublisher.css" />
+<div class="col-md-12 products-list">       
+    @if(GetString("ItemPublisher:Items.Any")=="True") { 	
+        if(GetLoop("ItemPublisher:Items.List").Count() > 0){
+            foreach (LoopItem i in GetLoop("ItemPublisher:Items.List")) { 
+        	    string friendlyURL = i.GetString("ItemPublisher:Item.Url");// Dynamicweb.Frontend.SearchEngineFriendlyURLs.GetFriendlyUrl(i.GetString("ItemPublisher:Item.Field.PageId"));
+                string image = GetImage(i.GetString("ItemPublisher:Item.Image"),300, 300);
+                string productTitle = i.GetString("ItemPublisher:Item.PageName");
+            <div class="product-item col-md-4 col-xs-12">                
+                <h3 class="name"><a href="@friendlyURL">@productTitle</a></h3>
+                @if(!string.IsNullOrWhiteSpace(image)){
+        			<a href="@friendlyURL"><img class="img-responsive" src="@image" alt="@productTitle"/></a>
+        		}
+                
+                <a class="btn btn-primary" href="@friendlyURL">@Translate("readMore", "Read More")</a>
+                
+            </div> 
+            
+         	}
+		}
+        
+		
+	 <div class="col-md-12">
+       @if(GetLoop("ItemPublisher:Items.Paging.Pages").Count() >1){
+        <ul class="pagination">              		 
+             <li><a href='/Default.aspx?ID=@GetString("ItemPublisher:Global.PageId")&amp;PageNum=1' class="first">@Translate("First", "First")</a></li>
+             @if (!string.IsNullOrWhiteSpace(GetString("ItemPublisher:Items.Paging.PrevPage"))) {
+                  <li><a href='@GetString("ItemPublisher:Items.Paging.PrevPage")' class="prev">@Translate("Previous", "Previous")</a></li>
+             }
+             @{
+                  int nrPagina = 1;
+                  int nrAfisari = 2;
+                  int nrPagini = GetInteger("ItemPublisher:Items.TotalCount");
+                  int currentPage = GetInteger("ItemPublisher:Items.Paging.CurrentPage");
+
+
+                  if (currentPage > nrAfisari + 1)
+                  {
+                      <li> <span class="dots">...</span> </li>
+                  }
+                  foreach (LoopItem page in GetLoop("ItemPublisher:Items.Paging.Pages"))
+                  {	
+                      if (nrPagina >=  currentPage - nrAfisari && nrPagina <=  currentPage + nrAfisari)
+                      {
+                        <li>
+							<a href='@page.GetString("ItemPublisher:Items.Paging.Pages.Page.Url")'>
+                                @if (page.GetBoolean("ItemPublisher:Items.Paging.Pages.Page.IsCurrent"))
+                                {
+                                	<span class="active">@page.GetValue("ItemPublisher:Items.Paging.Pages.Page.Number")</span>
+                                } else {
+                                	@page.GetValue("ItemPublisher:Items.Paging.Pages.Page.Number");
+                                }
+                            </a>
+                        </li>
+                      }
+                      nrPagina++;
+                  }
+                  if (currentPage < nrPagini - nrAfisari)
+                  {
+                      <li> <span class="dots"> ... </span> </li>
+                  }
+              }
+              @if (!string.IsNullOrWhiteSpace(GetString("ItemPublisher:Items.Paging.NextPage"))) {
+                  <li><a href='@GetString("ItemPublisher:Items.Paging.NextPage")' class="next">@Translate("Next", "Next")</a></li>
+              }
+              <li><a href='/Default.aspx?ID=@GetString("ItemPublisher:Global.PageId")&amp;PageNum=@GetString("ItemPublisher:Items.Paging.TotalPages")' class="last">@Translate("Last", "Last")</a></li>
+        </ul>
+		}
+    </div>
+     
+    }else {
+
+		<div class="col-md-12">
+            <p>@Translate("noProducts","There are no products associated with this category")</p>
+		</div>
+		}
+</div>

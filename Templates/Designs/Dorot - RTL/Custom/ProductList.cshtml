@@ -1,0 +1,22 @@
+﻿@{
+  if (GetValue("Item.Products") != null){
+  var products = GetLoop("Item.Products");
+  foreach (LoopItem product in products){
+  	string productImage = product.GetString("Item.Products.Image");
+	string productTitle = product.GetString("Item.Products.Title");
+	string productURL = product.GetString("Item.Products.Url");
+    string productImageResized = GetImage(productImage,400, 400);
+    <div class="studies-box col-md-3">
+    <h4><a href="@productURL">@productTitle</a></h4>
+    <img src="@productImageResized" alt="" class="img-responsive media-object" />
+    </div>
+
+
+  }
+
+
+  }
+
+
+}
+

@@ -1,0 +1,54 @@
+
+
+<style>
+
+.displayNONE{
+display: none;
+
+}
+
+
+</style>
+
+<div class="col-md-6">
+
+
+@foreach(LoopItem grupuri in GetLoop("AllUsers")){
+
+string company = !string.IsNullOrWhiteSpace(grupuri.GetString("UserManagement:User.Company")) ? grupuri.GetString("UserManagement:User.Company").ToString():"";
+
+string name = !string.IsNullOrWhiteSpace(grupuri.GetString("UserManagement:User.Name")) ? grupuri.GetString("UserManagement:User.Name").ToString():""; 
+var clasaCSS = string.IsNullOrEmpty(name) ? name : displayNONE;
+
+string adress = !string.IsNullOrWhiteSpace(grupuri.GetString("UserManagement:User.Address")) ? grupuri.GetString("UserManagement:User.Address").ToString():"";
+string city = !string.IsNullOrWhiteSpace(grupuri.GetString("UserManagement:User.DefaultAddress.City"))? grupuri.GetString("UserManagement:User.DefaultAddress.City").ToString():""; 
+string country = !string.IsNullOrWhiteSpace(grupuri.GetString("UserManagement:User.DefaultAddress.Country")) ? grupuri.GetString("UserManagement:User.DefaultAddress.Country").ToString():"";
+string email = !string.IsNullOrWhiteSpace(grupuri.GetString("UserManagement:User.Email")) ? grupuri.GetString("UserManagement:User.Email").ToString():"";
+string phone = !string.IsNullOrWhiteSpace(grupuri.GetString("UserManagement:User.Phone")) ? grupuri.GetString("UserManagement:User.Phone").ToString():"";
+
+
+
+
+
+	
+	<p><strong>Address:</strong>@adress</p>
+	<p><strong>City:</strong> @city</p>
+	<p><strong>Country:</strong> @country</p>
+	<p><strong>Email:</strong> @email</p>
+	<p><strong>Phone:</strong> @phone</p>
+	
+	if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.PhonePrivate"))) {
+	<p><strong>PhonePrivate:</strong> @grupuri.GetString("UserManagement:User.PhonePrivate")</p>
+	}
+	if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.PhoneMobile"))){
+	<p><strong>PhoneMobile:</strong> @grupuri.GetString("UserManagement:User.PhoneMobile")</p>
+	}
+	if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.PhoneBusiness"))){
+	<p><strong>PhoneBusiness:</strong> @grupuri.GetString("UserManagement:User.PhoneBusiness")</p>
+	}
+	<hr style="background-color:#337ab7; height:1px;">
+
+	 }   
+
+
+</div>

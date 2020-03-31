@@ -1,0 +1,123 @@
+﻿@MasterPageFile("Master.cshtml")
+@GetValue("Title(Content page)")
+@GetValue("Description(Product Item Page)")
+@using System;
+@Include("includes/Razor/GetImage.cshtml")
+@Include("includes/Razor/VerifyImage.cshtml")
+@Include("includes/PageTemplates/GenericHelper.cshtml")
+@{
+  bool hideSecondaryNavigation = GetBoolean("Item.Page.Hide_Secondary_Navigation");
+  string contentcol = hideSecondaryNavigation ? "col-md-12" : "col-md-9";
+}
+
+
+@{
+	
+   	 string titleProduct = GetString("Item.Title.Value"),
+       shortDescriptionProduct = GetString("Item.Short_Description.Value"),
+       imageLink1= GetString("Item.Image.Value"),
+	    image1 = GetImage(imageLink1,300, 300),
+       link1 = GetString("Item.Link.Value"),
+         
+       textLinkPDF = GetString("Item.TextLinkPDF.Value"),
+       PDF = GetString("Item.PDF.Value"),
+       textLinkPDF2 = GetString("Item.TextLinkPDF2.Value"),
+       PDF2 = GetString("Item.PDF2.Value"),
+       textLinkPDF3 = GetString("Item.TextLinkPDF3.Value"),
+       PDF3 = GetString("Item.PDF3.Value"),
+       textLinkPDF4 = GetString("Item.TextLinkPDF4.Value"),
+       PDF4 = GetString("Item.PDF4.Value"),
+       noImage = "/Files/Images/Dorot/no_image.png",
+       parentPageTitle = GetString("DwPageName_3"),
+       parentPageLink = "Default.aspx?ID=" + GetString("DwPageID_3");
+
+  
+}
+@Include("Custom/HeaderImage.cshtml") 
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+        	<ul class="dwnavigation breadcrumb" id="breadcrumbs" data-settings="template:Breadcrumb.xslt;startlevel:1;endlevel:3;expandmode:PathOnly"></ul>
+    	</div>
+    </div>
+</div>
+<div class="white-box white-box-content">
+	<div class="container">
+	  <div class="row">	
+        
+		<div class="col-xs-12" id="topsearch">
+           <div class="search-box col-md-4 col-xs-12 pull-right">
+              <form action="/search" method="GET" role="search">
+                <div class="form-group">
+                  <input type="search" aria-label="search" name="q" id="q" autocomplete="off" spellcheck="false" placeholder='@Translate("findYourSolution", "Find your solution")' class="form-control">
+                  <button type="submit" value="search"><i class="fa fa-search" aria-hidden="true"></i><span style="display:none">text</span></button>
+                  @* <div class="instant_search"></div> *@
+                </div>
+              </form>
+           </div>
+           <h1>@parentPageTitle</h1>
+        </div>
+        
+        @if(!hideSecondaryNavigation){
+          <div class="col-md-3">
+            <div class="nav nav-pills" id="secondNavigation">
+         	      @if(GetString("DwPageID") == "488"){
+                
+                } else {
+               
+                } 
+                <!--<ul class="dwnavigation" id="navpills1" data-settings="template:TabsSecondary.xslt;startlevel:3;endlevel:3;expandmode:All"></ul>-->
+                <ul class="dwnavigation" id="navpills" data-settings="template:Tabs.xslt;startlevel:2;endlevel:3;expandmode:All"></ul>
+            </div>
+          </div>
+    		}
+        
+    		<div class="@contentcol">
+           <div class="col-md-12 bg-info padding-md margin-bottom-md"><a href="@parentPageLink"><i class="fa fa-angle-left"></i> @Translate("backTo","Back to ") @parentPageTitle</a></div>
+            <div class="product-item col-md-12 noPadding">
+                  <div class="col-md-3 col-xs-12">
+                        @if(!string.IsNullOrWhiteSpace(image)){
+                           <img class="img-responsive" src="@imageLink1" alt="@titleProduct"/>
+                        } 
+
+                      @if(!string.IsNullOrWhiteSpace(PDF) || !string.IsNullOrWhiteSpace(PDF2) || !string.IsNullOrWhiteSpace(PDF3) || !string.IsNullOrWhiteSpace(PDF4)) {
+                        <div class="button-pdf">
+                          @if(!string.IsNullOrWhiteSpace(PDF) && !string.IsNullOrWhiteSpace(textLinkPDF)) {
+                            <p><a href='@PDF' target="_blank" class="btn btn-primary">@textLinkPDF</a></p>
+                            @*  <p class="btn-primary">@RenderDownloadLink(@PDF,@Translate("Brochure","Download Brochure"))</p> *@
+                          }
+
+                          @if(!string.IsNullOrWhiteSpace(PDF2) && !string.IsNullOrWhiteSpace(textLinkPDF2)) {
+                            <p><a href='@PDF2' target="_blank" class="btn btn-primary">@textLinkPDF2</a></p>
+                            @*  <p class="btn-primary">@RenderDownloadLink(@PDF2,@Translate("Brochure","Download Brochure"))</p> *@
+                          }
+
+                          @if(!string.IsNullOrWhiteSpace(PDF3) && !string.IsNullOrWhiteSpace(textLinkPDF3)) {
+                            <p><a href='@PDF3' target="_blank" class="btn btn-primary">@textLinkPDF3</a></p>
+                            @*  <p class="btn-primary">@RenderDownloadLink(@PDF2,@Translate("Brochure","Download Brochure"))</p> *@
+                          }
+
+                          @if(!string.IsNullOrWhiteSpace(PDF4) && !string.IsNullOrWhiteSpace(textLinkPDF4)) {
+                            <p><a href='@PDF4' target="_blank" class="btn btn-primary">@textLinkPDF4</a></p>
+                            @*  <p class="btn-primary">@RenderDownloadLink(@PDF2,@Translate("Brochure","Download Brochure"))</p> *@
+                          }
+                        </div>
+                      }
+
+                  </div>
+                  
+                  <div class="col-md-9 col-xs-12"> 
+                    <h2>@titleProduct</h2>
+                    <div class="shortDescription">@shortDescriptionProduct</div>
+                      @if(!string.IsNullOrWhiteSpace(link)) {
+                      <a href="@link" alt="@titleProduct"><span>@Translate("readMore", "Read more") <span style="display:none">@titleProduct</span></span></a>
+                    }
+                    
+                  </div>
+            
+            </div><!--End of products-item DIV-->
+          <div class="col-md-12 bg-info padding-md"><a href="@parentPageLink"><i class="fa fa-angle-left"></i> @Translate("backTo","Back to ") @parentPageTitle</a></div>
+	      </div>
+		</div>
+	</div>
+</div>

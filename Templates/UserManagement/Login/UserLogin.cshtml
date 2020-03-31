@@ -1,0 +1,31 @@
+﻿<div class="login-pane">
+    <!--<h3 class="head">Login</h3>-->
+    @if(!string.IsNullOrEmpty(GetString("DW_extranet_error_uk"))){
+  <div class="info-pane error text-danger"><strong>@GetValue("DW_extranet_error_uk")</strong></div>
+    }
+
+
+
+    <form method="post" name="ExtUserForm" action='@GetString("DWExtranetAction")'>
+        <input type="hidden" name="ID" value='@Pageview.Page.ID' />
+        @if(!string.IsNullOrEmpty(GetString("UserManagement:User.Login.SuccessRedirectToPage"))){
+        <input type="hidden" name="Redirect" value='@GetValue("UserManagement:User.Login.SuccessRedirectToPage")' />
+        }
+      
+      
+        <div class="form-group">
+          <label for="login-username">@Translate("username", "Utilizator"):</label>
+          <input type="text" class="form-control" name="username" id="login-username" placeholder="" value='@(GetValue("Server:Request.username") != null ? GetValue("Server:Request.username") : "")' />
+        </div>
+        <div class="form-group">
+          <label for="login-password">@Translate("password", "Password"):</label>
+          <input type="password" class="form-control" name="password" id="login-password" placeholder="" value='@(GetValue("Server:Request.password") != null ? GetValue("Server:Request.password") : "")' />
+        </div>
+        <div class="form-group">
+          <a href='/Default.aspx?id=@Pageview.Page.ID&amp;LoginAction=Recovery'>@Translate("recoverPassword", "Recover password")</a>
+          <button type="submit" name="LoginAction" value="Login" class="btn btn-primary">@Translate("submit", "Submit")</button>
+        </div>
+
+
+    </form>
+</div>

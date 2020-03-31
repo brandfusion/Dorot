@@ -1,0 +1,27 @@
+﻿@Include("../../includes/razor/GetImage.cshtml")
+@Include("../../includes/razor/VerifyImage.cshtml")
+
+
+<div class="row">
+    
+	@if(GetBoolean("ItemPublisher:Items.Any")){
+	  	foreach(LoopItem item in GetLoop("ItemPublisher:Items.List")){	  		
+		  	string itemTitle = item.GetString("ItemPublisher:Item.Title.Value");
+		    string itemShortDescription = item.GetString("ItemPublisher:Item.ShortDescription.Value");		  		 
+		  	string itemUrl = item.GetString("ItemPublisher:Item.Url");
+  			@* string itemMainImage2 = GetImage(item.GetString("ItemPublisher:Item.Image.Value"), 260, 170, 0); *@ 
+			string  itemMainImage = item.GetString("ItemPublisher:Item.Image.Value");
+  			string itemMainImage2 = "/Admin/Public/GetImage.ashx?Image="+itemMainImage+"&altFmImage_path=/Files/Images/NoImage/255x168.png&Format=jpg&Width=255&Height=150&Crop=0";
+  
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<h3>@itemTitle</h3>					
+				<a href="@itemUrl" class="rounded" id="imgcentrata"><img src="@itemMainImage2" alt="Homepage Case Study" class="img-responsive"/></a> 		
+				@* <div class="paragraphText short-description"><p>@itemShortDescription</p></div> *@
+				<p class="paragraphButton">
+					<a href="@itemUrl">Read more</a>
+				</p>							
+			</div>
+		}
+	}
+          
+</div>

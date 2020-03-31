@@ -1,0 +1,57 @@
+﻿@{
+string columns = GetString("Item.ItemsPerRow");
+string gridClass = "";
+string noImage = "";
+  switch (columns){
+    case "1":
+    gridClass = "col-xs-12 col-sm-12";
+    break;
+    case "2":
+    gridClass = "col-xs-12 col-sm-6";
+    break;
+    case "3":
+    gridClass = "col-xs-12 col-sm-4";
+    break;
+    case "4":
+    gridClass = "col-xs-12 col-sm-3";
+    break;
+	
+  }
+
+
+
+}
+<div class="col-md-12 person-list">
+  @foreach(LoopItem member in GetLoop("Item.Team")) {
+  	  string name = !string.IsNullOrEmpty(member.GetString("Item.Team.Name.Value")) ? member.GetString("Item.Team.Name.Value") : "";    	
+      string job = !string.IsNullOrEmpty(member.GetString("Item.Team.Job.Value")) ? member.GetString("Item.Team.Job.Value") : "";    	
+      string longDescription = !string.IsNullOrEmpty(member.GetString("Item.Team.Long_Description.Value")) ? member.GetString("Item.Team.Long_Description.Value") : "";    	
+      string image = !string.IsNullOrEmpty(member.GetString("Item.Team.Image.Value")) ? member.GetString("Item.Team.Image.Value") : ""; 
+  	  string url="";
+		<div class="@gridClass person-box">
+			<div class="media media-person">
+				 <div class="media-left">
+                 <div class="person-img media-object" style="background-image: url(@image)" ></div>
+            </div>
+			<div class="media-body person-details">
+              	 @if(!string.IsNullOrEmpty(name)) { 
+                  <h3>@name</h3>
+              	 }
+              	 @if(!string.IsNullOrEmpty(job)) {
+                  <p>@job</p>
+              	 }
+
+				@if(!string.IsNullOrEmpty(longDescription)) {
+                 <div class="box-details">
+                 	@longDescription 
+                 </div>
+                 }
+              	 
+              </div>
+			</div>
+		   
+          
+      </div>
+  }
+</div>
+

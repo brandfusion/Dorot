@@ -1,0 +1,62 @@
+﻿<div class="contact-item">
+
+@foreach(LoopItem grupuri in GetLoop("AllUsers")){
+
+	<div class="item">
+     
+      @*
+      	<div id="map"></div>
+        <script>
+          function initMap() {
+            var uluru = {lat: @grupuri.GetValue("UserManagement:User.GeolocationLatitude"), lng:@grupuri.GetValue("UserManagement:User.GeolocationLongitude")};
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 7,
+              center: uluru
+            });
+            var marker = new google.maps.Marker({
+              position: uluru,
+              map: map
+            });
+          }
+        </script>
+      *@
+      
+      
+      
+      @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.Department"))) {
+      <p><strong>@Translate("department", "Department"):</strong> @grupuri.GetString("UserManagement:User.Department")</p>
+      }
+      
+      @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.Name"))) {
+      <p><strong>@Translate("contactPerson", "Contact Person"):</strong> @grupuri.GetString("UserManagement:User.Name")</p>
+      }
+
+      @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.Address"))) {
+      <p><strong>@Translate("address", "Address"):</strong> @grupuri.GetString("UserManagement:User.Address")</p>
+      }
+      @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.DefaultAddress.City"))) {
+      <p><strong>@Translate("city", "City"):</strong> @grupuri.GetString("UserManagement:User.DefaultAddress.City")</p>
+      }
+      @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.DefaultAddress.Country"))) {
+      <p><strong>@Translate("country", "Country"):</strong> @grupuri.GetString("UserManagement:User.DefaultAddress.Country")</p>
+      }
+      <p><strong>@Translate("email", "Email"):</strong> @grupuri.GetString("UserManagement:User.Email")</p>
+
+      @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.Phone"))) {
+      <p><strong>@Translate("phone", "Phone"):</strong> @grupuri.GetString("UserManagement:User.Phone")</p>
+      }
+      @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.PhonePrivate"))) {
+      <p><strong>@Translate("privatePhone", "Private Phone"):</strong> @grupuri.GetString("UserManagement:User.PhonePrivate")</p>
+      }
+      @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.PhoneMobile"))){
+      <p><strong>@Translate("mobile", "Mobile"):</strong> @grupuri.GetString("UserManagement:User.PhoneMobile")</p>
+      }
+      @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.PhoneBusiness"))){
+      <p><strong>@Translate("businessPhone", "Business Phone"):</strong> @grupuri.GetString("UserManagement:User.PhoneBusiness")</p>
+      }
+    </div>
+
+}  
+
+
+</div>

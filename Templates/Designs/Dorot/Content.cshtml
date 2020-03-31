@@ -1,0 +1,46 @@
+﻿@MasterPageFile("Master.cshtml")
+@GetValue("Title(Content page)")
+@GetValue("Description(Content page)")
+
+
+@Include("Custom/HeaderImage.cshtml")
+@{
+	bool hideSecondaryNavigation = GetBoolean("Item.Page.Hide_Secondary_Navigation");
+  string contentcol = hideSecondaryNavigation ? "col-md-12" : "col-md-9";
+}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+        	<ul class="dwnavigation breadcrumb" id="breadcrumbs" data-settings="template:Breadcrumb.xslt;startlevel:1;endlevel:3;expandmode:PathOnly"></ul>
+        </div>
+		@*<div class="header-search col-xs-6" >
+		    <form  action="/search" method="GET">
+		      <div class="form-group">
+		        <input type="text" name="q" id="q" autocomplete="off" spellcheck="false" placeholder="" class="form-control"><!-- 
+		        --><button type="submit"></button>
+		        
+		      </div>
+		    </form>
+		</div>*@
+
+
+    </div>
+</div>
+<div class="white-box white-box-content">
+	<div class="container">
+		<div class="row">	
+			<div class="col-xs-12">					
+				<h1>@GetGlobalValue("Global:Page.Name")</h1>
+			</div>
+			@if(!hideSecondaryNavigation){
+      <div class="sidebar">
+          <ul class="dwnavigation nav-stacked" id="navpills" data-settings="template:pills.xslt;startlevel:3;endlevel:4;expandmode:path"></ul>
+					<div class="dwcontent" id="sidebar" title="Sidebar"></div>
+      </div>
+			}
+			<div class="dwcontent" id="maincontent" title="Content area"></div>       
+		</div>
+	</div>
+</div>
+<div class="dwcontent" id="widecontent" title="Wide Content area"></div>

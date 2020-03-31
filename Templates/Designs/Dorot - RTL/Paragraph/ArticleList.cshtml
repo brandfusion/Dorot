@@ -1,0 +1,54 @@
+﻿@{
+   int count = 1;
+  
+   <div class="purple-box-wide" @RenderAnchor()>
+     @foreach(LoopItem articleParams in GetLoop("Item.Article_List")) {   	  
+
+		string iconA = !string.IsNullOrEmpty(articleParams.GetString("Item.Article_List.Icon.Value")) ? articleParams.GetString("Item.Article_List.Icon.Value") : "";    	
+    	string titleA = !string.IsNullOrEmpty(articleParams.GetString("Item.Article_List.Title.Value")) ? articleParams.GetString("Item.Article_List.Title.Value") : "";    	
+		string shortDescriptionA = !string.IsNullOrEmpty(articleParams.GetString("Item.Article_List.Short_Description.Value")) ? articleParams.GetString("Item.Article_List.Short_Description.Value") : "";    	
+		string order = count<10 ?  "0"+ count.ToString() : count.ToString();
+
+		<div class="col">
+            <div class="container">
+                <div class="row">
+					
+                    <div class="col-xs-2 col-sm-1"> 
+						@if(!string.IsNullOrEmpty(@iconA)) { 
+							<img src="@iconA" alt=""> 
+						}
+					</div>
+                    <div class="col-xs-8 col-sm-8">
+                        @if(!string.IsNullOrEmpty(@titleA)) { 
+							<h3>@titleA</h3> 
+						}
+                        @if(!string.IsNullOrEmpty(@shortDescriptionA)) { 
+							<p class="hidden-xs">@shortDescriptionA</p> 
+						}
+                    </div>
+                    <div class="col-xs-2 col-sm-3 align-right nr">@order.</div>
+					
+                </div>
+            </div>
+        </div>
+        count++;
+
+     }  
+  </div>
+}
+
+@helper RenderAnchor() {
+	if (!string.IsNullOrEmpty(GetString("Item.Title")))
+		{
+		<text>id='@GetString("Item.Title").Replace(" ","-")'</text>
+
+		}
+}
+
+  
+  
+
+
+  
+  
+

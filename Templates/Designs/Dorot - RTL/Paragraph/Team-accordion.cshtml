@@ -1,0 +1,59 @@
+﻿@{
+   int count = 1;  
+   
+   <div class="light-bg" @RenderAnchor()>
+     <div class="container">
+       <div class="col-xs-12">
+         <div class="row">
+
+            <h2>@GetValue("ParagraphHeader")</h2>
+            <div class="row items accordion-list">							
+       
+               @foreach(LoopItem team in GetLoop("Item.Team")) {  	
+                  
+                  string name = !string.IsNullOrEmpty(team.GetString("Item.Team.Name.Value")) ? team.GetString("Item.Team.Name.Value") : "";    	
+                  string job = !string.IsNullOrEmpty(team.GetString("Item.Team.Job.Value")) ? team.GetString("Item.Team.Job.Value") : "";    	
+                  string longDescription = !string.IsNullOrEmpty(team.GetString("Item.Team.Long_Description.Value")) ? team.GetString("Item.Team.Long_Description.Value") : "";    	
+                  string image = !string.IsNullOrEmpty(team.GetString("Item.Team.Image.Value")) ? team.GetString("Item.Team.Image.Value") : ""; 
+                            
+                  <div class="item col-xs-12">                      
+					  <a href="javascript:void(0)" class="view-more-btn"><div class="box">
+
+                        <div class="box-name">
+                              @if(!string.IsNullOrEmpty(@name)) { 
+                              	 <h3>@name</h3> 
+                              }
+                              @if(!string.IsNullOrEmpty(@job)) { 
+                                 <p>@job</p> 
+                              }
+                          </div>
+                          <div class="box-details">
+                              @if(!string.IsNullOrEmpty(@longDescription)) { 
+                              	 @longDescription 
+                              }
+                          </div>
+                          <div class="view-more">
+                              <span class="more-btn">&nbsp;</span>
+                          </div>
+
+                      </div></a>
+                  </div>
+                  count++;        
+               } 
+
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+      
+}
+
+@helper RenderAnchor() {
+	if (!string.IsNullOrEmpty(GetString("Item.Title")))
+		{
+		<text>id='@GetString("Item.Title").Replace(" ","-")'</text>
+
+		}
+}

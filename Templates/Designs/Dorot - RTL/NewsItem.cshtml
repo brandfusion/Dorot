@@ -1,0 +1,110 @@
+﻿@MasterPageFile("Master.cshtml")
+@GetValue("Title(Content page)")
+@GetValue("Description(Content page)")
+
+@{
+		string cultureName = GetGlobalValue("Global:Area.Culture.Name");
+		string pageImage = !string.IsNullOrEmpty(GetString("Item.Image.Value")) ? GetString("Item.Image.Value") : GetString("Item.Page.Image");
+		string genericImage = GetString("Item.Area.News_Image");
+		string image = !string.IsNullOrEmpty(pageImage) ? pageImage : genericImage;
+		string title = GetString("Item.Page.Title");
+		string description = GetString("Item.Page.Description").ToString();
+		string link =  GetString("Item.Page.Link").ToString();
+		string textLink = GetString("Item.Page.Link_Text").ToString();
+
+
+		string titleItem = GetString("Item.Title.Value");
+		string subheadlineItem = GetString("Item.Subheadline.Value");
+		DateTime date = GetDate("Item.Date");
+//string dateItem = date.ToString("dddd, MMMM dd, yyyy h:mm tt");
+		string dateItem = date.ToString("f", System.Globalization.CultureInfo.GetCultureInfo(cultureName));
+		string dateTimeItem = date.ToString("tt", System.Globalization.CultureInfo.GetCultureInfo(cultureName));
+		string categoryItem = GetString("Item.Categories.Value");
+
+		string contactItem = GetString("Item.Contact.Value");
+		string multimediaItem = GetString("Item.Multimedia.Value");
+}
+
+
+<div class="head-image" style='background-image: url(@image)'>			
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">				
+				<h2>@title</h2>
+				@if (!string.IsNullOrEmpty(@description)) { 
+					<p>@description</p>
+				}
+				@if (!string.IsNullOrEmpty(@link)) { 
+					<a href='@link'>@textLink</a>	
+				}					
+			</div>
+		</div>
+	</div>
+</div>
+
+@*Include("Custom/HeaderImage.cshtml")*@
+
+<div class="white-box white-box-content">
+	
+  	<div class="back-button">
+      <a href='/Default.aspx?ID=@GetValue("Item.Area.News_Page_ID")' title="" class="noPrint">@Translate("back", "Back")</a>            
+    </div>
+	<div class="container">
+		<div class="col-xs-12">
+			<div class="row">										              
+               
+				<div class="item-news" style="border-bottom: none" id="content-print">
+            <h3>@titleItem</h3>
+	  				<h5>@subheadlineItem</h5>
+            
+            <div class="details">
+                <div class="noPrint">
+	                @Translate("category", "Category"):
+	                <a href="#" class="category">@categoryItem</a>
+ 								</div>
+
+                <a href="#" class="print noPrint" onclick="printPage('content-print');">@Translate("wiewPrinterVersion", "View printer-friendly version")</a>
+								<script>									
+									function printPage(printpage)
+									{
+									  var headstr = "<html><head><title></title></head><body><div class='test'>";
+										var footstr = "</div></body>";
+										var newstr = document.all.item(printpage).innerHTML;
+										var oldstr = document.body.innerHTML;
+										document.body.innerHTML = headstr+newstr+footstr;
+										window.print();
+										document.body.innerHTML = oldstr;
+										return false;
+									}
+								</script>
+
+                <div class="date">
+                  @dateItem
+                </div>
+            </div>
+
+            <div class="description">
+            		<div class="short-description">
+            			@GetValue("Item.Short_Description.Value") 	
+            		</div>
+                @GetValue("Item.Description.Value") 
+            </div>
+            
+            @if(!string.IsNullOrWhiteSpace(multimediaItem)) {
+            	<div class="multimedia"><span>@Translate("multimedia", "Multimedia"):</span>  @multimediaItem</div>
+            }
+            @if(!string.IsNullOrWhiteSpace(contactItem)) {
+            	<div class="contact"><span>@Translate("contact", "Contact"):</span> @contactItem</div>
+            }
+            
+            <div class="pull-right noPrint">
+                <a href='/Default.aspx?ID=@GetValue("Item.Area.News_Page_ID")' class="back">@Translate("back", "Back")</a>
+            </div>	
+				</div>
+				
+			</div>	
+		</div>
+	</div>
+</div>
+
+<div class="dwcontent" id="widecontent" title="Wide Content area"></div>

@@ -1,0 +1,71 @@
+﻿@MasterPageFile("Master.cshtml")
+@GetValue("Title(Homepage)")
+@GetValue("Description(Homepage)")
+@{
+string newsParent = GetString("Item.Area.News_Page_ID");
+
+}
+
+<div class="row homepage-slider">
+    @Slider()
+</div>
+
+<div class="col-xs-12 homepage-white-bg">
+	<div class="row">
+    <div class="container">         
+      <div class="row">      
+        @CentralContent()
+      
+        @*@RenderItemList(new
+       {
+           ItemType = "NewsItem",
+           ListSourceType = "Page",
+           ListSourcePage = newsParent,
+           ItemFieldsList = "*",
+           ListTemplate = "ItemPublisher/List/HomepageNewsItem.cshtml",
+           IncludeAllChildItems = "True",
+           ListPageSize = 1,
+           IncludeParagraphItems = "True",
+           ListOrderBy = "Date",
+           ListOrderByDirection = "Descending"
+       })*@      	           
+      </div> 
+    </div>
+	</div>
+</div>
+
+
+	@if (!string.IsNullOrEmpty(GetString("DwContent(additionalContent)")))
+	{
+    <div class="white-box">
+        <div class="container">
+          <div class="col-xs-12">
+            <div class="row dwcontent" id="additionalContent" title="Additional content Centered" settings="unwrap:true"></div>
+          </div>
+        </div>
+    </div>
+	}
+	@if (!string.IsNullOrEmpty(GetString("DwContent(widecontent)")))
+	{
+	<div class="dwcontent" id="widecontent" title="Wide Content area"></div>
+	}
+
+	
+@helper CentralContent() {
+    if (!string.IsNullOrEmpty(GetString("DwContent(centralContent)")))
+    {
+        <div class="row dwcontent" id="centralContent" title="Homepage boxes" settings="unwrap:true"></div>
+		
+    }
+	
+
+}
+@helper Slider() {
+    if (!string.IsNullOrEmpty(GetString("DwContent(slider)")))
+    {
+        <div class="row dwcontent" id="slider" title="Slider" settings="unwrap:true"></div>
+    
+    }
+  
+
+}

@@ -1,0 +1,63 @@
+<div class="col-md-6">
+
+
+
+@foreach(LoopItem grupuri in GetLoop("Groups")){
+	
+@grupuri.TemplateTags()
+
+}
+
+
+
+	
+	@* @foreach(LoopItem grupuri in GetLoop("AllUsers")){
+	
+
+<p><strong>Branch office:</strong> @grupuri.GetString("UserManagement:User.Company")</p>
+<p><strong>UserName:</strong> @grupuri.GetString("UserManagement:User.UserName")</p>
+if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.Address"))) {
+<p><strong>Address:</strong> @grupuri.GetString("UserManagement:User.Address")</p>
+}
+if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.DefaultAddress.City"))) {
+<p><strong>City:</strong> @grupuri.GetString("UserManagement:User.DefaultAddress.City")</p>
+}
+if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.DefaultAddress.Country"))) {
+<p><strong>Country:</strong> @grupuri.GetString("UserManagement:User.DefaultAddress.Country")</p>
+}
+<p><strong>Email:</strong> @grupuri.GetString("UserManagement:User.Email")</p>
+
+if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.Phone"))) {
+<p><strong>Phone:</strong> @grupuri.GetString("UserManagement:User.Phone")</p>
+}
+if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.PhonePrivate"))) {
+<p><strong>PhonePrivate:</strong> @grupuri.GetString("UserManagement:User.PhonePrivate")</p>
+}
+if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.PhoneMobile"))){
+<p><strong>PhoneMobile:</strong> @grupuri.GetString("UserManagement:User.PhoneMobile")</p>
+}
+if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.PhoneBusiness"))){
+<p><strong>PhoneBusiness:</strong> @grupuri.GetString("UserManagement:User.PhoneBusiness")</p>
+}
+<hr style="background-color:#337ab7; height:1px;"> *@
+
+
+
+ 
+	
+
+		@* var usersGroup = grupuri.GetLoop("UserManagement:Group.ID");
+
+			foreach(LoopItem grup in usersGroup){
+				
+					@grup.TemplateTags()
+
+
+
+			} *@
+
+
+	 }  
+
+
+</div>

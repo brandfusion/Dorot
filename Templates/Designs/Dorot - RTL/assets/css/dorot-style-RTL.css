@@ -1,0 +1,51 @@
+﻿.contact-item .item {
+  float: right;
+  padding: 0 0 0 5%;
+}
+.form-group input {
+  padding-right: 50px;
+}
+.noPaddingRight {
+  padding-right: 0 !important;
+}
+footer nav ul#drawernavigationFooter {
+  width: 100%;
+}
+#topsearch .search-box {
+  position: initial;
+  margin: 30px 0;
+}
+#topsearch .search-box button {
+  top: 30px;
+}
+
+
+
+@media (max-width: 767px) {
+    .mobile-menu-trigger {
+      left: 1em;
+      right: auto;	
+    }
+    .dynamicweb-map label {
+      float: right !important;
+    }
+    .dynamicweb-map select {
+      min-width: 220px;
+      margin-left: 0;
+    } 
+    .search .btn {
+      padding: 6px 9px;
+    }
+    .search .btn.btn-primary {
+      clear: both;
+      float: right;
+      margin-left: 5px;
+    }
+    #dw-form-1 .formtable, .formtable input[type=text], .formtable input[type=password], .formtable textarea {
+      width: 100%;
+    }
+    .contact-item p strong {
+      float:right;
+      margin: 0 0 0 5px;
+    }
+}

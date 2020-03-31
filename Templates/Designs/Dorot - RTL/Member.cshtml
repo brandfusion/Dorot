@@ -1,0 +1,30 @@
+﻿@MasterPageFile("Master.cshtml")
+@GetValue("Title(Content page)")
+@GetValue("Description(Content page)")
+
+
+@Include("Custom/HeaderImage.cshtml")	
+<div class="white-box white-box-content">
+    
+  <div class="next-button">
+    <ul class="dwnavigation" id="nextMember" data-settings="template:NextMember.xslt;expandmode:all;sitemapmode:true"></ul> 
+  </div>
+  <div class="close-btn">
+    <a href='/Default.aspx?ID=@Pageview.Area.Item["Leadership_Page_ID"]'>&nbsp;</a>
+  </div>
+  <div class="container">
+    <div class="col-xs-12">
+	   <div class="row member">						
+		
+        <div class="col-md-9 col-sm-8 col-xs-12">
+          <h3>@GetValue("Item.Name.Value")</h3>
+          <span class="job">@GetValue("Item.Job.Value")</span>
+          @GetValue("Item.Long_Description.Value")
+        </div>
+	      <div class="col-md-3 col-sm-4 col-xs-12"><img src='@GetValue("Item.Image.Value")' alt="" class="img-responsive"/></div>	
+         
+      </div>	
+    </div>
+  </div>
+
+</div>

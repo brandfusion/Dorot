@@ -1,0 +1,70 @@
+﻿@{
+    string FooterMenuParentPage =  GetString("Item.Area.Footer_Page_ID");
+    string footernavigation = RenderNavigation(new {
+        template = "LIClean.xslt",
+        id = "bottomnavigation",
+        expandmode = "all",
+        parentid = FooterMenuParentPage,
+        startlevel = 1,
+        endlevel = 2
+    });
+    //string TopMenuParentPage = GetString("Item.Area.TopMenuPageId");
+    string footerNavigationMobile = RenderNavigation(new
+    {
+        template = "FooterLinksMobile.xslt",
+        id = "drawernavigationFooter",
+        expandmode = "all",
+        parentid = TopMenuParentPage,
+        startlevel = 1,
+        endlevel = 1
+    });
+    string navigationSetting = "parentid:" + TopMenuParentPage + ";startlevel:1;endlevel:2;template:FooterLinks.xslt;expandmode:all;";
+}
+
+<footer class="footer noPrint">  
+    <div class="footer-top">
+       @GetValue("Item.Area.Motto")     
+    </div>  
+    <div class="container">
+        <div class="row">   
+	        <div class="col-md-5">
+	            @* <a href="#top" class="hidden-lg hidden-md hidden-sm back-to-top"><span></span>@Translate("Back to top", "Back to top")</a> *@	                   
+	            <a href="#top" ref="#top" class="hidden-lg hidden-md hidden-sm back-to-top"><span></span>@Translate("Back to top", "Back to top")</a>
+	            <nav class="col-xs-12 col-md-12">
+	                <ul class="dwnavigation hidden-xs" id="drawernavigationFooter" data-settings="parentid:632;startlevel:1;endlevel:3;template:FooterLinks.xslt;"></ul>
+	                @footerNavigationMobile
+	            </nav>
+	        </div>
+
+	        <div class="col-md-7 text-justify">
+	            @RenderParagraphContent(560)
+
+                <div class="col-md-12">
+                    <ul class="footer-menu">
+                        <li>
+                            <p class="copyright hidden-xs hidden-sm">&copy;@DateTime.Now.Year @GetValue("DwAreaName")</p>
+                            @* @footernavigation *@
+                            @*<ul class="dwnavigation" id="bottomnavigation" data-settings="startlevel:1;endlevel:4;parentid:46;template:LIClean.xslt;expandmode:all;"></ul>*@
+                            
+                        </li> 
+                    </ul> 
+                </div>
+	        </div>
+        </div>
+    </div>  
+
+
+
+
+    <div class="footer-logo">  
+      <div class="container">
+        <div class="row">
+            <div class="col-xs-5 col-md-10">  @* @GetValue("DwAreaFirstPageID") *@
+                <a href='/Default.aspx?ID=3'><img src='@Pageview.Area.Item["LogoFooter"]' alt="logofooter" /></a>			
+            </div>
+            <div class="col-xs-7 col-md-2 copyright hidden-lg hidden-md">&copy; @DateTime.Now.Year @GetValue("DwAreaName")</div>
+        </div>
+      </div>
+    </div>
+    
+</footer>		

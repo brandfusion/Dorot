@@ -1,0 +1,17 @@
+﻿@using System.Web;
+
+@foreach(LoopItem menu in GetLoop("ItemPublisher:Items.List")){
+<nav>
+  <ul id="drawernavigation">
+	@foreach(LoopItem menuItem in menu.GetLoop("ItemPublisher:Item.Menu")){
+    string link = menuItem.GetString("ItemPublisher:Item.Menu.Link");
+    string linkText = menuItem.GetString("ItemPublisher:Item.Menu.Link_Text");
+    string customCSS = menuItem.GetString("ItemPublisher:Item.Menu.customCSS");
+    string target= menuItem.GetBoolean("ItemPublisher:Item.Menu.OpenInNewWindow") ? "target='_blank'" : "";
+	<li class="dropdown2 dw-navbar-button">
+    	<a class="dropdown-toggle @customCSS" data-hover="dropdown" data-close-others="true" href="@link" @target>@linkText<span></span></a>
+  	</li>
+	}
+  </ul>
+</nav>
+}

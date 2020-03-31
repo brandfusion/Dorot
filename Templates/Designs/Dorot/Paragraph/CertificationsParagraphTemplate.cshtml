@@ -1,0 +1,19 @@
+﻿
+@Include("../includes/Razor/GetImage.cshtml")
+@Include("../includes/Razor/VerifyImage.cshtml")
+                            
+
+@{
+string title = GetString("Item.Title.Value");
+string file = GetString("Item.File.Value");
+string description = GetString("Item.Description.Value");
+string image = GetImage(GetString("Item.Image.Value"),250, 250);
+}
+
+<div class="certification-box col-md-3">  
+    <h3>@title</h3>
+    <a href="@file" target="_blank">
+    	<span class="download">&nbsp;</span>
+    	<img class="img-responsive" src="@image" alt="@title"/>
+    </a>
+</div>    

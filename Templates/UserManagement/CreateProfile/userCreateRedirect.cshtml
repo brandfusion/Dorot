@@ -1,0 +1,122 @@
+﻿
+<br><br><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @* <h4><b>New user <i>@GetValue("UserManagement:User.Name")</i>, account request successfully send</b></h4> *@
+
+        <div class="col-xs-12 col-md-10">
+
+            <h4><b>Dear <i>@GetValue("UserManagement:User.Name")</i></b>,</h4>
+            <br><br>
+            <p>Thank you for signing up to keep in touch with Dorot Control Valves.<br>
+            In less than 24 hours an activation email will be sent to your email address<br>
+            and you will have access all data from Dorot Control Valves. If you want to <br>
+            send us a message, please write us at: <a href="https://www.dorot.com/contact-us">office@dorot.com</a> and we will get back<br>
+            to you as soon as possible.
+            <br><br>
+            Best regards,
+            <br><br>
+            Dorot Team</p>
+            <img alt="" src="https://www.dorot.com/Files/Images/logo.png" style="height:58px; width:100px" /></p>
+
+            Stay in touch with the latest news from Dorot Control Valves
+            Follows us on:
+            <a href="https://www.facebook.com/dorot.controlvalves/"><img src="/Files/Images/Dorot/facebook.png" width="30" height="30"></a>
+            <a href="https://www.linkedin.com/company/676100/"><img src="/Files/Images/Dorot/linkedin.png" width="30" height="30"></a>
+        
+        </div>
+
+        </div>
+    </div>
+</div>
+
+
+@* @GetValue("UserManagement:User.FormStart")
+<table>
+    <tr>
+        <th align="left"><!--@Translate(Name, "Name")-->: </th>
+        <td>@GetValue("UserManagement:User.Name")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(Email, "Email")-->: </th>
+        <td>@GetValue("UserManagement:User.Email")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(Username, "Username")-->: </th>
+        <td>@GetValue("UserManagement:User.UserName")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(Department, "Department")-->: </th>
+        <td>@GetValue("UserManagement:User.Department")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(Phone, "Phone")-->: </th>
+        <td>@GetValue("UserManagement:User.Phone")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(PhonePrivate, "Private phone")-->: </th>
+        <td>@GetValue("UserManagement:User.PhonePrivate")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(PhoneBusiness, "Business phone")-->: </th>
+        <td>@GetValue("UserManagement:User.PhoneBusiness")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(PhoneMobile, "Mobile phone")-->: </th>
+        <td>@GetValue("UserManagement:User.PhoneMobile")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(Fax, "Fax")-->: </th>
+        <td>@GetValue("UserManagement:User.Fax")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(Address, "Address")-->: </th>
+        <td>@GetValue("UserManagement:User.Address")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(Address2, "Address 2")-->: </th>
+        <td>@GetValue("UserManagement:User.Address2")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(Zip, "Zip")-->: </th>
+        <td>@GetValue("UserManagement:User.Zip")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(City, "City")-->: </th>
+        <td>@GetValue("UserManagement:User.City")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(Country, "Country")-->: </th>
+        <td>@GetValue("UserManagement:User.Country")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(BillingCountryCode, "Billing country code")-->: </th>
+        <td>@GetValue("UserManagement:User.CountryCode")</td>
+    </tr>
+    @if(Core.Converter.ToBoolean(GetValue("UserManagement:User.Culture.CountryName"))){<text>
+    <tr>
+        <th align="left"><!--@Translate(BillingCountry, "Billing country")-->: </th>
+        <td>@GetValue("UserManagement:User.Culture.CountryName")</td>
+    </tr>
+    </text>}
+    <tr>
+        <th align="left"><!--@Translate(JobTitle, "Jobtitle")-->: </th>
+        <td>@GetValue("UserManagement:User.JobTitle")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(Company, "Company")-->: </th>
+        <td>@GetValue("UserManagement:User.Company")</td>
+    </tr>
+    <tr>
+        <th align="left"><!--@Translate(VATIN, "VATIN")-->: </th>
+        <td>@GetValue("UserManagement:User.VatRegNumber")</td>
+    </tr>
+    @if(Core.Converter.ToBoolean(GetValue("UserManagement:User.Image.Clean"))){<text>
+    <tr>
+        <th align="left"><!--@Translate(profilepicture, "Profile picture")-->: </th>
+        <td><img src="/admin/public/getimage.aspx?fmImage_path=@GetValue("UserManagement:User.Image.Clean")&amp;width=80" alt="@GetValue("UserManagement:User.Name")" border="0" /></td>
+    </tr>
+    </text>}
+</table>
+@GetValue("UserManagement:User.FormEnd") *@

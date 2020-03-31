@@ -1,0 +1,31 @@
+﻿<div class="row">
+    
+	@if(GetBoolean("ItemPublisher:Items.Any")){
+	  	foreach(LoopItem item in GetLoop("ItemPublisher:Items.List")){
+
+
+	  		DateTime date = item.GetDate("ItemPublisher:Item.DateForSorting");
+
+		  	string itemTitle = item.GetString("ItemPublisher:Item.Title.Value"),
+		  		   itemShortDescription = item.GetString("ItemPublisher:Item.ShortDescription.Value"),
+		  		   itemDate = date.ToString("MMMM yyyy"),
+		  		   itemUrl = item.GetString("ItemPublisher:Item.Url");
+
+
+		  		   //dateItem = date.ToString("dddd, MMMM dd, yyyy h:mm tt", System.Globalization.CultureInfo.GetCultureInfo(cultureName));
+			 	   //dateLongCulture = date.ToString("f", System.Globalization.CultureInfo.GetCultureInfo(cultureName)); 
+  
+
+			<div class="col-xs-12 col-sm-6 col-md-12 col-lg-12 homepage-news">
+				<h3>@itemTitle</h3>
+				<span class="date">@itemDate</span>
+
+				<div class="paragraphText short-description"><p>@itemShortDescription</p></div>
+				<p class="paragraphButton">
+					<a href="@itemUrl">Read more</a>
+				</p>							
+			</div>
+		}
+	}
+          
+</div>

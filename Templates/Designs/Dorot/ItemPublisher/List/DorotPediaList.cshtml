@@ -1,0 +1,19 @@
+﻿<div class="row">
+
+	@if(GetBoolean("ItemPublisher:Items.Any")){
+	  	foreach(LoopItem item in GetLoop("ItemPublisher:Items.List")){
+
+		  	string itemTerm = item.GetString("ItemPublisher:Item.Term.Value");
+		  	string itemDescription = item.GetString("ItemPublisher:Item.Description.Value");
+            var parentPageID = item.GetValue("ItemPublisher:Item.Field.PageId")!= null? item.GetValue("ItemPublisher:Item.Field.PageId"):"";
+	
+		  		   
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<h3>@itemTerm</h3>
+				<div class="paragraphText short-description"><p>@itemDescription</p></div>
+										
+			</div>
+		}
+	}
+          
+</div>

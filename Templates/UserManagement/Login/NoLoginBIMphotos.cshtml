@@ -1,0 +1,37 @@
+﻿@*<p>Userul este: @Pageview.User</p>*@
+
+<br> 
+<div class="login-pane">
+    <!--<h3 class="head">Login</h3>-->
+    <!--@If(DW_extranet_error_uk<defined>)-->
+    <div class="info-pane error">@GetValue("DW_extranet_error_uk")</div>
+    <!--@EndIf-->
+
+@if(Pageview.User == null) {  
+
+  
+  <div><b><!--@Translate(PleaseLoginBIMphotos, "Please login to access the photos!")--></b></div> <br>  
+
+    <form method="post" action="@GetValue("DWExtranetAction")">
+        <input type="hidden" name="ID" value="@GetValue("Global:Page.ID")" />
+        <!--@If Defined(UserManagement:User.Login.SuccessRedirectToPage)-->
+        <input type="hidden" name="Redirect" value='@GetValue("UserManagement:User.Login.SuccessRedirectToPage")' />
+        <!--@EndIf-->
+      
+    
+  
+        <div class="form-group">
+          <label for="login-username"><!--@Translate(username, "User name")-->:</label>
+          <input type="text" class="form-control" name="username" id="login-username" placeholder="" value='<!--@If(Server:Request.username<defined>)-->@GetValue("Server:Request.username") <!--@EndIf-->' />
+        </div>
+        <div class="form-group">
+          <label for="login-password"><!--@Translate(password, "Password")-->:</label>
+          <input type="password" class="form-control" name="password" id="login-password" placeholder="" value='<!--@If(Server:Request.password<defined>)-->@GetValue("Server:Request.password")<!--@EndIf-->' />
+        </div>
+        <div class="form-group">
+          <a href='Default.aspx?ID=532&amp;LoginAction=Recovery'><!--@Translate(forgotPass, "Forgot your password?")--></a>
+          <button type="submit" name="LoginAction" value="Login" class="btn btn-primary"><!--@Translate(sumbit, "Submit")--></button>
+        </div>
+    </form>
+  }
+</div>

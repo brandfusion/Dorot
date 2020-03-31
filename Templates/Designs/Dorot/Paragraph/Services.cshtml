@@ -1,0 +1,117 @@
+﻿@{
+int count = 1;
+
+<div class="light-bg no-bg" @RenderAnchor()>
+   <div class="brown-bg">&nbsp;</div>
+   <div class="container">
+      <div class="col-xs-12">
+          <div class="row">
+
+  			  <h2>@GetValue("ParagraphHeader")</h2>
+   			  <div class="row">
+              @foreach(LoopItem articleParams in GetLoop("Item.Services_List")) {   	  
+          
+                  string id = !string.IsNullOrEmpty(articleParams.GetString("Item.Services_List.Id.Value")) ? articleParams.GetString("Item.Services_List.Id.Value") : "";     
+                  string image = !string.IsNullOrEmpty(articleParams.GetString("Item.Services_List.Image.Value")) ? articleParams.GetString("Item.Services_List.Image.Value") : "";    	
+                  string title = !string.IsNullOrEmpty(articleParams.GetString("Item.Services_List.Title.Value")) ? articleParams.GetString("Item.Services_List.Title.Value") : "";    	
+                  string shortDescription = !string.IsNullOrEmpty(articleParams.GetString("Item.Services_List.Short_Description.Value")) ? articleParams.GetString("Item.Services_List.Short_Description.Value") : "";    	
+          		
+        					string link = !string.IsNullOrEmpty(articleParams.GetString("Item.Services_List.Link_Link.Value")) ? articleParams.GetString("Item.Services_List.Link_Link.Value") : "";
+        					string linkText = articleParams.GetString("Item.Services_List.Link_Text.Value");
+
+                  string videoCode = !string.IsNullOrEmpty(articleParams.GetString("Item.Services_List.Video_Code.Value")) ? articleParams.GetString("Item.Services_List.Video_Code.Value") : "";
+                  string videoYoutubeCode = !string.IsNullOrEmpty(articleParams.GetString("Item.Services_List.Video_Youtube_Code.Value")) ? articleParams.GetString("Item.Services_List.Video_Youtube_Code.Value") : "";
+				
+                  
+                  <div class="col-xs-12 col-sm-6 services-box">
+                      <div class="services-img" style="background-image: url(@image)">   
+
+
+                      @if (!string.IsNullOrEmpty(@videoCode) || !string.IsNullOrEmpty(@videoYoutubeCode) ) {   
+	                        <button type="button" class="btn btn-primary push" data-toggle="modal" data-target="#popup@(id)">
+	                          <span>&nbsp;</span>
+	                        </button>
+	                        @SnippetStart("modals")
+	                        <!-- Modal -->
+	                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="popup@(id)" aria-labelledby="myLargeModalLabel">
+	                          <div class="modal-dialog modal-lg" role="document" style="max-width: 670px;">
+	                            <div class="modal-content">
+	                              <div class="modal-header">
+	                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                              </div>
+	                              <div class="modal-body">
+	                              	@if (!string.IsNullOrEmpty(@videoCode)) {  
+	                                	<iframe src="https://player.vimeo.com/video/@(videoCode)" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+	                                	<script type="text/javascript">
+																			$(function() {
+																				$('#popup@(id)').on('hidden.bs.modal', function (e) {
+																				  // do something...
+																				  var source = $('#popup@(id) iframe').attr('src');
+																				  $('#popup@(id) iframe').attr('src','');
+																				  $('#popup@(id) iframe').attr('src',source);																			  
+																				});
+																			});
+																		</script>
+
+
+
+
+	                                } @if (!string.IsNullOrEmpty(@videoYoutubeCode)) {  
+	                                  <iframe class="youtube-content" width="640" height="360" src='https://www.youtube.com/embed/@(videoYoutubeCode)?version=3&enablejsapi=1' frameborder="0" allowfullscreen></iframe>
+
+
+	                                  <script type="text/javascript">
+																			$(function() {
+																				$('#popup@(id)').on('hidden.bs.modal', function (e) {
+																				  // do something...
+																				  $('#popup@(id) iframe.youtube-content').each(function(){
+																            this.contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*')
+																          });
+																				  //$(' video').attr("src", $("#popup@(id) video").attr("src"));
+																				});
+																			});
+																		</script>
+	                                } 
+	                              </div>      
+	                            </div>
+	                          </div>
+	                        </div>
+	                        @SnippetEnd("modals") 
+	                        }                       
+	                        &nbsp;
+
+                      </div>
+                      <div class="services-details">
+                          @if (!string.IsNullOrEmpty(@title)) {                            
+                              <h4>@title</h4>
+                          }
+            							@if (!string.IsNullOrEmpty(@shortDescription)) {  
+                              <p>@shortDescription</p>
+            							}
+            							@if (!string.IsNullOrEmpty(@linkText)) {
+                              <a href='@link'>@linkText</a>
+                          }
+                      </div>
+                  </div>                      
+                  count++;
+          
+                }	
+  				    </div>
+
+          </div>
+      </div>
+   </div>
+</div>
+
+
+} 
+
+@helper RenderAnchor() {
+	if (!string.IsNullOrEmpty(GetString("Item.Title")))
+		{
+		<text>id='@GetString("Item.Title").Replace(" ","-")'</text>
+
+		}
+}
+

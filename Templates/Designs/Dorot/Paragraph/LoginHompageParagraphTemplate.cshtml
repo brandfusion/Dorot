@@ -1,0 +1,48 @@
+﻿@Include("../includes/Razor/GetImage.cshtml")
+@Include("../includes/Razor/VerifyImage.cshtml")
+
+@{
+string title = GetString("Item.Title.Value");
+string description = GetString("Item.Description.Value");
+
+List<LoopItem> ProductsListLoop = GetLoop("Item.Products");
+
+
+}
+
+
+<div class="col-md-12 products-list">
+    
+    <h3 class="title">@title</h3>
+	<p class="description">@description</p>	
+
+	@foreach (var element in ProductsListLoop)
+    {
+    	string titleProduct = element.GetString("Item.Products.Title"),
+    	       shortDescriptionProduct = element.GetString("Item.Products.Short_Description"),
+    	       imageLink= element.GetString("Item.Products.Image"),
+  			   image = GetImage(imageLink,300, 300);
+  		<div class="row">
+          <div class="product-item">
+            
+            @if(!string.IsNullOrWhiteSpace(image)) {
+              <div class="col-md-3 col-xs-12">
+                <img class="img-responsive" src="@image"/>
+              </div>
+              <div class="col-md-9 col-xs-12">  
+                <h4>@titleProduct</h4>
+                <div class="shortDescription">@shortDescriptionProduct</div>
+              </div>
+            } else {
+              <div class="col-md-12 col-xs-12">  
+                <h4>@titleProduct</h4>
+                <div class="shortDescription">@shortDescriptionProduct</div>
+              </div>	
+            }
+            <hr />
+            
+          </div>
+  		</div>
+    }  
+          
+</div>

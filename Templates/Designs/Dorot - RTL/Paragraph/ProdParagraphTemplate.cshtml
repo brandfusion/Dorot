@@ -1,0 +1,88 @@
+﻿@* @Include("Custom/GlobalVariables.cshtml") *@
+@Include("../includes/Razor/GetImage.cshtml")
+@Include("../includes/Razor/VerifyImage.cshtml")
+@Include("../includes/PageTemplates/GenericHelper.cshtml")
+
+@{
+string title = GetString("Item.Title.Value");
+string description = GetString("Item.Description.Value");
+
+List<LoopItem> ProductsListLoop = GetLoop("Item.Products");
+
+
+}
+
+
+<div class="col-md-12 products-list">
+
+    @if (GetBoolean("Item.Show_Title.Value") && !string.IsNullOrEmpty(title)) {   
+      <h2 class="title">@title</h2>
+    }
+    @if(!string.IsNullOrEmpty(description)){
+  		<div class="description">@description</div>	
+    }
+
+  	@foreach (var element in ProductsListLoop)
+      {
+      	string titleProduct = element.GetString("Item.Products.Title"),
+      	       shortDescriptionProduct = element.GetString("Item.Products.Short_Description"),
+      	       imageLink= element.GetString("Item.Products.Image"),
+    			     image = GetImage(imageLink,180, 180), 
+               link = element.GetString("Item.Products.Link"),
+               
+               textLinkPDF = element.GetString("Item.Products.TextLinkPDF"),
+               PDF = element.GetString("Item.Products.PDF"),
+               textLinkPDF2 = element.GetString("Item.Products.TextLinkPDF2"),
+               PDF2 = element.GetString("Item.Products.PDF2"),
+               textLinkPDF3 = element.GetString("Item.Products.TextLinkPDF3"),
+               PDF3 = element.GetString("Item.Products.PDF3"),
+               textLinkPDF4 = element.GetString("Item.Products.TextLinkPDF4"),
+               PDF4 = element.GetString("Item.Products.PDF4"),
+               noImage = "/Files/Images/Dorot/no_image.png";
+    		
+        <div class="product-item col-xs-12">
+            
+            <div class="col-md-3 col-xs-12">
+        				@if(!string.IsNullOrWhiteSpace(image)){
+        					<img class="img-responsive" src="@image" alt="@titleProduct"/>
+        				} 
+
+                @if(!string.IsNullOrWhiteSpace(PDF) || !string.IsNullOrWhiteSpace(PDF2) || !string.IsNullOrWhiteSpace(PDF3) || !string.IsNullOrWhiteSpace(PDF4)) {
+                  <div class="button-pdf">
+                    @if(!string.IsNullOrWhiteSpace(PDF) && !string.IsNullOrWhiteSpace(textLinkPDF)) {
+                      <p><a href='@PDF' target="_blank" class="btn btn-primary">@textLinkPDF</a></p>
+                      @*  <p class="btn-primary">@RenderDownloadLink(@PDF,@Translate("Brochure","Download Brochure"))</p> *@
+                    }
+
+                    @if(!string.IsNullOrWhiteSpace(PDF2) && !string.IsNullOrWhiteSpace(textLinkPDF2)) {
+                      <p><a href='@PDF2' target="_blank" class="btn btn-primary">@textLinkPDF2</a></p>
+                      @*  <p class="btn-primary">@RenderDownloadLink(@PDF2,@Translate("Brochure","Download Brochure"))</p> *@
+                    }
+
+                    @if(!string.IsNullOrWhiteSpace(PDF3) && !string.IsNullOrWhiteSpace(textLinkPDF3)) {
+                      <p><a href='@PDF3' target="_blank" class="btn btn-primary">@textLinkPDF3</a></p>
+                      @*  <p class="btn-primary">@RenderDownloadLink(@PDF2,@Translate("Brochure","Download Brochure"))</p> *@
+                    }
+
+                    @if(!string.IsNullOrWhiteSpace(PDF4) && !string.IsNullOrWhiteSpace(textLinkPDF4)) {
+                      <p><a href='@PDF4' target="_blank" class="btn btn-primary">@textLinkPDF4</a></p>
+                      @*  <p class="btn-primary">@RenderDownloadLink(@PDF2,@Translate("Brochure","Download Brochure"))</p> *@
+                    }
+                  </div>
+                }
+
+            </div>
+            
+            <div class="col-md-9 col-xs-12">  
+              <h2>@titleProduct</h2>
+              <div class="shortDescription">@shortDescriptionProduct</div>
+                @if(!string.IsNullOrWhiteSpace(link)) {
+                <a href="@link" alt="@titleProduct"><span>@Translate("readMore", "Read more") <span style="display:none">@titleProduct</span></span></a>
+              }
+              
+            </div>
+
+        </div><!--End of product-item DIV-->
+    }  
+          
+</div>

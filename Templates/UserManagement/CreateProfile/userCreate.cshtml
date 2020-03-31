@@ -1,0 +1,186 @@
+﻿<h2>Create new user</h2>
+@foreach (LoopItem i in GetLoop("FormValidationErrors")){
+@i.GetValue("HeaderStart")
+<div id="errormessages">
+    <ul>
+        @i.GetValue("HeaderEnd")
+        <li>Error in the input field "@i.GetValue("UserManagement:User.FormValidationError.FieldNiceName")": <a href="javascript:document.getElementById('@i.GetValue("UserManagement:User.FormValidationError.FieldName")').focus();">@i.GetValue("UserManagement:User.FormValidationError.Message")</a></li>
+        @i.GetValue("FooterStart")
+    </ul>
+</div>
+@i.GetValue("FooterEnd")
+}
+@GetValue("UserManagement:User.FormStart")
+
+
+
+<div class="col-md-12 formtable">
+    <div class="row fieldRow form-group">
+        <div class="col-md-6 labelCell" id="NameForUser">
+            <label for="UserManagement_Form_Name"><!--@Translate(Name, "Name")--></label>
+        </div>    
+        <div class="col-md-6"> 
+        <input name="UserManagement_Form_Name" type="text" id="UserManagement_Form_Name" class="form-control" required/>
+           @*  @GetValue("UserManagement:User.Name.Input") *@
+        </div> 
+    </div><!--End of row-->
+   
+    <div class="row fieldRow form-group">
+        <div class="col-md-6 labelCell">
+             <label for="UserManagement_Form_Company"><!--@Translate(Company, "Company")--></label>: 
+        </div>
+        <div class="col-md-6">
+        <input name="UserManagement_Form_Company" type="text" id="UserManagement_Form_Company" class="form-control" required/>
+            @* @GetValue("UserManagement:User.Company.Input") *@
+        </div>
+    </div><!--End of row-->
+    
+    <div class="row fieldRow form-group">
+        <div class="col-md-6 labelCell">
+             <label for="UserManagement_Form_CountryCode"><!--@Translate(CountryOfOrigin, "Country of origin")--></label>: 
+        </div>
+        <div class="col-md-6">
+            <select id="UserManagement_Form_CountryCode" name="UserManagement_Form_CountryCode" class="form-control">
+                
+                @foreach (LoopItem i in GetLoop("UserManagement.CountryList")){
+                <option value="@i.GetValue("Country.Code2")">@i.GetValue("Country.Name")</option>
+                }
+            </select>
+        </div>
+    </div><!--End of row-->
+
+    
+   
+    <div class="row fieldRow form-group">
+        <div class="col-md-6 labelCell">
+             <label for="UserManagement_Form_Department"><!--@Translate(Department, "Department")-->:</label> 
+        </div>
+        <div class="col-md-6">
+        <input name="UserManagement_Form_Department" type="text" id="UserManagement_Form_Department" class="form-control" required/>
+            @* @GetValue("UserManagement:User.Department.Input") *@
+        </div>
+    </div><!--End of row-->
+
+    <div class="row fieldRow form-group">
+        <div class="col-md-6">
+            <label for="UserManagement_Form_Address"><!--@Translate(Address, "Address")-->:</label> 
+        </div>
+        <div class="col-md-6">
+        <input name="UserManagement_Form_Address" type="text" id="UserManagement_Form_Address" class="form-control" />
+            @* @GetValue("UserManagement:User.Address.Input") *@
+        </div>
+    </div><!--End of row-->
+
+    <div class="row fieldRow form-group">
+        <div class="col-md-6">
+            <label for="UserManagement_Form_Zip"><!--@Translate(Zip, "Zip")-->:</label>
+        </div>
+        <div class="col-md-6">
+         <input name="UserManagement_Form_Zip" type="text" id="UserManagement_Form_Zip" class="form-control" />
+            @* @GetValue("UserManagement:User.Zip.Input") *@
+        </div>
+    </div><!--End of row-->
+
+    <div class="row fieldRow form-group">
+        <div class="col-md-6">
+            <label for="UserManagement_Form_Email"><!--@Translate(Email, "Email")-->:</label>
+        </div>
+        <div class="col-md-6">
+        <input name="UserManagement_Form_Email" type="text" id="UserManagement_Form_Email" class="form-control" />
+           @*  @GetValue("UserManagement:User.Email.Input") *@
+        
+        <input name="UserManagement_Form_EmailAllowed"  type="hidden" id="UserManagement_Form_EmailAllowed" value="True" />   
+        </div>
+
+    </div><!--End of row-->
+
+    <div class="row fieldRow form-group">
+        <div class="col-md-6">
+            <label for="UserManagement_Form_Phone"><!--@Translate(Phone, "Phone")-->:</label> 
+        </div>
+        <div class="col-md-6">
+        <input name="UserManagement_Form_Phone" type="text" id="UserManagement_Form_Phone" class="form-control" />
+           @*  @GetValue("UserManagement:User.Phone.Input") *@
+        </div>
+    </div><!--End of row-->
+ 
+     <div class="row fieldRow form-group">
+        <div class="col-md-6">
+             <label for="AccessUser_Field_Of_Interest"><!--@Translate(FieldOfInterest, "Field of Interest")-->:</label> 
+        </div>
+        <div class="col-md-6">
+            <select id="AccessUser_Field_Of_Interest" name="AccessUser_Field_Of_Interest" class="form-control" required>
+              	<option value="NONE" selected>NONE</option>
+              	<option value="FireProtection">Fire Protection</option>
+                <option value="Mining">Mining</option>
+                <option value="Agriculture">Agriculture</option>
+                <option value="WaterTreatment&Filtration">Water-treatment & Filtration</option>
+                <option value="WaterWorks">Water Works</option>
+            </select>
+        </div>
+    </div><!--End of row-->
+
+
+    <div class="row fieldRow form-group">
+        <div class="col-md-6">
+            <label for="UserManagement_Form_UserName"><!--@Translate(Username, "Username")-->:</label> 
+        </div>
+        <div class="col-md-6">
+        <input name="UserManagement_Form_UserName" type="text" id="UserManagement_Form_UserName" class="form-control" />
+            @* @GetValue("UserManagement:User.UserName.Input") *@
+        </div>
+   </div><!--End of row-->
+
+    <div class="row fieldRow form-group">
+        <div class="col-md-6">
+            <label for="UserManagement_Form_NewPassword"><!--@Translate(newpassword, "New password")-->:</label>
+        </div>
+        <div class="col-md-6">
+        <input name="UserManagement_Form_NewPassword" type="text" id="UserManagement_Form_NewPassword" class="form-control" />
+            @* @GetValue("UserManagement:User.NewPassword.Input") *@
+        </div>
+    </div><!--End of row-->
+
+    <div class="row fieldRow form-group">
+        <div class="col-md-6">
+            <label for="UserManagement_Form_NewPasswordConfirm"><!--@Translate(confirmpassword, "Confirm password")-->:</label>
+        </div>
+        <div class="col-md-6">
+        <input name="UserManagement_Form_NewPasswordConfirm" type="text" id="UserManagement_Form_NewPasswordConfirm" class="form-control" />
+            @* @GetValue("UserManagement:User.NewPasswordConfirm.Input") *@
+        </div>
+    </div><!--End of row-->
+
+
+    <div class="row fieldRow form-group">
+        <div class="col-md-6">
+            <label for="UserManagement_Form_JobTitle"><!--@Translate(Position, "Position")-->:</label> 
+        </div>
+        <div class="col-md-6">
+         <input name="UserManagement_Form_JobTitle" type="text" id="UserManagement_Form_JobTitle" class="form-control" required/>
+            @* @GetValue("UserManagement:User.JobTitle.Input") *@
+        </div>
+    </div><!--End of row-->
+
+
+   
+    @foreach (LoopItem i in GetLoop("SelectableGroups")){
+    @i.GetValue("HeaderStart")
+    <div class="row fieldRow form-group">
+        <div class="col-md-6">
+            <!--@Translate(memberof, "Member of")-->:
+        </div>
+        <div class="col-md-6">
+            @i.GetValue("HeaderEnd")
+            @i.GetValue("UserManagement:User.SelectableGroup.Input") 
+            @* <label for='@i.GetValue("UserManagement:User.SelectableGroup.InputName")'>@i.GetValue("UserManagement:User.SelectableGroup.Name")</label></br> *@
+            @i.GetValue("FooterStart")
+        </div>
+    </div><!--End of row-->
+
+    @i.GetValue("FooterEnd")
+    }
+
+
+</div><!--End of col-md 12-->
+<input type="submit" id="submitter" value='<!--@Translate(createnewuser, " Create new user")-->'>@GetValue("UserManagement:User.FormEnd")

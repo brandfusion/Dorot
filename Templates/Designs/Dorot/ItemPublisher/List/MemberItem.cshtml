@@ -1,0 +1,36 @@
+﻿<div class="row person-list">
+  @foreach(LoopItem memberItem in GetLoop("ItemPublisher:Items.List")){
+  	  string name = memberItem.GetString("ItemPublisher:Item.Name.Value");
+      string job = memberItem.GetString("ItemPublisher:Item.Job.Value");
+   	  string image = memberItem.GetString("ItemPublisher:Item.Image.Value");
+  	  string url = memberItem.GetString("ItemPublisher:Item.Url");
+  	
+      @* <div class="col-xs-12 col-sm-6 person-box">
+          <div class="col-xs-6 col-sm-6 col-md-4">
+            <div class="person-img" style="background-image: url(@image)">&nbsp;</div>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-8 person-details">
+              <h3>@name</h3>
+              <p>@job</p>
+              <a href="@url&Purge=true"><span>@Translate("readFullBio","Read full bio") > </span> <span class="pull-right view-more-btn">&nbsp;</span> </a>
+          </div>
+      </div> *@
+
+		<div class="col-xs-12 col-sm-6 person-box">
+			<a href="@url">
+			<div class="media media-person">
+				 <div class="media-left">
+                 <div class="person-img media-object" style="background-image: url(@image)" ></div>
+            </div>
+			<div class="media-body person-details">
+                  <h3>@name</h3>
+                  <p>@job</p>
+                  <span class="read-more-bio">@Translate("readFullBio","Read full bio") > </span>
+              </div>
+			</div>
+		   </a>
+          
+      </div>
+  }
+</div>
+

@@ -1,0 +1,29 @@
+﻿@{
+bool hasFiles = !string.IsNullOrEmpty(GetString("FilepublishList")) ? true : false;
+bool hasFolders = !string.IsNullOrEmpty(GetString("FilepublishFolderList")) ? true : false;
+}
+
+@if(hasFiles || hasFolders){
+<table class="col-xs-12 noPadding evenTable">
+  <thead>
+    <tr>
+      <th colspan="2"><b>@Translate("File","File")</b></th>
+      <th align="right" style="text-align: right;"><b>@Translate("File Size","Size")</b></th>    
+      <th align="right" style="text-align: right;"><b>@Translate("File Date","Date")</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    @GetValue("FilepublishList")
+  </tbody>
+	
+</table>
+@GetValue("FilepublishUpload")
+
+} else {
+
+<div>
+	@Translate("notyetfilesorfolder","For viewing these documents, please contact Dorot Application Engineering Team . Our expert engineers will provide you with the necessary information for your custom-made solutions.") <a href="Default.aspx?ID=497" class="btn btn-primary">Contact Dorot Experts</a>
+</div>
+
+}
+

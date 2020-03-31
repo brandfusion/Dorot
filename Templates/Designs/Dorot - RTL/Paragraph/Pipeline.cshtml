@@ -1,0 +1,150 @@
+﻿@{
+    int count = 1;
+    string drug = !string.IsNullOrEmpty(GetString("Item.Drug.Value")) ? GetString("Item.Drug.Value") : "";            
+    string description = !string.IsNullOrEmpty(GetString("Item.Description.Value")) ? GetString("Item.Description.Value") : "";      
+
+
+    <div class="pipeline-item" @RenderAnchor()> 
+		
+        <div class="hidden-lg hidden-md hidden-sm visible-xs accordion-list">                
+            <div class="item">
+                <div class="drug"> @drug</div>
+                <div class="view-more">
+                    <a href="javascript:void(0)" class="view-more-btn">&nbsp;</a>
+                </div>
+                <div class="description box-details">
+                    @description    
+                </div>
+            </div>
+        </div>
+		
+		
+		<div class="visible-lg visible-md visible-sm hidden-xs drug"> @drug</div>
+        <div class="pipeline-list">                        
+            @foreach(LoopItem pipelineParams in GetLoop("Item.Pipeline_List")) {  
+                string indication = !string.IsNullOrEmpty(pipelineParams.GetString("Item.Pipeline_List.Indication.Value")) ? pipelineParams.GetString("Item.Pipeline_List.Indication.Value") : "";   
+                string modality = !string.IsNullOrEmpty(pipelineParams.GetString("Item.Pipeline_List.Modality.Value")) ? pipelineParams.GetString("Item.Pipeline_List.Modality.Value") : "";                                    
+                
+					<div class="indication"><label class="hidden-lg hidden-md hidden-sm visible-xs ">Indication</label> <span>@indication</span></div>
+					<div class="modality"><label class="hidden-lg hidden-md hidden-sm visible-xs">Modality</label> <span>@modality</span></div>
+                    
+					<div class="columns">
+                        @if(pipelineParams.GetString("Item.Pipeline_List.List.Value") == "clinical") { 							
+							<div class="visible-lg visible-md visible-sm hidden-xs purple-line">&nbsp;</div>
+							<div class="hidden-lg hidden-md hidden-sm visible-xs purple-line-mobile">
+                                <label>
+                                    <span></span><span></span><span></span><span class="purple-square"></span>
+                                </label>
+                                <span>Marketed</span>
+                            </div> 														  							
+                        }
+						@if(pipelineParams.GetString("Item.Pipeline_List.List.Value") == "clinicalFull") { 							
+							<div class="visible-lg visible-md visible-sm hidden-xs purple-line-full">&nbsp;</div>
+							<div class="hidden-lg hidden-md hidden-sm visible-xs purple-line-full-mobile">
+                                <label>
+                                    <span></span><span></span><span></span><span class="purple-square"></span>
+                                </label>
+                                <span>Marketed</span>
+                            </div>							
+                        }
+
+
+                        @if(pipelineParams.GetString("Item.Pipeline_List.List.Value") == "lateDiscovery") { 							
+                            <div class="visible-lg visible-md visible-sm hidden-xs dark-blue-line">&nbsp;</div> 								
+							<div class="hidden-lg hidden-md hidden-sm visible-xs dark-blue-line-mobile">
+								<label>
+									<span></span><span></span><span class="dark-blue-square"></span><span></span>
+								</label>
+								<span>Clinical</span>
+							</div>
+							
+                        }
+						@if(pipelineParams.GetString("Item.Pipeline_List.List.Value") == "lateDiscoveryFull") { 							
+                            <div class="visible-lg visible-md visible-sm hidden-xs dark-blue-line-full">&nbsp;</div> 							
+							<div class="hidden-lg hidden-md hidden-sm visible-xs dark-blue-line-full-mobile">
+								<label>									
+									<span></span><span></span><span class="dark-blue-square"></span><span></span>
+								</label>
+								<span>Clinical</span>
+							</div>
+							
+                        }
+
+
+                        @if(pipelineParams.GetString("Item.Pipeline_List.List.Value") == "earlyDiscovery") {							
+                            <div class="visible-lg visible-md visible-sm hidden-xs blue-line">&nbsp;</div> 							
+							<div class="hidden-lg hidden-md hidden-sm visible-xs blue-line-mobile">
+								 <label>
+									<span></span><span class="blue-square"></span><span></span><span></span>
+								</label>
+                                <span>Preclinical</span>
+							</div>
+							
+                        }
+						@if(pipelineParams.GetString("Item.Pipeline_List.List.Value") == "earlyDiscoveryFull") {							
+                            <div class="visible-lg visible-md visible-sm hidden-xs blue-line-full">&nbsp;</div> 							
+							<div class="hidden-lg hidden-md hidden-sm visible-xs blue-line-full-mobile">
+								 <label>
+									<span></span><span class="blue-square"></span><span></span><span></span>
+								</label>
+								<span>Preclinical</span>
+							</div>
+							
+                        }
+
+
+                        @if(pipelineParams.GetString("Item.Pipeline_List.List.Value") == "exploratory") { 							
+                            <div class="visible-lg visible-md visible-sm hidden-xs light-blue-line">&nbsp;</div>
+							<div class="hidden-lg hidden-md hidden-sm visible-xs light-blue-line-mobile">
+                                <label>
+									<span class="light-blue-square"></span><span></span><span></span><span></span>
+								</label>
+                                <span>Discovery</span>	
+							</div>
+                        } 
+						@if(pipelineParams.GetString("Item.Pipeline_List.List.Value") == "exploratoryFull") { 							
+                            <div class="visible-lg visible-md visible-sm hidden-xs light-blue-line-full">&nbsp;</div>								
+							<div class="hidden-lg hidden-md hidden-sm visible-xs light-blue-line-full-mobile">
+                                <label>
+									<span class="light-blue-square"></span><span></span><span></span><span></span>
+								</label>
+                                <span>Discovery</span>	
+							</div>
+							
+                        }
+
+						
+
+                    </div>                 
+                
+                count++;
+            }
+        </div>
+        <div class="visible-lg visible-md visible-sm hidden-xs accordion-list">                
+            <div class="item">
+                <div class="view-more">
+                    <a href="javascript:void(0)" class="view-more-btn">&nbsp;</a>
+                </div>
+                <div class="description box-details">
+                    @description    
+                </div>
+            </div>
+        </div>
+        
+    </div>  
+}
+    
+@helper RenderAnchor() {
+	if (!string.IsNullOrEmpty(GetString("Item.Title")))
+		{
+		<text>id='@GetString("Item.Title").Replace(" ","-")'</text>
+
+		}
+}
+  
+  
+
+
+  
+  
+

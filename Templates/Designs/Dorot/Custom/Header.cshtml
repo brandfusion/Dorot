@@ -1,0 +1,119 @@
+﻿@using Dynamicweb.Content.Items;
+@using System
+@{
+//Define the pageURL to avoid parsing of #
+	string pageURL = GetGlobalValue("Global:Pageview.Url");
+	//Define ItemArea object
+	Dynamicweb.Content.Items.Item itemArea = Pageview.Area.Item;
+	//read settingsPageID from Area
+  	//string settingsPageId = itemArea["SettingsPageId"].ToString();
+	//Define an empty item object for Settings
+	Dynamicweb.Content.Items.Item generalSettings;
+	string menu = "";
+	IEnumerable<ItemEntry> menuItems = Enumerable.Empty<ItemEntry>();
+	
+    @*if(!string.IsNullOrEmpty(settingsPageId)){
+        int generalSettingsPage = Int32.Parse(settingsPageId.ToString());
+        generalSettings = Dynamicweb.Content.Items.Item.GetItemById("Settings", Dynamicweb.Extensibility.ServiceLocator.Current.GetPageService().GetPage(generalSettingsPage).ItemId);
+        //Get the relations list
+        menu = generalSettings["Menu"] != null ? generalSettings["Menu"].ToString() : "";
+        int itemListID;
+        if (int.TryParse(menu, out itemListID)) {
+            //Get the relations list objsect based on the ID of the relations list
+            var itemList = ItemList.GetItemListById(itemListID);
+            //get a list of Items objects from the Relation
+            menuItems = itemList.Relations;
+        }
+    }*@
+
+
+//string HtmlMenu = GetString("Item.Page.HTML_Menu");
+//string HtmlMobileMenu = GetString("Item.Page.HTML_Mobile_Menu");
+string TopMenuParentPage = GetString("Item.Area.TopMenuPageId");
+string topnavigation = RenderNavigation(new
+{
+    template = "LIClean.xslt",
+    id = "topnavigation2",
+    expandmode = "all",
+    parentid = TopMenuParentPage,
+    startlevel = 1,
+    endlevel = 3
+});
+
+
+string homePageLink =  "/Default.aspx?ID="+ GetString("DwAreaFirstActivePageID");
+}
+
+@* <div class="opacity-box-header">&nbsp;</div> *@
+<header class="header @drawer">
+	<div class="top-header hidden-xs">			
+	    <div class="container">
+	      <div class="row">
+	         
+
+	        <div class="col-xs-12">
+	          <nav role="navigation" aria-labelledby="nav1">
+	 			
+				<div id="nav1">
+	           
+			            @Include("CountryNavigation.cshtml")
+			            @if(!string.IsNullOrEmpty(GetString("DW_extranet_AccessUserEmail")) ) {
+			 				<ul>
+				 				<li>
+				 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;@GetString("DW_extranet_AccessUserEmail")<a href="/Admin/Public/ExtranetLogoff.aspx"> Logout</a></span>
+
+
+				 				</li>		 				
+			 				</ul>
+			 				}else{
+							<ul>
+								<li>
+									<a  href="/Default.aspx?ID=532">Login</a>
+								</li>
+							</ul>
+			 			}
+			            @topnavigation
+				</div>
+	            	                 
+			  </nav> 
+	          
+	        </div>
+	        
+	    </div>
+	  </div>
+	</div>
+	<button type="button" class="hidden-lg hidden-md hidden-sm mobile-menu-trigger noPrint"><i class="fa fa-bars"></i></button>
+	
+	<div class="main-menu">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="row">
+						<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 logo">
+							<a href='@homePageLink' alt="Dorot" style="display: block;">
+							    <h1><img src='@Pageview.Area.Item["Logo"]' alt="Dorot" class="img-responsive"/></h1>
+							</a>
+						</div>
+	          			<div role="navigation" aria-labelledby="nav2">
+
+			          			
+				          			<div class="col-xs-6 col-sm-9 col-md-9 col-lg-10">															
+										
+										<nav id="nav2">
+										  <ul class="dwnavigation pageLevel1 nav navbar-nav" id="megaMenu" data-settings="startlevel:1;endlevel:4;template:LiCleanBootstrapDropdown.xslt;expandmode:all;"></ul>							
+										</nav>
+
+									</div>
+									<div class="col-xs-12 hidden-lg hidden-md mobile-nav">			
+										<ul class="dwnavigation" id="drawernavigationMobile" data-settings="startlevel:1;endlevel:3;template:LiCleanBootstrapDropdownMobile.xslt;expandmode:all;"></ul>
+				                        @Include("CountryNavigation-mobile.cshtml")
+									</div>
+								
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>

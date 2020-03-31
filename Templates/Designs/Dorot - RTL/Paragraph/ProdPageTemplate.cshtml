@@ -1,0 +1,133 @@
+@MasterPageFile("Master.cshtml")
+@GetValue("Title(Content page)")
+@GetValue("Description(Content page)")
+@using System;
+@Include("includes/Razor/GetImage.cshtml")
+@Include("includes/Razor/VerifyImage.cshtml")
+@Include("includes/PageTemplates/GenericHelper.cshtml")
+@Include("Custom/HeaderImage.cshtml")	
+@{	
+string titlePage = GetString("Item.Title.Value");
+string imagePage = GetImage(GetString("Item.Image.Value"),400, 400);
+string technicalS = GetString("Item.Technical_Specifications.Value");
+string purchaseS = GetString("Item.Purchase_Specification.Value");
+string materialsList = GetString("Item.MaterialsList.Value");
+string installationG = GetString("Item.Installation_Guide.Value");
+string designTS = GetString("Item.DesignAndTestStandards.Value");
+
+List<LoopItem> caseStudiesLoop = GetLoop("Item.Case_Studies");
+List<LoopItem> certificationsLoop = GetLoop("Item.Certifications2");
+List<LoopItem> galerieImaginiLoop = GetLoop("Item.GalerieImagini");
+}
+<div class="container">
+	<div class="row">
+				<div class="col-md-12">
+              		<ul class="dwnavigation breadcrumb" id="breadcrumbs" data-settings="template:Breadcrumb.xslt;startlevel:1;endlevel:3;expandmode:PathOnly"></ul>
+         		</div>
+    </div>
+</div>
+<div class="white-box white-box-content">
+	<div class="container">
+    <div class="row">
+      
+        <div class="col-md-12 col-sm-12 col-xs-12">
+           <h1>@titlePage</h1>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12" id="productimage">
+          <img src="@imagePage" alt="@titlePage" class="img-responsive"/>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12" id="overview">
+          
+            
+            <div class="row"><div class="dwcontent" id="overviewcontent" title="Content overview"></div></div>
+         
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12" id="download">
+          <h4 class="title">@Translate("Downloads","Downloads")</h4>
+
+          @RenderDownloadLink(@technicalS,@Translate("TechnicalSpecification","Technical Specifications")) 
+          @RenderDownloadLink(@purchaseS,@Translate("PurchaseSpecification","Purchase Specification")) 
+          @RenderDownloadLink(@materialsList,@Translate("MaterialsList","Materials List")) 
+          @RenderDownloadLink(@installationG,@Translate("InstallationGuide","Installation Guide"))
+          @RenderDownloadLink(@designTS,@Translate("DesignAndTestStandards","Design And Test Standards"))   
+        </div>
+
+        <div class="dwcontent" id="maincontent" title="Content full width"></div>
+        @if(caseStudiesLoop.Count() > 0){
+              int caseStudiesLoopHalf = (caseStudiesLoop.Count() / 2) + 1;
+              <div class="col-md-12 col-sm-12 col-xs-12" id="casestudies">
+                <h3 class="dw-section-title">@Translate("CaseStudies","Case studies")</h3>
+              </div>
+            <ul class="studies-box col-md-6">
+              @foreach(var element in caseStudiesLoop) {      
+                string titleCS = element.GetString("Item.Case_Studies.Title");
+                string imageCS = element.GetString("Item.Case_Studies.Image");
+                int counterCer = element.GetInteger("Item.Certifications2.LoopCounter");
+                <li>
+                  <p>@titleCS</p>     
+                </li>
+                @ResetElement("ul",counterCer,caseStudiesLoopHalf,"studies-box col-md-6")
+              } 
+            </ul>
+      
+        }
+        @if(certificationsLoop.Count() > 0) {
+          int certificationsLoopHalf = (certificationsLoop.Count() / 2) + 1;
+          <div class="col-md-12 col-sm-12 col-xs-12" id="certifications">
+            <h3 class="dw-section-title">@Translate("Certifications","Certifications")</h3>
+          </div>
+          <ul class="studies-box col-md-6"> test
+            @foreach(var element in certificationsLoop) {     
+              string titleCer = element.GetString("Item.Certifications2.Title");
+              string imageCer = element.GetString("Item.Certifications2.Image");
+              string imageCerResized = GetImage(imageCer,50, 50);
+              string linkCer = element.GetString("Item.Certifications2.File.Value");
+              int counterCer = element.GetInteger("Item.Certifications2.LoopCounter");
+    
+              <li>
+                <div class="media">
+                  <div class="media-left"><img src="@imageCerResized" alt="" class="img-responsive media-object" /></div>
+                  <div class="media-right"><a href="@linkCer" target="_blank"><p>@titleCer</p></a></div>
+                  </div>
+              </li>
+              @ResetElement("ul",counterCer,certificationsLoopHalf,"studies-box col-md-6")    
+            }
+          </ul>
+        }
+
+    </div>
+
+<div class="row">
+ 
+    <div class="col-md-12">
+        <div class="owl-carousel owl-theme"> 
+
+@if(certificationsLoop.Count() > 0) {
+
+        
+              foreach(LoopItem element in galerieImaginiLoop) {    
+
+              string titleImg = element.GetString("Item.GalerieImagini.Title.Value");
+              string imageGalerie = GetImage(element.GetString("Item.GalerieImagini.Image.Value"),300, 300);  
+                
+                    <div class="item">
+                      <a class="single_image" href="" rel="">
+                        @titleImg<br />
+                        <img src='@imageGalerie' alt="" class="img-responsive" />
+                      </a>
+                    </div>
+
+                
+              } 
+         
+      
+    }
+
+
+
+    </div> <!-- end of owl -->    
+  </div>    
+</div>
+
+	</div>
+</div>
