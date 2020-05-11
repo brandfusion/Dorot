@@ -60,7 +60,7 @@
 
         <form method="post" action="@formAction" enctype="multipart/form-data" class="@formCssClass" id="@formId" onsubmit="@formOnSubmit">
             @formSystemFields
-            <table class="formtable">
+            <div class="formtable">
                 @if (formColumnShiftFormFieldID > 0)
                 {
                     @GetStartTable();
@@ -125,7 +125,7 @@
                 {
                     @GetEndTable();
                 }
-            </table>
+            </div>
         </form>
     }
 }
