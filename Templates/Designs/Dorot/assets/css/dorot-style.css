@@ -68,20 +68,20 @@ textarea {
   background: #337ab7;
 }
 
-.formtable {
+.formtable.custom {
   display: grid;
   grid-template-columns: 30% 1fr;
   width: 50%;
   grid-row-gap: 10px;
 }
 
-.formtable label {
+.formtable.custom label{
   grid-column-start: 1;
   grid-column-end: 2;
 }
 
 @media (max-width: 480px) {
-  .formtable {
+  .formtable.custom {
     width: 100%;
     grid-template-columns: 100%;
     grid-row-gap: 5px;
