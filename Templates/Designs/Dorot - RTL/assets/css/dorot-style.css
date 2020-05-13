@@ -54,6 +54,41 @@ textarea {
 .media {
   margin-top: 0; }
 
+
+#submitter {
+  display: inline-block;
+  width: auto;
+  line-height: 1.5;
+  padding: 7px 20px;
+  margin: 0 auto;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  border-radius: 5px;
+  text-transform: uppercase;
+  background: #337ab7;
+}
+
+.formtable.custom {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  width: 50%;
+  grid-row-gap: 10px;
+}
+
+.formtable.custom label{
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+  
+  @media (max-width: 480px) {
+    .formtable.custom {
+      width: 100%;
+      grid-template-columns: 100%;
+      grid-row-gap: 5px;
+    }
+  }
+
 /*padding and margin */
 .padding-xs { padding: .25em; }
 .padding-sm { padding: .5em; }
@@ -635,10 +670,16 @@ nav ul li.dropdown:hover ul {
     line-height: 1.5;
     margin: 0;
     padding: 13px 0 13px 15px; }
-    .top-header a:hover {
+    .top-header a:hover,
+    .top-header a:focus {
       color: #0098dc !important; }
     .top-header ul ul li a {
       padding: 1px 5px;
+    }
+    
+
+    .top-header nav ul li a:focus {
+      color: #0098dc !important;
     }
     @media (min-width: 768px) and (max-width: 991px) {
       .top-header a {
@@ -651,8 +692,12 @@ nav ul li.dropdown:hover ul {
   .top-header a.global-sites {
     padding: 13px 15px;
     color: #001A72 !important; }
-    .top-header a.global-sites:hover {
+
+
+    .top-header a.global-sites:hover,
+    .top-header a.global-sites:focus {
       color: #0098dc !important; }
+
     @media (min-width: 768px) and (max-width: 991px) {
       .top-header a.global-sites {
         padding: 11px 15px 10px; } }
@@ -2632,6 +2677,15 @@ footer nav ul.footer-menu {
       background: none !important;
       font-weight: 600 !important;
       color: #3F68A1; }
+
+
+      .pagination li span:hover,
+      .pagination li span:focus {
+        font-weight: 700 !important;
+        color: #2d2c2b!important;
+      }
+
+
   .pagination .active {
     font-weight: 600; }
   .pagination span:hover {
@@ -3935,6 +3989,13 @@ ul.studies-box li .media-right {
     padding: 2px;
     border: 1px solid #e0e0e0;}
 
+    .studies-box h2.panel-title.case-studies {
+      display: block;
+      min-height: 60px;
+      font-size: 1em !important;
+      line-height: 1.4;
+      font-weight: 300;
+  }
 
 .certification-box {
   margin: 30px 0 0 0; }

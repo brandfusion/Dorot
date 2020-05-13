@@ -340,7 +340,8 @@ li.drop ul.pageLevel2 li:hover {
 #secondNavigation ul.nav > li.darkBlue > a:first-child {background: #026eb2;}
 
 
-#secondNavigation ul.nav > li > a:hover {
+#secondNavigation ul.nav > li > a:hover,
+#secondNavigation ul.nav > li > a:focus  {
   background-color: #061772;
 }
 #secondNavigation ul.nav > li.active {
