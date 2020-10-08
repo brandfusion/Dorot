@@ -1,0 +1,153 @@
+@MasterPageFile("Master.cshtml")
+@GetValue("Title(Content page)")
+@GetValue("Description(Content page)")
+@using System;
+@Include("includes/Razor/GetImage.cshtml")
+@Include("includes/Razor/VerifyImage.cshtml")
+@Include("includes/PageTemplates/GenericHelper.cshtml")
+@Include("Custom/HeaderImage.cshtml")	
+<div class="container">
+  <div class="row">
+    @searchElement()
+    @breadcrumbs()
+  </div>
+</div>
+<div class="white-box white-box-content">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9 col-sm-12 col-xs-12" id="FormContainer">
+				<h2>@Translate("Untility Field person")</h2>
+				<form class="form-horizontal" id="personSavings">
+					@formField("12", "3", "CPH", Translate("Cost per hour"), "number", string.Empty, "$")
+					@formField("12", "3", "NumberOfTechnicians", Translate("Number"), "number", string.Empty, string.Empty)
+					@formField("12", "3", "AverageTime", Translate("Average time (h/week)"), "number", string.Empty, string.Empty)
+                    @formFieldReadonly("12", "3", "totalSavings", Translate("Total savings per year"), "text", string.Empty, string.Empty)
+				</form>
+			</div>
+			@downloadsMenu()
+		</div>
+	</div>
+</div>
+
+@*helpers  *@
+@helper searchElement(){
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="search-box col-md-4 pull-right">
+      <form action="/search" method="GET" role="search">
+        <div class="form-group">
+          <input type="text" name="q" id="q" aria-label="search" autocomplete="off" spellcheck="false" placeholder='@Translate("findYourSolution", "Find your solution")' class="form-control">
+          <button type="submit"><i class="fa fa-search" aria-hidden="true"></i><span style="display:none">text</span></button>
+          @* <div class="instant_search"></div> *@
+        </div>
+      </form>
+    </div>
+  </div>
+}
+@helper breadcrumbs()
+{
+  <div class="col-md-12">
+    <ul class="dwnavigation breadcrumb" id="breadcrumbs" data-settings="template:Breadcrumb.xslt;startlevel:1;endlevel:3;expandmode:PathOnly"></ul>
+  </div>
+}
+@helper downloadsMenu()
+{
+	string titlePage = GetString("Item.Title.Value");
+	string imagePage = GetImage(GetString("Item.Image.Value"),400, 400);
+	string productCatalog = GetString("Item.ProductCatalog.Value");
+	string technicalS = GetString("Item.Technical_Specifications.Value");
+	string installationG = GetString("Item.Installation_Guide.Value");
+	string iom = GetString("Item.IOM.Value");
+	string multimedia = GetString("Item.Multimedia.Value");
+	string purchaseS = "http://" + GetGlobalValue("Global:Request.Host") + "/engineering-hub/engineers-library/purchase-specifications?Folder=%2F"+titlePage;
+	string troubleshootGuide = "http://" + GetGlobalValue("Global:Request.Host") + "/engineering-hub/engineers-library/troubleshoot-guides?Folder=%2F"+titlePage;
+	string dataSheets ="http://" + GetGlobalValue("Global:Request.Host") + "/engineering-hub/engineers-library/data-sheets?Folder=%2F"+titlePage;
+	string cadFiles ="http://" + GetGlobalValue("Global:Request.Host") + "/engineering-hub/engineers-library/cad-library?Folder=%2F"+titlePage;
+	string designTS = GetString("Item.DesignAndTestStandards.Value");
+
+	List<LoopItem> caseStudiesLoop = GetLoop("Item.Case_Studies");
+	List<LoopItem> certificationsLoop = GetLoop("Item.Certifications2");
+	List<LoopItem> galerieImaginiLoop = GetLoop("Item.GalerieImagini");
+<div class="col-md-3 col-sm-12 col-xs-12 group-btn" id="download">
+	<h2 class="title">@Translate("Downloads", "Downloads")</h2>
+	@if (!string.IsNullOrEmpty(productCatalog))
+	{
+		<div class="catalog-btn" title="pdf">@RenderDownloadLink(@productCatalog, @Translate("ProductCatalog", " Product Catalog"))</div>
+	}
+	@if (!string.IsNullOrEmpty(technicalS))
+	{
+		<div class="technicalS-btn">@RenderDownloadLink(@technicalS, @Translate("TechnicalSpecification", "Technical Specifications"))</div>
+	}
+	@if (!string.IsNullOrEmpty(installationG))
+	{
+		<div class="installationG-btn">@RenderDownloadLink(@installationG, @Translate("InstallationGuide", "Installation Guide"))</div>
+	}
+	@if (!string.IsNullOrEmpty(iom))
+	{
+		<div class="iom-btn">@RenderDownloadLink(@iom, @Translate("IOM", "IOM"))</div>
+	}
+	@if (!string.IsNullOrEmpty(multimedia))
+	{
+		<div class="multimedia-btn">@RenderDownloadLink(@multimedia, @Translate("multimedia", "Multimedia"))</div>
+	}
+	@if (!string.IsNullOrEmpty(purchaseS))
+	{
+		<div class="purchaseS-btn">@RenderDownloadLink(@purchaseS, @Translate("PurchaseSpecification", "Purchase Specification"))</div>
+	}
+	@if (!string.IsNullOrEmpty(troubleshootGuide))
+	{
+		<div class="troubleshootGuide-btn">@RenderDownloadLink(@troubleshootGuide, @Translate("TroubleshootGuide", "Troubleshoot Guide"))</div>
+	}
+	@if (!string.IsNullOrEmpty(dataSheets))
+	{
+		<div class="dataSheets-btn">@RenderDownloadLink(@dataSheets, @Translate("dataSheets", "Data Sheets"))</div>
+	}
+	@if (!string.IsNullOrEmpty(cadFiles))
+	{
+		<div class="cadFiles-btn">@RenderDownloadLink(@cadFiles, @Translate("cadFiles", "Cad Files"))</div>
+	}
+	@if (!string.IsNullOrEmpty(designTS))
+	{
+		<div class="designTS-btn">@RenderDownloadLink(@designTS, @Translate("DesignAndTestStandards", "Design And Test Standards"))</div>
+	}
+</div>
+}
+@helper formField (string xsSize, string smSize, string id, string label, string type, string extraCss, string placeholder )
+{
+	var xsColumns = "col-xs-" + xsSize;
+	var smColumns = "col-sm-" + smSize;
+	<div class="@xsColumns @smColumns">
+		<label for="@id">@label</label>
+		<input type="@type" class="form-control @extraCss" id="@id" placeholder="@placeholder" name="@id" required="true">
+	</div>
+	
+}
+@helper formFieldReadonly (string xsSize, string smSize, string id, string label, string type, string extraCss, string placeholder )
+{
+	var xsColumns = "col-xs-" + xsSize;
+	var smColumns = "col-sm-" + smSize;
+	<div class="@xsColumns @smColumns">
+		<label for="@id">@label</label>
+		<input type="@type" class="form-control @extraCss" id="@id" placeholder="@placeholder" readonly="readonly">
+	</div>
+	
+}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+
+    $("#AverageTime,#NumberOfTechnicians, #CPH").change(
+        function(event) {
+            var cph = $("#CPH").val();
+            var numberOfTechnicians = $("#NumberOfTechnicians").val();
+            var averageTime = $("#AverageTime").val();
+            event.preventDefault();
+            if (cph != "" && numberOfTechnicians != "" && averageTime != "") {
+	            var totalSavingsRaw = cph * numberOfTechnicians * averageTime * 52;
+	            var totalSavings = totalSavingsRaw + "$";
+                $("#totalSavings").val(totalSavings);
+            }
+        }
+    );
+
+</script>
+
+
