@@ -16,12 +16,22 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9 col-sm-12 col-xs-12" id="FormContainer">
-				<h2>@Translate("Untility Field person")</h2>
+				<h4 class="scenarioSubtitle">@Translate("Utility Field Person")</h4>
 				<form class="form-horizontal" id="personSavings">
-					@formField("12", "3", "CPH", Translate("Cost per hour"), "number", string.Empty, "$")
-					@formField("12", "3", "NumberOfTechnicians", Translate("Number"), "number", string.Empty, string.Empty)
-					@formField("12", "3", "AverageTime", Translate("Average time (h/week)"), "number", string.Empty, string.Empty)
-                    @formFieldReadonly("12", "3", "totalSavings", Translate("Total savings per year"), "text", string.Empty, string.Empty)
+						@formField("12", "3", "CPH", Translate("Cost per hour"), "number", string.Empty, "$")
+						@formField("12", "3", "NumberOfTechnicians", Translate("Number"), "number", string.Empty, string.Empty)
+						@formField("12", "3", "AverageTime", Translate("Average time (h/week)"), "number", string.Empty, string.Empty)
+						@formFieldReadonly("12", "3", "totalSavings", Translate("Total savings per year"), "text", string.Empty, string.Empty)
+					</form>
+				<h4 class="scenarioSubtitle">@Translate("Utility Field Person - Transportation")</h4>
+				<form class="form-horizontal" id="personSavingsT">
+						@formField("12", "3", "CPHT", Translate("Cost per hour"), "number", string.Empty, "$")
+						@formField("12", "3", "NumberOfTechniciansT", Translate("Number"), "number", string.Empty, string.Empty)
+						@formField("12", "3", "AverageTimeT", Translate("Average time (h/week)"), "number", string.Empty, string.Empty)
+						@formFieldReadonly("12", "3", "totalSavingsT", Translate("Total savings per year"), "text", string.Empty, string.Empty)
+                        @formFieldReadonly("12" , "4", "totalKmTraveled", Translate("Total Km travelled per year for valve service"), "number", string.Empty, string.Empty)
+						@formField("12" , "4", "truckEmissions", Translate("Truck CO2 emission per Km (in grams)"), "number", string.Empty, string.Empty)
+						@formFieldReadonly("12", "4", "totalEmissions", Translate("Total tons of CO2 emission saved per year"), "text", string.Empty, string.Empty)
 				</form>
 			</div>
 			@downloadsMenu()
@@ -133,7 +143,7 @@
 }
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-
+	//total savings for personel
     $("#AverageTime,#NumberOfTechnicians, #CPH").change(
         function(event) {
             var cph = $("#CPH").val();
@@ -142,12 +152,52 @@
             event.preventDefault();
             if (cph != "" && numberOfTechnicians != "" && averageTime != "") {
 	            var totalSavingsRaw = cph * numberOfTechnicians * averageTime * 52;
-	            var totalSavings = totalSavingsRaw + "$";
-                $("#totalSavings").val(totalSavings);
+	            var totalSavings = "$" + totalSavingsRaw;
+	           $("#totalSavings").val(totalSavings);
             }
         }
     );
-
+	//total savings for transportation
+    $("#AverageTimeT,#NumberOfTechniciansTT,#CPHT").change(
+	    function(event) {
+		    var cph = $("#CPHT").val();
+		    var numberOfTechnicians = $("#NumberOfTechniciansT").val();
+		    var averageTime = $("#AverageTimeT").val();
+		    event.preventDefault();
+		    if (cph != "" && numberOfTechnicians != "" && averageTime != "") {
+			    var totalSavingsRaw = cph * numberOfTechnicians * averageTime * 52;
+			    var totalSavings = "$" + totalSavingsRaw;
+			    $("#totalSavingsT").val(totalSavings);
+		    }
+	    }
+    );
+	//total km traveled
+	$("#AverageTimeT").change(
+		function(event) {
+			var numberOfTechnicians = $("#NumberOfTechniciansT").val() != "" ? $("#NumberOfTechniciansT").val() : "";
+			var cph = $("#CPHT").val() != "" ? $("#CPHT").val() : "";
+			event.preventDefault();
+            if (numberOfTechnicians != "" && cph != "") {
+				//temporary use hardcoded value "2" instead of dynamic value numberOfTechnicians to match the formula in excel.
+	            var totalkm = 2 * 20 * 52;
+	            $("#totalKmTraveled").val(totalkm);
+            }
+		});
+    //total emissions
+    $("#truckEmissions").change(
+	    function(event) {
+		    var totalKm = $("#totalKmTraveled").val();
+		    var truckEmissions = $("#truckEmissions").val();
+		    event.preventDefault();
+		    if (totalKm != "" && truckEmissions != "" ) {
+			    var totalEmissionsRaw = (totalKm * truckEmissions) /100000;
+			    var totalEmissions = totalEmissionsRaw;
+			    totalEmissions = totalEmissions.toFixed(1);
+			    $("#totalEmissions").val(totalEmissions);
+		    }
+	    }
+    );
+   
 </script>
 
 
