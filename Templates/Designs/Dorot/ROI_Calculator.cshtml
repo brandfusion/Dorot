@@ -8,33 +8,19 @@
 @Include("Custom/HeaderImage.cshtml")	
 <div class="container">
   <div class="row">
-    @searchElement()
+	 @*@searchElement()*@
     @breadcrumbs()
   </div>
 </div>
 <div class="white-box white-box-content">
+	<br/>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-9 col-sm-12 col-xs-12" id="FormContainer">
-				<h4 class="scenarioSubtitle">@Translate("Utility Field Person")</h4>
-				<form class="form-horizontal" id="personSavings">
-						@formField("12", "3", "CPH", Translate("Cost per hour"), "number", string.Empty, "$")
-						@formField("12", "3", "NumberOfTechnicians", Translate("Number"), "number", string.Empty, string.Empty)
-						@formField("12", "3", "AverageTime", Translate("Average time (h/week)"), "number", string.Empty, string.Empty)
-						@formFieldReadonly("12", "3", "totalSavings", Translate("Total savings per year"), "text", string.Empty, string.Empty)
-					</form>
-				<h4 class="scenarioSubtitle">@Translate("Utility Field Person - Transportation")</h4>
-				<form class="form-horizontal" id="personSavingsT">
-						@formField("12", "3", "CPHT", Translate("Cost per hour"), "number", string.Empty, "$")
-						@formField("12", "3", "NumberOfTechniciansT", Translate("Number"), "number", string.Empty, string.Empty)
-						@formField("12", "3", "AverageTimeT", Translate("Average time (h/week)"), "number", string.Empty, string.Empty)
-						@formFieldReadonly("12", "3", "totalSavingsT", Translate("Total savings per year"), "text", string.Empty, string.Empty)
-                        @formFieldReadonly("12" , "4", "totalKmTraveled", Translate("Total Km travelled per year for valve service"), "number", string.Empty, string.Empty)
-						@formField("12" , "4", "truckEmissions", Translate("Truck CO2 emission per Km (in grams)"), "number", string.Empty, string.Empty)
-						@formFieldReadonly("12", "4", "totalEmissions", Translate("Total tons of CO2 emission saved per year"), "text", string.Empty, string.Empty)
-				</form>
+			<div class="col-md-12 col-sm-12 col-xs-12" id="FormContainer">
+				@dispatchPersonel()
+				@pipeBurst()
 			</div>
-			@downloadsMenu()
+			@*@downloadsMenu()*@
 		</div>
 	</div>
 </div>
@@ -121,13 +107,28 @@
 	}
 </div>
 }
-@helper formField (string xsSize, string smSize, string id, string label, string type, string extraCss, string placeholder )
+@helper formField (string fieldType,string xsSize, string smSize, string id, string label, string type, string extraCss, string placeholder )
 {
 	var xsColumns = "col-xs-" + xsSize;
 	var smColumns = "col-sm-" + smSize;
 	<div class="@xsColumns @smColumns">
-		<label for="@id">@label</label>
-		<input type="@type" class="form-control @extraCss" id="@id" placeholder="@placeholder" name="@id" required="true">
+		@if (fieldType == "input")
+		{
+			<label for="@id">@label</label>
+		    <input type="@type" class="form-control @extraCss" id="@id" placeholder="@placeholder" name="@id" required="true">
+        }
+		@if (fieldType == "text")
+		{
+			<p id="@id" class="@extraCss">@label</p>
+		}
+        @if (fieldType == "remarks")
+        {
+	        <p style="color:white">test</p>
+	        <h6>Remarks</h6>
+	        <p>
+		        <small>* @label</small>
+	        </p>
+        }
 	</div>
 	
 }
@@ -141,6 +142,48 @@
 	</div>
 	
 }
+@helper dispatchPersonel()
+{
+	<h4 class="scenarioSubtitle">@Translate("Utility Field Person")</h4>
+	<form class="form-horizontal" id="personSavings">
+		@formField("input","12", "3", "CPH", Translate("Cost per hour"), "number", string.Empty, "$")
+		@formField("input","12", "3", "NumberOfTechnicians", Translate("Number"), "number", string.Empty, string.Empty)
+		@formField("input","12", "3", "AverageTime", Translate("Average time (h/week)"), "number", string.Empty, string.Empty)
+		@formFieldReadonly("12", "3", "totalSavings", Translate("Total savings per year"), "text", string.Empty, "$")
+	</form>
+	<h4 class="scenarioSubtitle">@Translate("Utility Field Person - Transportation")</h4>
+	<form class="form-horizontal" id="personSavingsT">
+		@formField("input","12", "3", "CPHT", Translate("Cost per hour"), "number", string.Empty, "$")
+		@formField("input","12", "3", "NumberOfTechniciansT", Translate("Number"), "number", string.Empty, string.Empty)
+		@formField("input","12", "3", "AverageTimeT", Translate("Average time (h/week)"), "number", string.Empty, string.Empty)
+		@formFieldReadonly("12", "3", "totalSavingsT", Translate("Total savings per year"), "text", string.Empty, "$")
+		@formFieldReadonly("12", "4", "totalKmTraveled", Translate("Total Km travelled per year"), "number", string.Empty, string.Empty)
+		@formField("input","12", "4", "truckEmissions", Translate("Truck CO2 emission per Km (in grams)"), "number", string.Empty, string.Empty)
+		@formFieldReadonly("12", "4", "totalEmissions", Translate("Total tons of CO2 emission saved per year"), "text", string.Empty, string.Empty)
+	</form>
+}
+@helper pipeBurst()
+{
+	<p style="color:white">test</p>
+	<hr/>
+	<h4 class="scenarioSubtitle">@Translate("Pipe Burst")</h4>
+	<p>@Translate("PipeBurstText","Bursts are a catastrophoc event, often related to exessive pressure and water hammer in the pipeline. Shutting a valve remotely and protecting the network by actuating valves gradually help reduce occurances and time.")</p>
+	<form class="form-horizontal" id="pipeBurstCalculations">
+		@formField("input","12", "3", "pipeSize", Translate("Pipe Size"), "text", string.Empty, "mm or inch")
+		@formField("input","12", "3", "waterCost", Translate("Price of unit wate"), "number", string.Empty, "$")
+		@formField("input","12", "3", "volumeLoss", Translate("Volume loss per hour"), "number", string.Empty, string.Empty)
+		@formField("input","12", "3", "timeLost", Translate("Number of hours till shut-off"), "number", string.Empty, string.Empty)
+		@formFieldReadonly("12", "3", "totalVolumeLossPerEvent", Translate("Total volume loss per event"), "text", string.Empty, string.Empty)
+		@formFieldReadonly("12", "3", "totalLossPerEvent", Translate("Total loss per event"), "text", string.Empty, "$")
+		@formField("input","12", "3", "additionalCosts", Translate("Additional cost and expenses"), "number", string.Empty, "$")
+		@formField("input","12", "3", "numberOfEvents", Translate("Number of events per year"),"number", string.Empty, string.Empty)
+		@formFieldReadonly("12", "3", "	totalCostPerYear", Translate("Total cost per year"),"number", string.Empty, string.Empty)
+		@formField("input","12", "3", "reductionInPercent", Translate("Reduction in % per year"),"number", string.Empty, "%")
+		@formFieldReadonly("12", "3", "totalSavings", Translate("Total savings per year"),"number", string.Empty, "$")
+		@formField("remarks","12", "12", "RemarksCalculation", Translate("Realistic and conservative"), string.Empty, string.Empty, string.Empty)
+	</form>
+
+}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	//total savings for personel
@@ -152,7 +195,7 @@
             event.preventDefault();
             if (cph != "" && numberOfTechnicians != "" && averageTime != "") {
 	            var totalSavingsRaw = cph * numberOfTechnicians * averageTime * 52;
-	            var totalSavings = "$" + totalSavingsRaw;
+	            var totalSavings = totalSavingsRaw;
 	           $("#totalSavings").val(totalSavings);
             }
         }
@@ -166,7 +209,7 @@
 		    event.preventDefault();
 		    if (cph != "" && numberOfTechnicians != "" && averageTime != "") {
 			    var totalSavingsRaw = cph * numberOfTechnicians * averageTime * 52;
-			    var totalSavings = "$" + totalSavingsRaw;
+			    var totalSavings = totalSavingsRaw;
 			    $("#totalSavingsT").val(totalSavings);
 		    }
 	    }
