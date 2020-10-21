@@ -6,6 +6,14 @@
 @Include("includes/Razor/VerifyImage.cshtml")
 @Include("includes/PageTemplates/GenericHelper.cshtml")
 @Include("Custom/HeaderImage.cshtml")	
+<style>
+.noPaddingLeft {
+	padding-left: 0;
+}
+.formContainer {
+	margin-bottom: 18px;
+}
+</style>
 <div class="container">
   <div class="row">
 	 @*@searchElement()*@
@@ -16,15 +24,21 @@
 	<br/>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12" id="FormContainer">
+			<div class="col-xs-12">
+				<h1>@Translate("Dorot Smart It Up")</h1>
+				<h2>@Translate("ROI Analysis Tool")</h2>
+				<h3>@Translate("Instructions: enter actual utility data in each relevant scenario and see the total saving by implementing Dorot's SIU solutions!")</h3>
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12" id="RoiFormContainer">
 				@dispatchPersonel()
 				@pipeBurst()
+				@qualityOfService()
+				@NRW()
 			</div>
 			@*@downloadsMenu()*@
 		</div>
 	</div>
 </div>
-
 @*helpers  *@
 @helper searchElement(){
   <div class="col-md-12 col-sm-12 col-xs-12">
@@ -123,10 +137,9 @@
 		}
         @if (fieldType == "remarks")
         {
-	        <p style="color:white">test</p>
-	        <h6>Remarks</h6>
 	        <p>
-		        <small>* @label</small>
+				<h6>Remarks</h6>
+				<small>* @label</small>
 	        </p>
         }
 	</div>
@@ -143,50 +156,91 @@
 	
 }
 @helper dispatchPersonel()
-{
+{	
 	<h4 class="scenarioSubtitle">@Translate("Utility Field Person")</h4>
-	<form class="form-horizontal" id="personSavings">
-		@formField("input","12", "3", "CPH", Translate("Cost per hour"), "number", string.Empty, "$")
-		@formField("input","12", "3", "NumberOfTechnicians", Translate("Number"), "number", string.Empty, string.Empty)
-		@formField("input","12", "3", "AverageTime", Translate("Average time (h/week)"), "number", string.Empty, string.Empty)
-		@formFieldReadonly("12", "3", "totalSavings", Translate("Total savings per year"), "text", string.Empty, "$")
-	</form>
+	<p>@Translate("ROI_DispatchingFiledServiceText","Dispatching field service perosnnel across the city can be costly. Remote controlling the valve and receiving data from it saves time & money and protects the environment.")</p>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="personSavings">
+			@formField("input","12", "3", "CPH", Translate("Cost per hour"), "number", string.Empty, "$")
+			@formField("input","12", "3", "NumberOfTechnicians", Translate("Number"), "number", string.Empty, string.Empty)
+			@formField("input","12", "3", "AverageTime", Translate("Average time"), "number", string.Empty, "hours/week")
+			@formFieldReadonly("12", "3", "totalSavings", Translate("Total savings per year"), "text", string.Empty, "$")
+		</form>
+	</div>
 	<h4 class="scenarioSubtitle">@Translate("Utility Field Person - Transportation")</h4>
-	<form class="form-horizontal" id="personSavingsT">
-		@formField("input","12", "3", "CPHT", Translate("Cost per hour"), "number", string.Empty, "$")
-		@formField("input","12", "3", "NumberOfTechniciansT", Translate("Number"), "number", string.Empty, string.Empty)
-		@formField("input","12", "3", "AverageTimeT", Translate("Average time (h/week)"), "number", string.Empty, string.Empty)
-		@formFieldReadonly("12", "3", "totalSavingsT", Translate("Total savings per year"), "text", string.Empty, "$")
-		@formFieldReadonly("12", "4", "totalKmTraveled", Translate("Total Km travelled per year"), "number", string.Empty, string.Empty)
-		@formField("input","12", "4", "truckEmissions", Translate("Truck CO2 emission per Km (in grams)"), "number", string.Empty, string.Empty)
-		@formFieldReadonly("12", "4", "totalEmissions", Translate("Total tons of CO2 emission saved per year"), "text", string.Empty, string.Empty)
-	</form>
-}
+	@formField("remarks","12", "12 noPaddingLeft pl-0", "RemarksPersonel",Translate("ROI_KmRemarks","The field technicians are dispatched to open or close a valve, change the set-point, check flow, etc. Assume 2 weekly trips, each 20Km.") , string.Empty, string.Empty, string.Empty)
+	<div class="row formContainer">
+		<form class="form-horizontal" id="personSavingsT">
+			@formField("input","12", "3", "CPHT", Translate("Cost per hour"), "number", string.Empty, "$")
+			@formField("input","12", "3", "NumberOfTechniciansT", Translate("Number"), "number", string.Empty, string.Empty)
+			@formField("input","12", "3", "AverageTimeT", Translate("Average time"), "number", string.Empty, "hours/week")
+			@formFieldReadonly("12", "3", "totalSavingsT", Translate("Total savings per year"), "text", string.Empty, "$")
+			@formFieldReadonly("12", "3", "totalKmTraveled", Translate("Total Km travelled per year"), "number", string.Empty, "km")
+			@formField("input","12", "3", "truckEmissions", Translate("Truck CO2 emission per Km"), "number", string.Empty, "grams")
+			@formFieldReadonly("12", "3", "totalEmissions", Translate("Total CO2 emission saved"), "text", string.Empty, "tons/year")
+		</form>
+	</div>
+	}
 @helper pipeBurst()
 {
-	<p style="color:white">test</p>
 	<hr/>
 	<h4 class="scenarioSubtitle">@Translate("Pipe Burst")</h4>
 	<p>@Translate("PipeBurstText","Bursts are a catastrophoc event, often related to exessive pressure and water hammer in the pipeline. Shutting a valve remotely and protecting the network by actuating valves gradually help reduce occurances and time.")</p>
-	<form class="form-horizontal" id="pipeBurstCalculations">
-		@formField("input","12", "3", "pipeSize", Translate("Pipe Size"), "text", string.Empty, "mm or inch")
-		@formField("input","12", "3", "waterCost", Translate("Price of unit wate"), "number", string.Empty, "$")
-		@formField("input","12", "3", "volumeLoss", Translate("Volume loss per hour"), "number", string.Empty, string.Empty)
-		@formField("input","12", "3", "timeLost", Translate("Number of hours till shut-off"), "number", string.Empty, string.Empty)
-		@formFieldReadonly("12", "3", "totalVolumeLossPerEvent", Translate("Total volume loss per event"), "text", string.Empty, string.Empty)
-		@formFieldReadonly("12", "3", "totalLossPerEvent", Translate("Total loss per event"), "text", string.Empty, "$")
-		@formField("input","12", "3", "additionalCosts", Translate("Additional cost and expenses"), "number", string.Empty, "$")
-		@formField("input","12", "3", "numberOfEvents", Translate("Number of events per year"),"number", string.Empty, string.Empty)
-		@formFieldReadonly("12", "3", "	totalCostPerYear", Translate("Total cost per year"),"number", string.Empty, string.Empty)
-		@formField("input","12", "3", "reductionInPercent", Translate("Reduction in % per year"),"number", string.Empty, "%")
-		@formFieldReadonly("12", "3", "totalSavings", Translate("Total savings per year"),"number", string.Empty, "$")
-		@formField("remarks","12", "12", "RemarksCalculation", Translate("Realistic and conservative"), string.Empty, string.Empty, string.Empty)
-	</form>
-
+	<div class="row formContainer">
+		<form class="form-horizontal" id="pipeBurstCalculations">
+			@formField("input","12", "3", "pipeSize", Translate("Pipe Size"), "text", string.Empty, "mm or inch")
+			@formField("input","12", "3", "waterCost", Translate("Price of unit wate"), "number", string.Empty, "$")
+			@formField("input","12", "3", "volumeLoss", Translate("Volume loss per hour"), "number", string.Empty, string.Empty)
+			@formField("input","12", "3", "timeLost", Translate("Number of hours till shut-off"), "number", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "totalVolumeLossPerEvent", Translate("Total volume loss per event"), "text", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "totalLossPerEvent", Translate("Total loss per event"), "text", string.Empty, "$")
+			@formField("input","12", "3", "additionalCosts", Translate("Additional cost and expenses"), "number", string.Empty, "$")
+			@formField("input","12", "3", "numberOfEvents", Translate("Number of events per year"),"number", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "totalCostPerYear", Translate("Total cost per year"),"text", string.Empty, string.Empty)
+			@formField("input","12", "3", "reductionInPercent", Translate("Reduction in % per year"),"number", string.Empty, "%")
+			@formFieldReadonly("12", "3", "totalSavingsPerYear", Translate("Total savings per year"),"text", string.Empty, "$")
+			@formField("remarks","12", "12", "RemarksCalculation", Translate("Realistic and conservative"), string.Empty, string.Empty, "addSeparator")
+		</form>
+	</div>
+}
+@helper qualityOfService()
+{
+	<hr/>
+	<h4 class="scenarioSubtitle">@Translate("Quality of Service")</h4>
+	<p>@Translate("ROI_FinesText", "Fines are often imposed on utilities when not complying with regulation. Dynamic pressure management reduce events and fines.")</p>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="qualityOfService">
+			@formField("input","12", "3", "evenType", Translate("Event type"), "text", string.Empty, "Pressure deviation")
+			@formField("input","12", "3", "fine", Translate("Fine"), "number", string.Empty, "$")
+			@formField("input","12", "3", "eventsPerYear", Translate("Events per year"), "number", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "totalFinesPerYear", Translate("Total fines per year"),"text", string.Empty, "$")
+			@formField("input","12", "3", "reductionForQuality", Translate("Reduction in % per year"), "number", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "totalSavesQuality", Translate("Total savings per year"),"text", string.Empty, "$")
+			@formField("remarks","12", "12", "Remarksquality", Translate("Realistic and conservative (UKWIR)"), string.Empty, string.Empty, "addSeparator")
+		</form>
+	</div>
+}
+@helper NRW()
+{
+	<hr/>
+	<h4 class="scenarioSubtitle">@Translate("NRW")</h4>
+	<p>@Translate("ROI_HighNRW", "High NRW equals loss of water, wasted energy, loss of income and low quality of service along with high cost of network maintainance.")</p>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="NRW">
+			@formField("input","12", "3", "priceOfWaterUnit", Translate("Price of water unit"), "number", string.Empty, "$")
+			@formField("input","12", "3", "waterProduction", Translate("Water production"), "number", string.Empty, string.Empty)
+			@formField("input","12", "3", "waterBilled", Translate("Water billed"), "number", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "nRWAmount", Translate("NRW amount"),"text", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "tCPY", Translate("Total cost per year"),"text", string.Empty, "$")
+			@formField("input","12", "3", "reductionPerYearNRW", Translate("Reduction in % per year"), "number", string.Empty, "%")
+			@formFieldReadonly("12", "3", "tSVPY", Translate("Total savings per year"),"text", string.Empty, "$")
+			@formField("remarks","12", "12", "RemarksNRW", Translate("Manila, assuming 1000 valves"), string.Empty, string.Empty, "addSeparator")
+		</form>
+	</div>
 }
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-	//total savings for personel
+	//total savings for personel dispatchPersonel helper
     $("#AverageTime,#NumberOfTechnicians, #CPH").change(
         function(event) {
             var cph = $("#CPH").val();
@@ -200,7 +254,7 @@
             }
         }
     );
-	//total savings for transportation
+	//total savings for transportation dispatchPersonel helper
     $("#AverageTimeT,#NumberOfTechniciansTT,#CPHT").change(
 	    function(event) {
 		    var cph = $("#CPHT").val();
@@ -214,7 +268,7 @@
 		    }
 	    }
     );
-	//total km traveled
+	//total km traveled for  dispatchPersonel helper
 	$("#AverageTimeT").change(
 		function(event) {
 			var numberOfTechnicians = $("#NumberOfTechniciansT").val() != "" ? $("#NumberOfTechniciansT").val() : "";
@@ -226,7 +280,7 @@
 	            $("#totalKmTraveled").val(totalkm);
             }
 		});
-    //total emissions
+    //total emissions     dispatchPersonel helper
     $("#truckEmissions").change(
 	    function(event) {
 		    var totalKm = $("#totalKmTraveled").val();
@@ -240,7 +294,47 @@
 		    }
 	    }
     );
-   
+	//total volume loss  pipeBurst helper
+	$("#volumeLoss,#timeLost, #waterCost").change(
+		function(event) {
+			var volumeLoss = $("#volumeLoss").val();
+			var timeLost = $("#timeLost").val();
+			var waterCost = $("#waterCost").val();
+			event.preventDefault();
+			if (volumeLoss != "" && timeLost != "" && waterCost != "") {
+				var totalVolumeLoss = volumeLoss * timeLost;
+				var totalCost = totalVolumeLoss * waterCost;
+				$("#totalVolumeLossPerEvent").val(totalVolumeLoss);
+				$("#totalLossPerEvent").val(totalCost);
+			}
+		}
+	);
+	//total cost per year  pipeBurst helper
+	$("#totalLossPerEvent,#additionalCosts, #numberOfEvents").change(
+		function(event) {
+			var totalLossPerEvent = $("#totalLossPerEvent").val();
+			var additionalCosts = $("#additionalCosts").val();
+			var numberOfEvents = $("#numberOfEvents").val();
+			event.preventDefault();
+			if (totalLossPerEvent != "" && additionalCosts != "" && numberOfEvents != "") {
+				var totalCostPerYear = (totalLossPerEvent * numberOfEvents) + (additionalCosts * numberOfEvents)
+               $("#totalCostPerYear").val(totalCostPerYear);
+			}
+		}
+	);
+	//total savings on year  pipeBurst helper
+	$("#reductionInPercent,#totalCostPerYear").change(
+		function(event) {
+			var reductionInPercent = $("#reductionInPercent").val();
+			var totalCostPerYear = $("#totalCostPerYear").val();
+			event.preventDefault();
+			if (reductionInPercent != "" && totalCostPerYear != "" ) {
+				var reduction = (reductionInPercent * totalCostPerYear) / 100;
+				reduction = Math.floor(reduction);
+                $("#totalSavingsPerYear").val(reduction);
+			}
+		}
+	);
 </script>
 
 
