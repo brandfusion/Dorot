@@ -34,6 +34,8 @@
 				@pipeBurst()
 				@qualityOfService()
 				@NRW()
+                @electricity()
+				@reservoirs()
 			</div>
 			@*@downloadsMenu()*@
 		</div>
@@ -238,6 +240,38 @@
 		</form>
 	</div>
 }
+@helper electricity(){
+	<hr/>
+	<h4 class="scenarioSubtitle">@Translate("Electric expense per valve")</h4>
+	<p>@Translate("ROI_Bonus_deal:", "Bonus deal: reduce expenses AND protect the environment! The average annual energy consumption of a motor (e.g. Rotork) actuated valve is in the order of 10,000 kWh and requires 400VAC, 3ph mains electricity supply. Dorot's hydraulic valves are operated by solenoid having an average annual energy consumption of about 14 kWh.Beyond reducing electric bills, this difference represents a yearly emission saving of several tons of CO2.")</p>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="electricity">
+			@formField("input","12", "3", "kwPerYear", Translate("KWh per year of motorized valve"), "number", string.Empty, "KWh")
+			@formField("input","12", "3", "pricePerKwh", Translate("Price of 1 KWh"), "number", string.Empty, "$")
+			@formFieldReadonly("12", "3", "mVEBPY", Translate("Motorized valve electricity bill"),"text", string.Empty, "$/year")
+			@formFieldReadonly("12", "3", "kPY2SV", Translate("2 solenoid valves electricity bill"),"text", string.Empty, "$/year")
+			@formFieldReadonly("12", "3", "kPY2SV", Translate("Hydraulic valve electricity bill"),"text", string.Empty, "$/year")
+			@formFieldReadonly("12", "3", "tSE", Translate("Total savings"),"text", string.Empty, "$/year")
+			@formFieldReadonly("12", "3", "tECo2ER", Translate("CO2 emmissions reduced"),"text", string.Empty, "tons/year")
+			@formField("remarks","12", "12", "RemarksElectricity", Translate("0.4483 kgs CO2 per kWh (figures from USA, 2019)"), string.Empty, string.Empty, "addSeparator")
+		</form>
+	</div>
+}
+@helper reservoirs(){
+	<hr/>
+	<h4 class="scenarioSubtitle">@Translate("Reserviors and water tank overflows")</h4>
+	<p>@Translate("ROI_Reservoir_and_water", "Reservior and water tank overflows waste water and and can cause collateral and financial damage.")</p>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="reservoirs">
+			@formField("input","12", "3", "pOWU", Translate("Price of unit water"), "number", string.Empty, "$")
+			@formField("input","12", "3", "aUWWPE", Translate("Avg units of water wasted"), "number", string.Empty, "units/event")
+			@formField("input","12", "3", "aDF", Translate("Avg damage fees"), "number", string.Empty, "$/event")
+			@formField("input","12", "3", "nOEPY", Translate("Number of events per year"), "number", string.Empty, "")
+			@formFieldReadonly("12", "3", "tSR", Translate("Total savings"),"text", string.Empty, "$/year")
+			@formField("remarks","12", "12", "RemarksReservoirs", Translate("Dorot Smart It Up can minimize overflows to 0"), string.Empty, string.Empty, "addSeparator")
+		</form>
+	</div>
+}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	//total savings for personel dispatchPersonel helper
@@ -335,6 +369,61 @@
 			}
 		}
 	);
+	//total fines per  quality of service
+	$("#fine,#eventsPerYear").change(
+		function(event) {
+			var fine = $("#fine").val();
+			var eventsPerYear = $("#eventsPerYear").val();
+			event.preventDefault();
+			if (fine != "" && eventsPerYear != "" ) {
+				var totalFine = fine * eventsPerYear;
+				$("#totalFinesPerYear").val(totalFine);
+			}
+		}
+	);
+    // total savings per year quality of service
+	$("#totalFinesPerYear,#reductionForQuality").change(
+		function(event) {
+			var totalFinesPerYear = $("#totalFinesPerYear").val();
+			totalFinesPerYear = parseInt(totalFinesPerYear);
+			var reductionForQuality = $("#reductionForQuality").val();
+			event.preventDefault();
+            if (totalFinesPerYear != "" && reductionForQuality != "" ) {
+				var totalReduction = (totalFinesPerYear * reductionForQuality)/100;
+				$("#totalSavesQuality").val(totalReduction);
+			}
+		}
+	);
+	//NRWA amount calculation and total cost
+	$("#waterProduction,#waterBilled, #priceOfWaterUnit").change(
+		function(event) {
+			var waterProduction = $("#waterProduction").val();
+			var waterBilled = $("#waterBilled").val();
+			var priceOfWaterUnit = $("#priceOfWaterUnit").val();
+			event.preventDefault();
+			if (waterProduction != "" && waterBilled != "" ) {
+				var nrwaAmount = waterProduction - waterBilled;
+				$("#nRWAmount").val(nrwaAmount);
+			}
+			if (waterProduction != "" && waterBilled != "" && priceOfWaterUnit != "" ) {
+				var tCPY = (waterProduction - waterBilled) * priceOfWaterUnit;
+				$("#tCPY").val(tCPY);
+			}
+
+		}
+	);
+	// NRWA total savings per year
+	$("#tCPY,#reductionPerYearNRW").change(
+		function(event) {
+			var tCPY = $("#tCPY").val();
+			tCPY = parseInt(tCPY);
+			var reductionPerYearNRW = $("#reductionPerYearNRW").val();
+			event.preventDefault();
+			if (tCPY != "" && reductionPerYearNRW != "" ) {
+				var totalSavings = (tCPY * reductionPerYearNRW)/100;
+				$("#tSVPY").val(totalSavings);
+			}
+		}
+	);
+	
 </script>
-
-
