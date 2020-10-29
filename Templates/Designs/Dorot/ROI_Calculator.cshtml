@@ -250,7 +250,7 @@
 			@formField("input","12", "3", "pricePerKwh", Translate("Price of 1 KWh"), "number", string.Empty, "$")
 			@formFieldReadonly("12", "3", "mVEBPY", Translate("Motorized valve electricity bill"),"text", string.Empty, "$/year")
 			@formFieldReadonly("12", "3", "kPY2SV", Translate("2 solenoid valves electricity bill"),"text", string.Empty, "$/year")
-			@formFieldReadonly("12", "3", "kPY2SV", Translate("Hydraulic valve electricity bill"),"text", string.Empty, "$/year")
+			@formFieldReadonly("12", "3", "hVEB", Translate("Hydraulic valve electricity bill"),"text", string.Empty, "$/year")
 			@formFieldReadonly("12", "3", "tSE", Translate("Total savings"),"text", string.Empty, "$/year")
 			@formFieldReadonly("12", "3", "tECo2ER", Translate("CO2 emmissions reduced"),"text", string.Empty, "tons/year")
 			@formField("remarks","12", "12", "RemarksElectricity", Translate("0.4483 kgs CO2 per kWh (figures from USA, 2019)"), string.Empty, string.Empty, "addSeparator")
@@ -425,5 +425,47 @@
 			}
 		}
 	);
-	
+	//Motorized valve electricity bill 
+	$("#kwPerYear,#pricePerKwh").change(
+		function(event) {
+			var kwPerYear = $("#kwPerYear").val();
+			kwPerYear = parseInt(kwPerYear);
+			var pricePerKwh = $("#pricePerKwh").val();
+			event.preventDefault();
+			if (kwPerYear != "" && pricePerKwh != "" ) {
+				var electricityBill = kwPerYear * pricePerKwh;
+				var electricityBillSolenoid = 14 * pricePerKwh;
+				electricityBillSolenoid = electricityBillSolenoid.toFixed(0);
+				var electricityBillHydraulic = (14 * electricityBill)/10000;
+				electricityBillHydraulic = electricityBillHydraulic.toFixed(2);
+				var totalSavings = electricityBill - electricityBillHydraulic;
+				totalSavings = Math.floor(totalSavings);
+				var savingsCo2 = (kwPerYear * 4483) / 10000000;
+				//savingsCo2 = Math.floor(savingsCo2);
+                savingsCo2 = savingsCo2.toFixed(2);
+				$("#mVEBPY").val(electricityBill);
+				$("#kPY2SV").val(electricityBillSolenoid);
+				$("#hVEB").val(electricityBillHydraulic);
+				$("#tSE").val(totalSavings);
+				$("#tECo2ER").val(savingsCo2);
+			}
+		}
+	);
+	//total Savings on water tanks
+	$("#pOWU,#aUWWPE,#aDF,#nOEPY").change(
+		function(event) {
+			var pOWU = $("#pOWU").val();
+			var aUWWPE = $("#aUWWPE").val();
+			var aDF = $("#aDF").val();
+			aDF = parseFloat(aDF);
+			var nOEPY = $("#nOEPY").val();
+			event.preventDefault();
+			if (pOWU != "" && aUWWPE != "" && aDF != "" && nOEPY != "" ) {
+                var firstCalculation = pOWU * aUWWPE;
+				var firstCalculation = parseFloat(firstCalculation);
+				var totalSavings = (firstCalculation + aDF) * nOEPY ;
+				$("#tSR").val(totalSavings);
+			}
+		}
+	);
 </script>
