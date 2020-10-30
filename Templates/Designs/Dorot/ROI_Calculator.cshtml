@@ -1,7 +1,7 @@
+@using System;
 @MasterPageFile("Master.cshtml")
 @GetValue("Title(Content page)")
 @GetValue("Description(Content page)")
-@using System;
 @Include("includes/Razor/GetImage.cshtml")
 @Include("includes/Razor/VerifyImage.cshtml")
 @Include("includes/PageTemplates/GenericHelper.cshtml")
@@ -36,6 +36,7 @@
 				@NRW()
                 @electricity()
 				@reservoirs()
+                @totalCalculations()
 			</div>
 			@*@downloadsMenu()*@
 		</div>
@@ -272,6 +273,18 @@
 		</form>
 	</div>
 }
+@helper totalCalculations()
+{
+	<hr/>
+	<h4 class="scenarioSubtitle">@Translate("Total Savings")</h4>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="reservoirs">
+			@formFieldReadonly("12", "4", "ROI", Translate("ROI per year per single installation:"),"text", string.Empty, "$/year")
+			@formFieldReadonly("12", "4", "CO2", Translate("CO2 Savings per year"),"text", string.Empty, "tons/year")
+		</form>
+	</div>
+
+}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	//total savings for personel dispatchPersonel helper
@@ -285,6 +298,7 @@
 	            var totalSavingsRaw = cph * numberOfTechnicians * averageTime * 52;
 	            var totalSavings = totalSavingsRaw;
 	           $("#totalSavings").val(totalSavings);
+	            $("#totalSavings").change();
             }
         }
     );
@@ -299,6 +313,7 @@
 			    var totalSavingsRaw = cph * numberOfTechnicians * averageTime * 52;
 			    var totalSavings = totalSavingsRaw;
 			    $("#totalSavingsT").val(totalSavings);
+			    $("#totalSavingsT").change();
 		    }
 	    }
     );
@@ -325,6 +340,8 @@
 			    var totalEmissions = totalEmissionsRaw;
 			    totalEmissions = totalEmissions.toFixed(1);
 			    $("#totalEmissions").val(totalEmissions);
+			    $("#totalEmissions").change();
+
 		    }
 	    }
     );
@@ -366,6 +383,7 @@
 				var reduction = (reductionInPercent * totalCostPerYear) / 100;
 				reduction = Math.floor(reduction);
                 $("#totalSavingsPerYear").val(reduction);
+				$("#totalSavingsPerYear").change();
 			}
 		}
 	);
@@ -378,6 +396,7 @@
 			if (fine != "" && eventsPerYear != "" ) {
 				var totalFine = fine * eventsPerYear;
 				$("#totalFinesPerYear").val(totalFine);
+				$("#totalFinesPerYear").change();
 			}
 		}
 	);
@@ -390,7 +409,10 @@
 			event.preventDefault();
             if (totalFinesPerYear != "" && reductionForQuality != "" ) {
 				var totalReduction = (totalFinesPerYear * reductionForQuality)/100;
+	            console.log(totalFinesPerYear);
+	            console.log(reductionForQuality)
 				$("#totalSavesQuality").val(totalReduction);
+	            $("#totalSavesQuality").change();
 			}
 		}
 	);
@@ -421,7 +443,9 @@
 			event.preventDefault();
 			if (tCPY != "" && reductionPerYearNRW != "" ) {
 				var totalSavings = (tCPY * reductionPerYearNRW)/100;
+				
 				$("#tSVPY").val(totalSavings);
+				$("#tSVPY").change();
 			}
 		}
 	);
@@ -448,6 +472,8 @@
 				$("#hVEB").val(electricityBillHydraulic);
 				$("#tSE").val(totalSavings);
 				$("#tECo2ER").val(savingsCo2);
+				$("#tSE").change();
+				$("#tECo2ER").change();
 			}
 		}
 	);
@@ -465,6 +491,46 @@
 				var firstCalculation = parseFloat(firstCalculation);
 				var totalSavings = (firstCalculation + aDF) * nOEPY ;
 				$("#tSR").val(totalSavings);
+				$("#tSR").change();
+			}
+		}
+	);
+	$("#totalSavings,#totalSavingsT, #totalSavingsPerYear, #totalSavesQuality, #tSVPY, #tSE , #tSR").change(
+		function(event) {
+			var totalSavings = $("#totalSavings").val();
+			var totalSavingsT = $("#totalSavingsT").val();
+			var totalSavingsPerYear = $("#totalSavingsPerYear").val();
+			var totalSavesQuality = $("#totalSavesQuality").val();
+			var tSVPY = $("#tSVPY").val();
+			var tSE = $("#tSE").val();
+			var tSR = $("#tSR").val();
+			event.preventDefault();
+			if (totalSavings != "" && totalSavingsT != "" && totalSavingsPerYear != "" && tSVPY != "" && tSE != "" && tSR !="") {
+				totalSavings = parseFloat(totalSavings);
+				totalSavingsT = parseFloat(totalSavingsT);
+				totalSavingsPerYear = parseFloat(totalSavingsPerYear);
+				totalSavesQuality = parseFloat(totalSavesQuality);
+				tSVPY = parseFloat(tSVPY);
+				tSE = parseFloat(tSE);
+				tSR = parseFloat(tSR);
+				var totalSavingsFinal = totalSavings + totalSavingsT + totalSavingsPerYear + totalSavesQuality + tSVPY + tSE + tSR;
+                totalSavingsFinal = totalSavingsFinal + " $/year"
+				$("#ROI").val(totalSavingsFinal);
+			}
+		}
+	);
+	$("#totalEmissions,#tECo2ER").change(
+		function(event) {
+			var totalEmissions = $("#totalEmissions").val();
+			totalEmissions = parseFloat(totalEmissions);
+			var tECo2ER = $("#tECo2ER").val();
+			tECo2ER = parseFloat(tECo2ER);
+			event.preventDefault();
+			if (totalEmissions != "" && tECo2ER != "" ) {
+				var totalEmissionsSavings = totalEmissions + tECo2ER ;
+				totalEmissionsSavings = totalEmissionsSavings.toFixed(1);
+				totalEmissionsSavings = totalEmissionsSavings + " Tons";
+				$("#CO2").val(totalEmissionsSavings);
 			}
 		}
 	);
