@@ -1,0 +1,536 @@
+@using System;
+@GetValue("Title(Content page)")
+@GetValue("Description(Content page)")
+@Include("../includes/Razor/GetImage.cshtml")
+@Include("../includes/Razor/VerifyImage.cshtml")
+@Include("../includes/PageTemplates/GenericHelper.cshtml")
+@Include("../Custom/HeaderImage.cshtml")	
+<style>
+.noPaddingLeft {
+	padding-left: 0;
+}
+.formContainer {
+	margin-bottom: 18px;
+}
+</style>
+<div class="container">
+  <div class="row">
+	 @*@searchElement()*@
+    @breadcrumbs()
+  </div>
+</div>
+<div class="">
+	<br/>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<h1>@Translate("Dorot Smart It Up")</h1>
+				<h2>@Translate("ROI Analysis Tool")</h2>
+				<h3>@Translate("Instructions: enter actual utility data in each relevant scenario and see the total saving by implementing Dorot's SIU solutions!")</h3>
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12" id="RoiFormContainer">
+				@dispatchPersonel()
+				@pipeBurst()
+				@qualityOfService()
+				@NRW()
+                @electricity()
+				@reservoirs()
+                @totalCalculations()
+			</div>
+			@*@downloadsMenu()*@
+		</div>
+	</div>
+</div>
+@*helpers  *@
+@helper searchElement(){
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="search-box col-md-4 pull-right">
+      <form action="/search" method="GET" role="search">
+        <div class="form-group">
+          <input type="text" name="q" id="q" aria-label="search" autocomplete="off" spellcheck="false" placeholder='@Translate("findYourSolution", "Find your solution")' class="form-control">
+          <button type="submit"><i class="fa fa-search" aria-hidden="true"></i><span style="display:none">text</span></button>
+          @* <div class="instant_search"></div> *@
+        </div>
+      </form>
+    </div>
+  </div>
+}
+@helper breadcrumbs()
+{
+  <div class="col-md-12">
+    <ul class="dwnavigation breadcrumb" id="breadcrumbs" data-settings="template:Breadcrumb.xslt;startlevel:1;endlevel:3;expandmode:PathOnly"></ul>
+  </div>
+}
+@helper downloadsMenu()
+{
+	string titlePage = GetString("Item.Title.Value");
+	string imagePage = GetImage(GetString("Item.Image.Value"),400, 400);
+	string productCatalog = GetString("Item.ProductCatalog.Value");
+	string technicalS = GetString("Item.Technical_Specifications.Value");
+	string installationG = GetString("Item.Installation_Guide.Value");
+	string iom = GetString("Item.IOM.Value");
+	string multimedia = GetString("Item.Multimedia.Value");
+	string purchaseS = "http://" + GetGlobalValue("Global:Request.Host") + "/engineering-hub/engineers-library/purchase-specifications?Folder=%2F"+titlePage;
+	string troubleshootGuide = "http://" + GetGlobalValue("Global:Request.Host") + "/engineering-hub/engineers-library/troubleshoot-guides?Folder=%2F"+titlePage;
+	string dataSheets ="http://" + GetGlobalValue("Global:Request.Host") + "/engineering-hub/engineers-library/data-sheets?Folder=%2F"+titlePage;
+	string cadFiles ="http://" + GetGlobalValue("Global:Request.Host") + "/engineering-hub/engineers-library/cad-library?Folder=%2F"+titlePage;
+	string designTS = GetString("Item.DesignAndTestStandards.Value");
+
+	List<LoopItem> caseStudiesLoop = GetLoop("Item.Case_Studies");
+	List<LoopItem> certificationsLoop = GetLoop("Item.Certifications2");
+	List<LoopItem> galerieImaginiLoop = GetLoop("Item.GalerieImagini");
+<div class="col-md-3 col-sm-12 col-xs-12 group-btn" id="download">
+	<h2 class="title">@Translate("Downloads", "Downloads")</h2>
+	@if (!string.IsNullOrEmpty(productCatalog))
+	{
+		<div class="catalog-btn" title="pdf">@RenderDownloadLink(@productCatalog, @Translate("ProductCatalog", " Product Catalog"))</div>
+	}
+	@if (!string.IsNullOrEmpty(technicalS))
+	{
+		<div class="technicalS-btn">@RenderDownloadLink(@technicalS, @Translate("TechnicalSpecification", "Technical Specifications"))</div>
+	}
+	@if (!string.IsNullOrEmpty(installationG))
+	{
+		<div class="installationG-btn">@RenderDownloadLink(@installationG, @Translate("InstallationGuide", "Installation Guide"))</div>
+	}
+	@if (!string.IsNullOrEmpty(iom))
+	{
+		<div class="iom-btn">@RenderDownloadLink(@iom, @Translate("IOM", "IOM"))</div>
+	}
+	@if (!string.IsNullOrEmpty(multimedia))
+	{
+		<div class="multimedia-btn">@RenderDownloadLink(@multimedia, @Translate("multimedia", "Multimedia"))</div>
+	}
+	@if (!string.IsNullOrEmpty(purchaseS))
+	{
+		<div class="purchaseS-btn">@RenderDownloadLink(@purchaseS, @Translate("PurchaseSpecification", "Purchase Specification"))</div>
+	}
+	@if (!string.IsNullOrEmpty(troubleshootGuide))
+	{
+		<div class="troubleshootGuide-btn">@RenderDownloadLink(@troubleshootGuide, @Translate("TroubleshootGuide", "Troubleshoot Guide"))</div>
+	}
+	@if (!string.IsNullOrEmpty(dataSheets))
+	{
+		<div class="dataSheets-btn">@RenderDownloadLink(@dataSheets, @Translate("dataSheets", "Data Sheets"))</div>
+	}
+	@if (!string.IsNullOrEmpty(cadFiles))
+	{
+		<div class="cadFiles-btn">@RenderDownloadLink(@cadFiles, @Translate("cadFiles", "Cad Files"))</div>
+	}
+	@if (!string.IsNullOrEmpty(designTS))
+	{
+		<div class="designTS-btn">@RenderDownloadLink(@designTS, @Translate("DesignAndTestStandards", "Design And Test Standards"))</div>
+	}
+</div>
+}
+@helper formField (string fieldType,string xsSize, string smSize, string id, string label, string type, string extraCss, string placeholder )
+{
+	var xsColumns = "col-xs-" + xsSize;
+	var smColumns = "col-sm-" + smSize;
+	<div class="@xsColumns @smColumns">
+		@if (fieldType == "input")
+		{
+			<label for="@id">@label</label>
+		    <input type="@type" class="form-control @extraCss" id="@id" placeholder="@placeholder" name="@id" required="true">
+        }
+		@if (fieldType == "text")
+		{
+			<p id="@id" class="@extraCss">@label</p>
+		}
+        @if (fieldType == "remarks")
+        {
+	        <p>
+				<h6>Remarks</h6>
+				<small>* @label</small>
+	        </p>
+        }
+	</div>
+	
+}
+@helper formFieldReadonly (string xsSize, string smSize, string id, string label, string type, string extraCss, string placeholder )
+{
+	var xsColumns = "col-xs-" + xsSize;
+	var smColumns = "col-sm-" + smSize;
+	<div class="@xsColumns @smColumns">
+		<label for="@id">@label</label>
+		<input type="@type" class="form-control @extraCss" id="@id" placeholder="@placeholder" readonly="readonly">
+	</div>
+	
+}
+@helper dispatchPersonel()
+{	
+	<h4 class="scenarioSubtitle">@Translate("Utility Field Person")</h4>
+	<p>@Translate("ROI_DispatchingFiledServiceText","Dispatching field service perosnnel across the city can be costly. Remote controlling the valve and receiving data from it saves time & money and protects the environment.")</p>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="personSavings">
+			@formField("input","12", "3", "CPH", Translate("Cost per hour"), "number", string.Empty, "$")
+			@formField("input","12", "3", "NumberOfTechnicians", Translate("Number"), "number", string.Empty, string.Empty)
+			@formField("input","12", "3", "AverageTime", Translate("Average time"), "number", string.Empty, "hours/week")
+			@formFieldReadonly("12", "3", "totalSavings", Translate("Total savings per year"), "text", string.Empty, "$")
+		</form>
+	</div>
+	<h4 class="scenarioSubtitle">@Translate("Utility Field Person - Transportation")</h4>
+	@formField("remarks","12", "12 noPaddingLeft pl-0", "RemarksPersonel",Translate("ROI_KmRemarks","The field technicians are dispatched to open or close a valve, change the set-point, check flow, etc. Assume 2 weekly trips, each 20Km.") , string.Empty, string.Empty, string.Empty)
+	<div class="row formContainer">
+		<form class="form-horizontal" id="personSavingsT">
+			@formField("input","12", "3", "CPHT", Translate("Cost per hour"), "number", string.Empty, "$")
+			@formField("input","12", "3", "NumberOfTechniciansT", Translate("Number"), "number", string.Empty, string.Empty)
+			@formField("input","12", "3", "AverageTimeT", Translate("Average time"), "number", string.Empty, "hours/week")
+			@formFieldReadonly("12", "3", "totalSavingsT", Translate("Total savings per year"), "text", string.Empty, "$")
+			@formFieldReadonly("12", "3", "totalKmTraveled", Translate("Total Km travelled per year"), "number", string.Empty, "km")
+			@formField("input","12", "3", "truckEmissions", Translate("Truck CO2 emission per Km"), "number", string.Empty, "grams")
+			@formFieldReadonly("12", "3", "totalEmissions", Translate("Total CO2 emission saved"), "text", string.Empty, "tons/year")
+		</form>
+	</div>
+	}
+@helper pipeBurst()
+{
+	<hr/>
+	<h4 class="scenarioSubtitle">@Translate("Pipe Burst")</h4>
+	<p>@Translate("PipeBurstText","Bursts are a catastrophoc event, often related to exessive pressure and water hammer in the pipeline. Shutting a valve remotely and protecting the network by actuating valves gradually help reduce occurances and time.")</p>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="pipeBurstCalculations">
+			@formField("input","12", "3", "pipeSize", Translate("Pipe Size"), "text", string.Empty, "mm or inch")
+			@formField("input","12", "3", "waterCost", Translate("Price of unit wate"), "number", string.Empty, "$")
+			@formField("input","12", "3", "volumeLoss", Translate("Volume loss per hour"), "number", string.Empty, string.Empty)
+			@formField("input","12", "3", "timeLost", Translate("Number of hours till shut-off"), "number", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "totalVolumeLossPerEvent", Translate("Total volume loss per event"), "text", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "totalLossPerEvent", Translate("Total loss per event"), "text", string.Empty, "$")
+			@formField("input","12", "3", "additionalCosts", Translate("Additional cost and expenses"), "number", string.Empty, "$")
+			@formField("input","12", "3", "numberOfEvents", Translate("Number of events per year"),"number", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "totalCostPerYear", Translate("Total cost per year"),"text", string.Empty, string.Empty)
+			@formField("input","12", "3", "reductionInPercent", Translate("Reduction in % per year"),"number", string.Empty, "%")
+			@formFieldReadonly("12", "3", "totalSavingsPerYear", Translate("Total savings per year"),"text", string.Empty, "$")
+			@formField("remarks","12", "12", "RemarksCalculation", Translate("Realistic and conservative"), string.Empty, string.Empty, "addSeparator")
+		</form>
+	</div>
+}
+@helper qualityOfService()
+{
+	<hr/>
+	<h4 class="scenarioSubtitle">@Translate("Quality of Service")</h4>
+	<p>@Translate("ROI_FinesText", "Fines are often imposed on utilities when not complying with regulation. Dynamic pressure management reduce events and fines.")</p>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="qualityOfService">
+			@formField("input","12", "3", "evenType", Translate("Event type"), "text", string.Empty, "Pressure deviation")
+			@formField("input","12", "3", "fine", Translate("Fine"), "number", string.Empty, "$")
+			@formField("input","12", "3", "eventsPerYear", Translate("Events per year"), "number", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "totalFinesPerYear", Translate("Total fines per year"),"text", string.Empty, "$")
+			@formField("input","12", "3", "reductionForQuality", Translate("Reduction in % per year"), "number", string.Empty, "%")
+			@formFieldReadonly("12", "3", "totalSavesQuality", Translate("Total savings per year"),"text", string.Empty, "$")
+			@formField("remarks","12", "12", "Remarksquality", Translate("Realistic and conservative (UKWIR)"), string.Empty, string.Empty, "addSeparator")
+		</form>
+	</div>
+}
+@helper NRW()
+{
+	<hr/>
+	<h4 class="scenarioSubtitle">@Translate("NRW")</h4>
+	<p>@Translate("ROI_HighNRW", "High NRW equals loss of water, wasted energy, loss of income and low quality of service along with high cost of network maintainance.")</p>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="NRW">
+			@formField("input","12", "3", "priceOfWaterUnit", Translate("Price of water unit"), "number", string.Empty, "$")
+			@formField("input","12", "3", "waterProduction", Translate("Water production"), "number", string.Empty, string.Empty)
+			@formField("input","12", "3", "waterBilled", Translate("Water billed"), "number", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "nRWAmount", Translate("NRW amount"),"text", string.Empty, string.Empty)
+			@formFieldReadonly("12", "3", "tCPY", Translate("Total cost per year"),"text", string.Empty, "$")
+			@formField("input","12", "3", "reductionPerYearNRW", Translate("Reduction in % per year"), "number", string.Empty, "%")
+			@formFieldReadonly("12", "3", "tSVPY", Translate("Total savings per year"),"text", string.Empty, "$")
+			@formField("remarks","12", "12", "RemarksNRW", Translate("Manila, assuming 1000 valves"), string.Empty, string.Empty, "addSeparator")
+		</form>
+	</div>
+}
+@helper electricity(){
+	<hr/>
+	<h4 class="scenarioSubtitle">@Translate("Electric expense per valve")</h4>
+	<p>@Translate("ROI_Bonus_deal:", "Bonus deal: reduce expenses AND protect the environment! The average annual energy consumption of a motor (e.g. Rotork) actuated valve is in the order of 10,000 kWh and requires 400VAC, 3ph mains electricity supply. Dorot's hydraulic valves are operated by solenoid having an average annual energy consumption of about 14 kWh.Beyond reducing electric bills, this difference represents a yearly emission saving of several tons of CO2.")</p>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="electricity">
+			@formField("input","12", "3", "kwPerYear", Translate("KWh per year of motorized valve"), "number", string.Empty, "KWh")
+			@formField("input","12", "3", "pricePerKwh", Translate("Price of 1 KWh"), "number", string.Empty, "$")
+			@formFieldReadonly("12", "3", "mVEBPY", Translate("Motorized valve electricity bill"),"text", string.Empty, "$/year")
+			@formFieldReadonly("12", "3", "kPY2SV", Translate("2 solenoid valves electricity bill"),"text", string.Empty, "$/year")
+			@formFieldReadonly("12", "3", "hVEB", Translate("Hydraulic valve electricity bill"),"text", string.Empty, "$/year")
+			@formFieldReadonly("12", "3", "tSE", Translate("Total savings"),"text", string.Empty, "$/year")
+			@formFieldReadonly("12", "3", "tECo2ER", Translate("CO2 emmissions reduced"),"text", string.Empty, "tons/year")
+			@formField("remarks","12", "12", "RemarksElectricity", Translate("0.4483 kgs CO2 per kWh (figures from USA, 2019)"), string.Empty, string.Empty, "addSeparator")
+		</form>
+	</div>
+}
+@helper reservoirs(){
+	<hr/>
+	<h4 class="scenarioSubtitle">@Translate("Reserviors and water tank overflows")</h4>
+	<p>@Translate("ROI_Reservoir_and_water", "Reservior and water tank overflows waste water and and can cause collateral and financial damage.")</p>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="reservoirs">
+			@formField("input","12", "3", "pOWU", Translate("Price of unit water"), "number", string.Empty, "$")
+			@formField("input","12", "3", "aUWWPE", Translate("Avg units of water wasted"), "number", string.Empty, "units/event")
+			@formField("input","12", "3", "aDF", Translate("Avg damage fees"), "number", string.Empty, "$/event")
+			@formField("input","12", "3", "nOEPY", Translate("Number of events per year"), "number", string.Empty, "")
+			@formFieldReadonly("12", "3", "tSR", Translate("Total savings"),"text", string.Empty, "$/year")
+			@formField("remarks","12", "12", "RemarksReservoirs", Translate("Dorot Smart It Up can minimize overflows to 0"), string.Empty, string.Empty, "addSeparator")
+		</form>
+	</div>
+}
+@helper totalCalculations()
+{
+	<hr/>
+	<h4 class="scenarioSubtitle">@Translate("Total Savings")</h4>
+	<div class="row formContainer">
+		<form class="form-horizontal" id="reservoirs">
+			@formFieldReadonly("12", "4", "ROI", Translate("ROI per year per single installation:"),"text", string.Empty, "$/year")
+			@formFieldReadonly("12", "4", "CO2", Translate("CO2 Savings per year"),"text", string.Empty, "tons/year")
+		</form>
+	</div>
+
+}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	//total savings for personel dispatchPersonel helper
+    $("#AverageTime,#NumberOfTechnicians, #CPH").change(
+        function(event) {
+            var cph = $("#CPH").val();
+            var numberOfTechnicians = $("#NumberOfTechnicians").val();
+            var averageTime = $("#AverageTime").val();
+            event.preventDefault();
+            if (cph != "" && numberOfTechnicians != "" && averageTime != "") {
+	            var totalSavingsRaw = cph * numberOfTechnicians * averageTime * 52;
+	            var totalSavings = totalSavingsRaw;
+	           $("#totalSavings").val(totalSavings);
+	            $("#totalSavings").change();
+            }
+        }
+    );
+	//total savings for transportation dispatchPersonel helper
+    $("#AverageTimeT,#NumberOfTechniciansTT,#CPHT").change(
+	    function(event) {
+		    var cph = $("#CPHT").val();
+		    var numberOfTechnicians = $("#NumberOfTechniciansT").val();
+		    var averageTime = $("#AverageTimeT").val();
+		    event.preventDefault();
+		    if (cph != "" && numberOfTechnicians != "" && averageTime != "") {
+			    var totalSavingsRaw = cph * numberOfTechnicians * averageTime * 52;
+			    var totalSavings = totalSavingsRaw;
+			    $("#totalSavingsT").val(totalSavings);
+			    $("#totalSavingsT").change();
+		    }
+	    }
+    );
+	//total km traveled for  dispatchPersonel helper
+	$("#AverageTimeT").change(
+		function(event) {
+			var numberOfTechnicians = $("#NumberOfTechniciansT").val() != "" ? $("#NumberOfTechniciansT").val() : "";
+			var cph = $("#CPHT").val() != "" ? $("#CPHT").val() : "";
+			event.preventDefault();
+            if (numberOfTechnicians != "" && cph != "") {
+				//temporary use hardcoded value "2" instead of dynamic value numberOfTechnicians to match the formula in excel.
+	            var totalkm = 2 * 20 * 52;
+	            $("#totalKmTraveled").val(totalkm);
+            }
+		});
+    //total emissions     dispatchPersonel helper
+    $("#truckEmissions").change(
+	    function(event) {
+		    var totalKm = $("#totalKmTraveled").val();
+		    var truckEmissions = $("#truckEmissions").val();
+		    event.preventDefault();
+		    if (totalKm != "" && truckEmissions != "" ) {
+			    var totalEmissionsRaw = (totalKm * truckEmissions) /100000;
+			    var totalEmissions = totalEmissionsRaw;
+			    totalEmissions = totalEmissions.toFixed(1);
+			    $("#totalEmissions").val(totalEmissions);
+			    $("#totalEmissions").change();
+
+		    }
+	    }
+    );
+	//total volume loss  pipeBurst helper
+	$("#volumeLoss,#timeLost, #waterCost").change(
+		function(event) {
+			var volumeLoss = $("#volumeLoss").val();
+			var timeLost = $("#timeLost").val();
+			var waterCost = $("#waterCost").val();
+			event.preventDefault();
+			if (volumeLoss != "" && timeLost != "" && waterCost != "") {
+				var totalVolumeLoss = volumeLoss * timeLost;
+				var totalCost = totalVolumeLoss * waterCost;
+				$("#totalVolumeLossPerEvent").val(totalVolumeLoss);
+				$("#totalLossPerEvent").val(totalCost);
+			}
+		}
+	);
+	//total cost per year  pipeBurst helper
+	$("#totalLossPerEvent,#additionalCosts, #numberOfEvents").change(
+		function(event) {
+			var totalLossPerEvent = $("#totalLossPerEvent").val();
+			var additionalCosts = $("#additionalCosts").val();
+			var numberOfEvents = $("#numberOfEvents").val();
+			event.preventDefault();
+			if (totalLossPerEvent != "" && additionalCosts != "" && numberOfEvents != "") {
+				var totalCostPerYear = (totalLossPerEvent * numberOfEvents) + (additionalCosts * numberOfEvents)
+               $("#totalCostPerYear").val(totalCostPerYear);
+			}
+		}
+	);
+	//total savings on year  pipeBurst helper
+	$("#reductionInPercent,#totalCostPerYear").change(
+		function(event) {
+			var reductionInPercent = $("#reductionInPercent").val();
+			var totalCostPerYear = $("#totalCostPerYear").val();
+			event.preventDefault();
+			if (reductionInPercent != "" && totalCostPerYear != "" ) {
+				var reduction = (reductionInPercent * totalCostPerYear) / 100;
+				reduction = Math.floor(reduction);
+                $("#totalSavingsPerYear").val(reduction);
+				$("#totalSavingsPerYear").change();
+			}
+		}
+	);
+	//total fines per  quality of service
+	$("#fine,#eventsPerYear").change(
+		function(event) {
+			var fine = $("#fine").val();
+			var eventsPerYear = $("#eventsPerYear").val();
+			event.preventDefault();
+			if (fine != "" && eventsPerYear != "" ) {
+				var totalFine = fine * eventsPerYear;
+				$("#totalFinesPerYear").val(totalFine);
+				$("#totalFinesPerYear").change();
+			}
+		}
+	);
+    // total savings per year quality of service
+	$("#totalFinesPerYear,#reductionForQuality").change(
+		function(event) {
+			var totalFinesPerYear = $("#totalFinesPerYear").val();
+			totalFinesPerYear = parseInt(totalFinesPerYear);
+			var reductionForQuality = $("#reductionForQuality").val();
+			event.preventDefault();
+            if (totalFinesPerYear != "" && reductionForQuality != "" ) {
+				var totalReduction = (totalFinesPerYear * reductionForQuality)/100;
+	            console.log(totalFinesPerYear);
+	            console.log(reductionForQuality)
+				$("#totalSavesQuality").val(totalReduction);
+	            $("#totalSavesQuality").change();
+			}
+		}
+	);
+	//NRWA amount calculation and total cost
+	$("#waterProduction,#waterBilled, #priceOfWaterUnit").change(
+		function(event) {
+			var waterProduction = $("#waterProduction").val();
+			var waterBilled = $("#waterBilled").val();
+			var priceOfWaterUnit = $("#priceOfWaterUnit").val();
+			event.preventDefault();
+			if (waterProduction != "" && waterBilled != "" ) {
+				var nrwaAmount = waterProduction - waterBilled;
+				$("#nRWAmount").val(nrwaAmount);
+			}
+			if (waterProduction != "" && waterBilled != "" && priceOfWaterUnit != "" ) {
+				var tCPY = (waterProduction - waterBilled) * priceOfWaterUnit;
+				$("#tCPY").val(tCPY);
+			}
+
+		}
+	);
+	// NRWA total savings per year
+	$("#tCPY,#reductionPerYearNRW").change(
+		function(event) {
+			var tCPY = $("#tCPY").val();
+			tCPY = parseInt(tCPY);
+			var reductionPerYearNRW = $("#reductionPerYearNRW").val();
+			event.preventDefault();
+			if (tCPY != "" && reductionPerYearNRW != "" ) {
+				var totalSavings = (tCPY * reductionPerYearNRW)/100;
+				
+				$("#tSVPY").val(totalSavings);
+				$("#tSVPY").change();
+			}
+		}
+	);
+	//Motorized valve electricity bill 
+	$("#kwPerYear,#pricePerKwh").change(
+		function(event) {
+			var kwPerYear = $("#kwPerYear").val();
+			kwPerYear = parseInt(kwPerYear);
+			var pricePerKwh = $("#pricePerKwh").val();
+			event.preventDefault();
+			if (kwPerYear != "" && pricePerKwh != "" ) {
+				var electricityBill = kwPerYear * pricePerKwh;
+				var electricityBillSolenoid = 14 * pricePerKwh;
+				electricityBillSolenoid = electricityBillSolenoid.toFixed(0);
+				var electricityBillHydraulic = (14 * electricityBill)/10000;
+				electricityBillHydraulic = electricityBillHydraulic.toFixed(2);
+				var totalSavings = electricityBill - electricityBillHydraulic;
+				totalSavings = Math.floor(totalSavings);
+				var savingsCo2 = (kwPerYear * 4483) / 10000000;
+				//savingsCo2 = Math.floor(savingsCo2);
+                savingsCo2 = savingsCo2.toFixed(2);
+				$("#mVEBPY").val(electricityBill);
+				$("#kPY2SV").val(electricityBillSolenoid);
+				$("#hVEB").val(electricityBillHydraulic);
+				$("#tSE").val(totalSavings);
+				$("#tECo2ER").val(savingsCo2);
+				$("#tSE").change();
+				$("#tECo2ER").change();
+			}
+		}
+	);
+	//total Savings on water tanks
+	$("#pOWU,#aUWWPE,#aDF,#nOEPY").change(
+		function(event) {
+			var pOWU = $("#pOWU").val();
+			var aUWWPE = $("#aUWWPE").val();
+			var aDF = $("#aDF").val();
+			aDF = parseFloat(aDF);
+			var nOEPY = $("#nOEPY").val();
+			event.preventDefault();
+			if (pOWU != "" && aUWWPE != "" && aDF != "" && nOEPY != "" ) {
+                var firstCalculation = pOWU * aUWWPE;
+				var firstCalculation = parseFloat(firstCalculation);
+				var totalSavings = (firstCalculation + aDF) * nOEPY ;
+				$("#tSR").val(totalSavings);
+				$("#tSR").change();
+			}
+		}
+	);
+	$("#totalSavings,#totalSavingsT, #totalSavingsPerYear, #totalSavesQuality, #tSVPY, #tSE , #tSR").change(
+		function(event) {
+			var totalSavings = $("#totalSavings").val();
+			var totalSavingsT = $("#totalSavingsT").val();
+			var totalSavingsPerYear = $("#totalSavingsPerYear").val();
+			var totalSavesQuality = $("#totalSavesQuality").val();
+			var tSVPY = $("#tSVPY").val();
+			var tSE = $("#tSE").val();
+			var tSR = $("#tSR").val();
+			event.preventDefault();
+			if (totalSavings != "" && totalSavingsT != "" && totalSavingsPerYear != "" && tSVPY != "" && tSE != "" && tSR !="") {
+				totalSavings = parseFloat(totalSavings);
+				totalSavingsT = parseFloat(totalSavingsT);
+				totalSavingsPerYear = parseFloat(totalSavingsPerYear);
+				totalSavesQuality = parseFloat(totalSavesQuality);
+				tSVPY = parseFloat(tSVPY);
+				tSE = parseFloat(tSE);
+				tSR = parseFloat(tSR);
+				var totalSavingsFinal = totalSavings + totalSavingsT + totalSavingsPerYear + totalSavesQuality + tSVPY + tSE + tSR;
+                totalSavingsFinal = totalSavingsFinal + " $/year"
+				$("#ROI").val(totalSavingsFinal);
+			}
+		}
+	);
+	$("#totalEmissions,#tECo2ER").change(
+		function(event) {
+			var totalEmissions = $("#totalEmissions").val();
+			totalEmissions = parseFloat(totalEmissions);
+			var tECo2ER = $("#tECo2ER").val();
+			tECo2ER = parseFloat(tECo2ER);
+			event.preventDefault();
+			if (totalEmissions != "" && tECo2ER != "" ) {
+				var totalEmissionsSavings = totalEmissions + tECo2ER ;
+				totalEmissionsSavings = totalEmissionsSavings.toFixed(1);
+				totalEmissionsSavings = totalEmissionsSavings + " Tons";
+				$("#CO2").val(totalEmissionsSavings);
+			}
+		}
+	);
+</script>

@@ -555,7 +555,7 @@ nav ul li.dropdown:hover ul {
   -webkit-transition: height 0.3s ease;
   transition: height 0.3s ease;
   left: auto;
-  max-width: 1920px;
+  max-width: 100%;
   box-shadow: 0 0 10px #e0e0e0; }
   @media (min-width: 768px) and (max-width: 991px) {
     .header.sticky-header {
