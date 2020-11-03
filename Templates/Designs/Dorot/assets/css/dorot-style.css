@@ -1312,7 +1312,28 @@ ul.accordion {
   padding-top: 20px; }
   .light-bg .box-details p {
     color: #3F68A1; }
-
+  /* Contact form checkbox */
+  #Iagreewithstorageandhandlingofmydatabythiswebsite{
+    float: left;
+    grid-column-start: 3;
+    grid-column-end: 3;
+    position: relative;
+    left: 12px;
+    top: 1px;
+  }
+label[for="Iagreewithstorageandhandlingofmydatabythiswebsite"]{
+  grid-column-start: 1 !important;
+  grid-column-end: 3 !important;
+}
+.white-box-content .col-md-12 #dw-form-1 #Send{
+  grid-column: 2;
+}
+#AccessUser_AccessUser_I_agree_with_storage_of_data{
+  height: 15px;
+}
+label[for="AccessUser_AccessUser_I_agree_with_storage_of_data"]{
+  font-size: 15px;
+}
 @media (max-width: 767px) {
   #Board-of-Directors.light-bg a.view-more-btn, #Board-of-Directors.light-bg .accordion-list {
     background: none !important; }

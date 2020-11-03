@@ -4,7 +4,13 @@
 @Include("../includes/Razor/GetImage.cshtml")
 @Include("../includes/Razor/VerifyImage.cshtml")
 @Include("../includes/PageTemplates/GenericHelper.cshtml")
-@Include("../Custom/HeaderImage.cshtml")	
+@Include("../Custom/HeaderImage.cshtml")
+@{
+	var ufpt = GetInteger("Item.Utility_Field_Person_No_Of_Trips");
+	var ufptkm = GetInteger("Item.Utility_Field_PersonKmPerTrip");
+	var electricExpence = GetString("Item.ElectricExpenseRemarks");
+}
+
 <style>
 .noPaddingLeft {
 	padding-left: 0;
@@ -21,7 +27,7 @@
 </div>
 <div class="">
 	<br/>
-	<div class="container">
+	<div class="container" id="calculatorROI" data-ufpt ="@ufpt" data-ufptkm="@ufptkm" data-electirc-expense = "@electricExpence">
 		<div class="row">
 			<div class="col-xs-12">
 				<h1>@Translate("Dorot Smart It Up")</h1>
@@ -301,31 +307,23 @@
             }
         }
     );
-	//total savings for transportation dispatchPersonel helper
-    $("#AverageTimeT,#NumberOfTechniciansTT,#CPHT").change(
-	    function(event) {
-		    var cph = $("#CPHT").val();
-		    var numberOfTechnicians = $("#NumberOfTechniciansT").val();
-		    var averageTime = $("#AverageTimeT").val();
-		    event.preventDefault();
-		    if (cph != "" && numberOfTechnicians != "" && averageTime != "") {
-			    var totalSavingsRaw = cph * numberOfTechnicians * averageTime * 52;
-			    var totalSavings = totalSavingsRaw;
-			    $("#totalSavingsT").val(totalSavings);
-			    $("#totalSavingsT").change();
-		    }
-	    }
-    );
-	//total km traveled for  dispatchPersonel helper
-	$("#AverageTimeT").change(
+	//total km traveled and total savings for  dispatchPersonel helper
+	$("#NumberOfTechniciansT,#CPHT,#AverageTimeT").change(
 		function(event) {
-			var numberOfTechnicians = $("#NumberOfTechniciansT").val() != "" ? $("#NumberOfTechniciansT").val() : "";
-			var cph = $("#CPHT").val() != "" ? $("#CPHT").val() : "";
+			var numberOfTechnicians = $("#NumberOfTechniciansT").val();
+			var cph = $("#CPHT").val();
+			var averageTrip = $("#calculatorROI").attr('data-ufptkm');
+			var weeklyTrips = $("#calculatorROI").attr('data-ufpt');
+			var averageTime = $("#AverageTimeT").val();
 			event.preventDefault();
-            if (numberOfTechnicians != "" && cph != "") {
+            if (numberOfTechnicians != "" && cph != "" && averageTime != "") {
 				//temporary use hardcoded value "2" instead of dynamic value numberOfTechnicians to match the formula in excel.
-	            var totalkm = 2 * 20 * 52;
+	            var totalkm = numberOfTechnicians * weeklyTrips * averageTrip * 52;
+	            var totalSavingsRaw = cph * numberOfTechnicians * averageTime * 52;
+	            var totalSavings = totalSavingsRaw;
 	            $("#totalKmTraveled").val(totalkm);
+	            $("#totalSavingsT").val(totalSavings);
+	            $("#totalSavingsT").change();
             }
 		});
     //total emissions     dispatchPersonel helper
@@ -408,9 +406,7 @@
 			event.preventDefault();
             if (totalFinesPerYear != "" && reductionForQuality != "" ) {
 				var totalReduction = (totalFinesPerYear * reductionForQuality)/100;
-	            console.log(totalFinesPerYear);
-	            console.log(reductionForQuality)
-				$("#totalSavesQuality").val(totalReduction);
+	            $("#totalSavesQuality").val(totalReduction);
 	            $("#totalSavesQuality").change();
 			}
 		}
@@ -454,6 +450,10 @@
 			var kwPerYear = $("#kwPerYear").val();
 			kwPerYear = parseInt(kwPerYear);
 			var pricePerKwh = $("#pricePerKwh").val();
+			var electricityValue = $("#calculatorROI").attr('data-electirc-expense');
+			electricityValue = parseFloat(electricityValue);
+			electricityValue = electricityValue * 10000;
+			electricityValue = electricityValue.toFixed(0);
 			event.preventDefault();
 			if (kwPerYear != "" && pricePerKwh != "" ) {
 				var electricityBill = kwPerYear * pricePerKwh;
@@ -463,7 +463,7 @@
 				electricityBillHydraulic = electricityBillHydraulic.toFixed(2);
 				var totalSavings = electricityBill - electricityBillHydraulic;
 				totalSavings = Math.floor(totalSavings);
-				var savingsCo2 = (kwPerYear * 4483) / 10000000;
+				var savingsCo2 = (kwPerYear * electricityValue) / 10000000;
 				//savingsCo2 = Math.floor(savingsCo2);
                 savingsCo2 = savingsCo2.toFixed(2);
 				$("#mVEBPY").val(electricityBill);
