@@ -4671,6 +4671,11 @@ ul.studies-box li .media-right {
     font-size: 16px; }
   .noPrint {
     display: none !important; }
+  .printLabel {
+    font-size:12px!important;
+   
+  }
+  #topsearch {display: none!important;}
   .description, .date, .contact {
     margin-top: 20px; }
   .short-description {
@@ -4751,5 +4756,16 @@ ul.studies-box li .media-right {
 .input .select {
   margin: 10px !important;
   }
-
-
+.printButton .btn {
+  line-height: 1.5;
+  padding: 7px 20px;
+  margin: 0 auto 10px auto;
+  font-size: 13px;
+  font-weight: 400;
+  border-radius: 5px;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}

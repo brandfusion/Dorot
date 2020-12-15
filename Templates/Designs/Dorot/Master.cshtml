@@ -115,7 +115,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/assets/owl.theme.default.min.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css"> 
       
-<body class="@home" id="top">    
+<body class="@home" id="top" data-users = '/Default.aspx?ID=@GetPageIdByNavigationTag("usersJson")'>    
       @* <!-- Go to www.addthis.com/dashboard to customize your tools --> 
       <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5808de87d226407a"></script>  *@
       
@@ -151,7 +151,7 @@
       <script type="text/javascript" src="@areaLayoutPath/assets/js/mobile-menu.js"></script>	
       <script type="text/javascript" src="@areaLayoutPath/assets/js/main.js"></script>
       <script src="https://use.fontawesome.com/3d0dad0af9.js"></script>
-      
+      @* <script async defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDUJVpKvhlFqq-qq27cgda-RO5uOhYvu7s&callback=initMap"></script> *@
        
       @if(!string.IsNullOrEmpty(GetString("Item.Area.CustomCodeFooter"))){
         @GetString("Item.Area.CustomCodeFooter") 
