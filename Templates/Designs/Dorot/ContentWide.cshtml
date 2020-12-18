@@ -6,6 +6,8 @@
 @{
   bool hideSecondaryNavigation = GetBoolean("Item.Page.Hide_Secondary_Navigation");
   string contentcol = hideSecondaryNavigation ? "col-md-12" : "col-md-9";
+	var roiPage = GetPageIdByNavigationTag("ROICalculator").ToString();
+	var currentPage = GetString("DwPageID").ToString();
 }
 
 
@@ -20,8 +22,8 @@
 <div class="white-box white-box-content">
 	<div class="container">
 	  <div class="row">	
-        
-		    <div class="col-xs-12 noPrint" id="topsearch">
+       
+		<div class="col-xs-12" id="topsearch">
            <div class="search-box col-md-4 col-xs-12 pull-right">
               <form action="/search" method="GET" role="search">
                 <div class="form-group">
@@ -30,7 +32,8 @@
                 </div>
               </form>
            </div>
-           <h1> @GetGlobalValue("Global:Page.Name")</h1>
+			<h1> @GetGlobalValue("Global:Page.Name")</h1>
+			
         </div>
         
         @if(!hideSecondaryNavigation){

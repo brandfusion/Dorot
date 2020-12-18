@@ -20,26 +20,26 @@
 		margin-bottom: 18px;
 	}
 </style>
-<div class="container">
+@*<div class="container">
   <div class="row">
-	 @*@searchElement()*@
+	 @searchElement()
     @breadcrumbs()
   </div>
-</div>
+</div>*@
 <div class="">
 	<br/>
 	<div class="container" id="calculatorROI" data-ufpt ="@ufpt" data-ufptkm="@ufptkm" data-electirc-expense = "@electricExpence">
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="row">
+				@*<div class="row">
 					<div class="col-xs-12 col-md-6">
-						<h1>@paragraphTitle</h1>
-					</div>
-					<div class="col-xs-12 col-md-6 noPrint">
+						<h1>@paragraphTitle</h1>                                            
+					</div>    *@
+					@*<div class="col-xs-12 col-md-6 noPrint">
 						<img src='/Admin/Public/GetImage.ashx?Image=@logo&Crop=0&Format=jpg&Height=83&Compression=75' alt="">
 						<img src=""/>
-					</div>
-				</div>
+					</div>*@
+				@*</div>    *@
 				<h2>@Translate("ROI Analysis Tool")</h2>
 				<h4>@Translate("Instructions: enter actual utility data in each relevant scenario and see the total saving by implementing Dorot's SIU solutions!")</h4>
 			</div>
