@@ -65,7 +65,7 @@
         <div class="form-group">
           <input type="text" name="q" id="q" aria-label="search" autocomplete="off" spellcheck="false" placeholder='@Translate("findYourSolution", "Find your solution")' class="form-control">
           <button type="submit"><i class="fa fa-search" aria-hidden="true"></i><span style="display:none">text</span></button>
-          @* <div class="instant_search"></div> *@
+			<div class="instant_search"></div
         </div>
       </form>
     </div>
@@ -147,7 +147,7 @@
 		@if (fieldType == "input")
 		{
 			<label for="@id"  class="printLabel">@label</label>
-		    <input type="@type" class="form-control @extraCss" id="@id" placeholder="@placeholder" name="@id" required="true">
+		    <input type="@type" class="form-control @extraCss" min="0" id="@id" placeholder="@placeholder" name="@id" required="true">
         }
 		@if (fieldType == "text")
 		{
@@ -159,10 +159,17 @@
 	        <h6>Remarks</h6>
 	        <small>* @label</small>
         }
+		@if (fieldType == "remarks2")
+		{ 
+			<p></p>
+			<h6>Remarks</h6>
+			<small>* @label</small><br/>
+			<small>@placeholder <a href="https://dorotdigitalsolutions.com/case-studies/" alt="Dorot case studies">https://dorotdigitalsolutions.com/case-studies/</a></small>
+		}
 		@if (fieldType == "SecondaryRemarks")
 		{
 			<small>** @label</small><br/>
-			<small>@Translate("Please add your estimation as you consider, customized on your current situation. For more information about our Digital Solutions Case Study please visit: ") <a href="https://dorotdigitalsolutions.com/case-studies/" alt="Dorot case studies">https://dorotdigitalsolutions.com/case-studies/</a></small>
+			<small>@placeholder <a href="https://dorotdigitalsolutions.com/case-studies/" alt="Dorot case studies">https://dorotdigitalsolutions.com/case-studies/</a></small>
 		}
 		@if (fieldType == "selectMeasurment")
 		{
@@ -200,16 +207,17 @@
 		</form>
 	</div>
 	<h3 class="scenarioSubtitle">@Translate("Utility Field Person - Transportation")</h3>
-	@formField("remarks","12", "12 noPaddingLeft pl-0", "RemarksPersonel",Translate("ROI_DistanceRemarks1","The field technicians are dispatched to open or close a valve, change the set-point, check flow, etc. Assume 2 weekly trips, each 20Km (12.5miles).") , string.Empty, string.Empty, string.Empty)
+	
 	<div class="row formContainer">
 		<form class="form-horizontal" id="personSavingsT">
 			@formField("input", "12", "3", "CPHT", Translate("Cost per hour"), "number", string.Empty, "")
 			@formField("input", "12", "3", "NumberOfTechniciansT", Translate("Number"), "number", string.Empty, string.Empty)
 			@formField("input", "12", "3", "AverageTimeT", Translate("Average time"), "number", string.Empty, "")
 			@formFieldReadonly("12", "3", "totalSavingsT", Translate("Total savings per year"), "text", string.Empty, "")
-			@formFieldReadonly("12", "3", "totalKmTraveled", Translate("Total Distance per year"), "number", string.Empty, "")
+			@formField("input", "12", "3", "totalKmTraveled", Translate("Total Distance per year"), "number", string.Empty, "")
 			@formField("input", "12", "3", "truckEmissions", Translate("Truck CO2 emission per Distance"), "number", string.Empty, "")
 			@formFieldReadonly("12", "3", "totalEmissions", Translate("Total CO2 emission saved"), "text", string.Empty, "")
+			@formField("remarks","12", "12", "RemarksPersonel",Translate("ROI_DistanceRemarks1","The field technicians are dispatched to open or close a valve, change the set-point, check flow, etc. Assume 2 weekly trips, each 20Km (12.5miles).") , string.Empty, string.Empty, string.Empty)
 		</form>
 	</div>
 	}
@@ -231,8 +239,8 @@
 			@formFieldReadonly("12", "3", "totalCostPerYear", Translate("Total cost per year"),"text", string.Empty, string.Empty)
 			@formField("input","12", "3", "reductionInPercent", Translate("Reduction in % per year"),"number", string.Empty, "5%")
 			@formFieldReadonly("12", "3", "totalSavingsPerYear", Translate("Total savings per year"),"text", string.Empty, "")
-			@formField("remarks","12", "12", "RemarksCalculation", Translate("Realistic and conservative"), string.Empty, string.Empty, "")
-			@formField("SecondaryRemarks","12", "12", "PipebusrstSecondary", Translate("Considering our implemented projects and business cases, we appreciate a minimum of 5% reduction in Pipe Burst Events."), string.Empty, string.Empty, "")
+			@*formField("remarks","12", "12", "RemarksCalculation", Translate("Realistic and conservative"), string.Empty, string.Empty, "")*@
+			@formField("remarks2","12", "12", "PipebusrstSecondary", Translate("Considering our implemented projects and business cases, we appreciate a minimum of 5% reduction in Pipe Burst Events."), string.Empty, string.Empty, Translate("Please add your estimation as you consider, customized on your current situation. For more information about our Digital Solutions Case Study please visit_PipeBust","Please add your estimation as you consider, customized on your current situation. For more information about our Digital Solutions Case Study please visit: "))
 		</form>
 	</div>
 }
@@ -249,8 +257,8 @@
 			@formFieldReadonly("12", "3", "totalFinesPerYear", Translate("Total fines per year"),"text", string.Empty, "")
 			@formField("input","12", "3", "reductionForQuality", Translate("Reduction in % per year"), "number", string.Empty, "5%")
 			@formFieldReadonly("12", "3", "totalSavesQuality", Translate("Total savings per year"),"text", string.Empty, "")
-			@formField("remarks","12", "12", "Remarksquality", Translate("Realistic and conservative (UKWIR)"), string.Empty, string.Empty, "addSeparator")
-			@formField("SecondaryRemarks","12", "12", "QOSSecondary", Translate("Considering our implemented projects and business cases, we appreciate a minimum of 5% reduction in number of Events leading to fines."), string.Empty, string.Empty, "")
+			@*formField("remarks","12", "12", "Remarksquality", Translate("Realistic and conservative (UKWIR)"), string.Empty, string.Empty, "addSeparator")  *@
+			@formField("remarks2","12", "12", "QOSSecondary", Translate("Considering our implemented projects and business cases, we appreciate a minimum of 5% reduction in number of Events leading to fines."), string.Empty, string.Empty, Translate("Please add your estimation as you consider, customized on your current situation. For more information about our Digital Solutions Case Study please visit_qualityOfService","Please add your estimation as you consider, customized on your current situation. For more information about our Digital Solutions Case Study please visit: "))
 		</form>
 	</div>
 }
@@ -268,8 +276,8 @@
 			@formFieldReadonly("12", "3", "tCPY", Translate("Total cost per year"),"text", string.Empty, "")
 			@formField("input","12", "3", "reductionPerYearNRW", Translate("Reduction in % per year"), "number", string.Empty, "5%")
 			@formFieldReadonly("12", "3", "tSVPY", Translate("Total savings per year"),"text", string.Empty, "")
-			@formField("remarks","12", "12", "RemarksNRW", Translate("Manila, assuming 1000 valves"), string.Empty, string.Empty, "addSeparator")
-			@formField("SecondaryRemarks","12", "12", "NRWSecondary", Translate("Considering our implemented projects and business cases, we appreciate a minimum of 5% reduction in Non-Revenue Water and Water Loss."), string.Empty, string.Empty, "")
+			@*formField("remarks","12", "12", "RemarksNRW", Translate("Manila, assuming 1000 valves"), string.Empty, string.Empty, "addSeparator")
+			@formField("SecondaryRemarks","12", "12", "NRWSecondary", Translate("Considering our implemented projects and business cases, we appreciate a minimum of 5% reduction in Non-Revenue Water and Water Loss."), string.Empty, string.Empty, Translate("Please add your estimation as you consider, customized on your current situation. For more information about our Digital Solutions Case Study please visit_NRW","Please add your estimation as you consider, customized on your current situation. For more information about our Digital Solutions Case Study please visit: "))  *@
 		</form>
 	</div>
 }
@@ -281,6 +289,7 @@
 		<form class="form-horizontal" id="electricity">
 			@formField("input","12", "3", "kwPerYear", Translate("KWh per year of motorized valve"), "number", string.Empty, "")
 			@formField("input","12", "3", "pricePerKwh", Translate("Price of 1 KWh"), "number", string.Empty, "")
+			@formField("input","12", "3", "FMACPY", Translate("Fuel, maintenance & additional"), "number", string.Empty, "")
 			@formFieldReadonly("12", "3", "mVEBPY", Translate("Motorized valve electricity bill"),"text", string.Empty, "")
 			@formFieldReadonly("12", "3", "kPY2SV", Translate("2 solenoid valves electricity bill"),"text", string.Empty, "")
 			@formFieldReadonly("12", "3", "hVEB", Translate("Hydraulic valve electricity bill"),"text", string.Empty, "")
@@ -337,7 +346,7 @@
 	<button class="btn noPrint" onclick="window.print()">Print</button>
 }
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script>
 	//total savings for personel dispatchPersonel helper
 	$("#measurmentCalculation").change(
@@ -389,7 +398,7 @@
 	            var totalkm = numberOfTechnicians * weeklyTrips * averageTrip * 52;
 	            var totalSavingsRaw = cph * numberOfTechnicians * averageTime * 52;
 	            var totalSavings = totalSavingsRaw;
-	            $("#totalKmTraveled").val(totalkm);
+	            //$("#totalKmTraveled").val(totalkm);
 	            $("#totalSavingsT").val(totalSavings);
 	            $("#totalSavingsT").change();
             }
@@ -488,9 +497,17 @@
 			var waterBilled = $("#waterBilled").val();
 			var priceOfWaterUnit = $("#priceOfWaterUnit").val();
 			event.preventDefault();
+            
 			if (waterProduction != "" && waterBilled != "" ) {
-				var nrwaAmount = waterProduction - waterBilled;
-				$("#nRWAmount").val(nrwaAmount);
+                if (waterBilled > waterProduction) {
+	                alert("Units of water supplied cannot be less than units of water billed");
+	                $("#waterBilled").val('');
+	                $("#nRWAmount").val('');
+	                $("#waterBilled").focus();
+                } else {
+	                var nrwaAmount = waterProduction - waterBilled;
+	                $("#nRWAmount").val(nrwaAmount);
+                }
 			}
 			if (waterProduction != "" && waterBilled != "" && priceOfWaterUnit != "" ) {
 				var tCPY = (waterProduction - waterBilled) * priceOfWaterUnit;
@@ -584,7 +601,6 @@
 				tSE = parseFloat(tSE);
 				tSR = parseFloat(tSR);
 				var totalSavingsFinal = totalSavings + totalSavingsT + totalSavingsPerYear + totalSavesQuality + tSVPY + tSE + tSR;
-                totalSavingsFinal = totalSavingsFinal + " $/year"
 				$("#ROI").val(totalSavingsFinal);
 			}
 		}
@@ -593,13 +609,13 @@
 		function(event) {
 			var totalEmissions = $("#totalEmissions").val();
 			totalEmissions = parseFloat(totalEmissions);
-			var tECo2ER = $("#tECo2ER").val();
+			var tECo2ER = $("#tECo2ER").val() != "" ? $("#tECo2ER").val() : "0";
 			tECo2ER = parseFloat(tECo2ER);
 			event.preventDefault();
-			if (totalEmissions != "" && tECo2ER != "" ) {
-				var totalEmissionsSavings = totalEmissions + tECo2ER ;
+			if (totalEmissions != "" && tECo2ER != "0" ) {
+               var totalEmissionsSavings = totalEmissions + tECo2ER ;
 				totalEmissionsSavings = totalEmissionsSavings.toFixed(1);
-				totalEmissionsSavings = totalEmissionsSavings + " Tons";
+				totalEmissionsSavings = totalEmissionsSavings;
 				$("#CO2").val(totalEmissionsSavings);
 			}
 		}
