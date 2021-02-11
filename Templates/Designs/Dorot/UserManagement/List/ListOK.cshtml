@@ -3,27 +3,7 @@
 @foreach(LoopItem grupuri in GetLoop("AllUsers")){
 
 	<div class="item">
-     
-      @*
-      	<div id="map"></div>
-        <script>
-          function initMap() {
-            var uluru = {lat: @grupuri.GetValue("UserManagement:User.GeolocationLatitude"), lng:@grupuri.GetValue("UserManagement:User.GeolocationLongitude")};
-            var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 7,
-              center: uluru
-            });
-            var marker = new google.maps.Marker({
-              position: uluru,
-              map: map
-            });
-          }
-        </script>
-      *@
-      
-      
-      
-      @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.Department"))) {
+	  @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.Department"))) {
       <p><strong>@Translate("department", "Department"):</strong> @grupuri.GetString("UserManagement:User.Department")</p>
       }
       
@@ -40,7 +20,7 @@
       @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.DefaultAddress.Country"))) {
       <p><strong>@Translate("country", "Country"):</strong> @grupuri.GetString("UserManagement:User.DefaultAddress.Country")</p>
       }
-      <p><strong>@Translate("email", "Email"):</strong> @grupuri.GetString("UserManagement:User.Email")</p>
+      <p><strong>@Translate("email", "Email"):</strong> <a href='mailto:@grupuri.GetString("UserManagement:User.Email")'>@grupuri.GetString("UserManagement:User.Email")</a></p>
 
       @if(!string.IsNullOrWhiteSpace(@grupuri.GetString("UserManagement:User.Phone"))) {
       <p><strong>@Translate("phone", "Phone"):</strong> @grupuri.GetString("UserManagement:User.Phone")</p>
