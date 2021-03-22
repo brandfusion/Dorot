@@ -667,8 +667,33 @@ a.fly-mask-active:hover {
     display: block
 }
 
-@media(min-width: 768px) {
+
+@media (min-width: 768px) {
     .mobile-padding {
         display:none
+    }
+}
+
+@media (max-width: 767px) { 
+    .formtable.custom {
+        display: block;
+    }
+    .formtable input[type=text], .formtable input[type=password], .formtable textarea, .formtable select {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+    .dynamicweb-map select {
+        min-width: 210px;
+        float: left;
+        width: 100%;
+        margin: 0 0 15px 0;
+    }
+    .search .btn {
+        margin-bottom: 10px;
+    }
+    header.header {
+        top: 0;
+        height: 90px;
+        padding: 14px 0;
     }
 }
