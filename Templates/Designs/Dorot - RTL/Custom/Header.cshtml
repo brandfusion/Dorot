@@ -1,6 +1,7 @@
 ﻿@using Dynamicweb.Content.Items;
 @using System
-@{
+@{                         
+	var topMenuLogo = "/Files/Images/Dorot/HomePage/Aquestialogo_tagline.png";
 //Define the pageURL to avoid parsing of #
 	string pageURL = GetGlobalValue("Global:Pageview.Url");
 	//Define ItemArea object
@@ -51,7 +52,7 @@ string homePageLink =  "/Default.aspx?ID="+ GetString("DwAreaFirstActivePageID")
 	      <div class="row">
 	         
 
-	        <div class="col-xs-12">
+	        <div class="col-xs-12 headerMenuTop">
 	          <nav role="navigation" aria-labelledby="nav1">
 	 			
 				<div id="nav1">
@@ -74,7 +75,7 @@ string homePageLink =  "/Default.aspx?ID="+ GetString("DwAreaFirstActivePageID")
 			 			}
 			            @topnavigation
 				</div>
-	            	                 
+	            	    <div class="header__logo"><img src="@topMenuLogo" alt="Dorot" class="img-responsive" width="100"></div>             
 			  </nav> 
 	          
 	        </div>
